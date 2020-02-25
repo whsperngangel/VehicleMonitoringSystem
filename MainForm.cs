@@ -16,8 +16,10 @@ namespace VehicleMonitoringSystem
         private int _repairID = 0,
                     _insuranceID = 0,
                     _registrationID = 0,
-                    _fuelID = 0;
-                       
+                    _fuelID = 0,
+                    _partID = 0,
+                    _supplierID = 0,
+                    _maintenanceID = 0;
 
         private string _plateNumber = "",
                        _registeredName = "",
@@ -31,16 +33,20 @@ namespace VehicleMonitoringSystem
                        _insuranceRegisteredName = "",
                        _typeOfRepair = "",
                        _repairSupplier = "",
-                       _repairPaidBy = "",
                        _fuelVehicle = "",
                        _typeOffuel = "",
                        _fuelSupplier = "",
                        _fuelPaidBy = "",
-                       _issuedTo = "";
+                       _issuedTo = "",
+                       _partDescription = "",
+                       _repairInvoiceNumber = "",
+                       _invoiceNumber = "",
+                       _conditionString1 = "";
         private double _amount = 0.00,
                        _insuranceAmount = 0.00,
                        _repairAmount = 0.00,
-                       _fuelAmount = 0.00;
+                       _fuelAmount = 0.00,
+                       _statementTotal = 0.00;
         private DateTime _orDate = DateTime.Now,
                          _crDate = DateTime.Now,
                          _renewal = DateTime.Now,
@@ -48,22 +54,28 @@ namespace VehicleMonitoringSystem
                          _insuranceDurationTo = DateTime.Now,
                          _insuranceRenewal = DateTime.Now,
                          _repairDate = DateTime.Now,
-                         _fuelDate = DateTime.Now;
+                         _fuelDate = DateTime.Now,
+                        _datedue = DateTime.Now,
+                        _repairDueDate = DateTime.Now;
 
         private Vehicle      _vehicle = new Vehicle();
+        private Part _part = new Part();
         private Registration _registration = new Registration();
         private Insurance    _insurance = new Insurance();
         private Repair       _repair = new Repair();
         private Fuel         _fuel = new Fuel();
-        private Supplier    _supplier = new Supplier();
-        private Payment      _payment = new Payment();
+        private Maintenance _maintenance = new Maintenance();
+        private Supplier _supplier = new Supplier();
+        private Statement _statement = new Statement();
         List<Vehicle>      _vehicles = new List<Vehicle>();
         List<Registration> _registrations = new List<Registration>();
         List<Insurance>    _insurances = new List<Insurance>();
+        List<Maintenance> _maintenances = new List<Maintenance>();
         List<Repair>       _repairs = new List<Repair>();
         List<Fuel>         _fuels = new List<Fuel>();
         List<Supplier> _suppliers = new List<Supplier>();
-        List<Payment> _payments = new List<Payment>();
+        List<Statement> _statements = new List<Statement>();
+        List<Part> _parts = new List<Part>();
         #endregion
 
         #region Constructors
@@ -72,12 +84,14 @@ namespace VehicleMonitoringSystem
             InitializeComponent();
             ListViewLoad();
             ComboBoxLoad();
-
+            LoadStatement();
+            MaintenanceListLoad();
         }
         #endregion
 
-        #region Load
-        private void ListViewLoad()
+        #region UI Methods
+        #region Populate ListViews
+        public void ListViewLoad()
         {
             _vehicles = _vehicle.RetrieveVehicleList();
             foreach (Vehicle v in _vehicles)
@@ -91,9 +105,32 @@ namespace VehicleMonitoringSystem
             foreach (Supplier s in _suppliers)
             {
                 repairSupplierCB.Items.Add(s.SupplierName);
+                supplierSortCB.Items.Add(s.SupplierName);
+            }
+            _parts = _part.RetrievePartList();
+            foreach (Part p in _parts)
+            {
+                partCB.Items.Add(p.Description);
             }
         }
+        private void MaintenanceListLoad()
+        {
+            maintenanceLV.Items.Clear();
+            _maintenances = _maintenance.RetrieveMaintenanceList();
+            foreach (Maintenance m in _maintenances)
+            {
+                _maintenanceID = m.MaintenanceID;
+                _plateNumber = m.PlateNumber;
+                _partID = m.PartID;
+                _partDescription = _part.RetrievePartInfo(_partID).Description;
 
+                ListViewItem maintenanceList = new ListViewItem(_maintenanceID.ToString());
+                maintenanceList.SubItems.Add(_plateNumber);
+                maintenanceList.SubItems.Add(_partDescription);
+
+                maintenanceLV.Items.Add(maintenanceList);
+            }
+        }
         public void LoadRegistration(string plateNumber)
         {
             _registrations = _registration.RetrieveRegistrationList(plateNumber);
@@ -157,19 +194,20 @@ namespace VehicleMonitoringSystem
             foreach (Repair repair in _repairs)
             {
                 _repairID = repair.RepairID;
-               // _plateNumber = repair.PlateNumber;
+                _plateNumber = repair.PlateNumber;
                 _repairDate = repair.RepairDate;
                 _typeOfRepair = repair.TypeOfRepair;
                 _repairSupplier = _supplier.RetrieveSupplierInfo(repair.SupplierID).SupplierName;
                 _repairAmount = repair.Amount;
-             //   _repairPaidBy = repair.PaidBy;
+                _repairDueDate = repair.DueDate;
 
                 ListViewItem searchRepair = new ListViewItem(_repairID.ToString());
                 searchRepair.SubItems.Add(_repairDate.ToShortDateString());
                 searchRepair.SubItems.Add(_typeOfRepair);
                 searchRepair.SubItems.Add(_repairSupplier);
+                searchRepair.SubItems.Add(_repairInvoiceNumber);
                 searchRepair.SubItems.Add(_repairAmount.ToString("N2"));
-                searchRepair.SubItems.Add(_repairPaidBy);
+                searchRepair.SubItems.Add(_repairDueDate.ToShortDateString());
 
                 repairLV.Items.Add(searchRepair);
             }
@@ -187,7 +225,7 @@ namespace VehicleMonitoringSystem
                 _typeOffuel = fuel.TypeOfFuel;
                 _fuelSupplier = _supplier.RetrieveSupplierInfo(fuel.SupplierID).SupplierName;
                 _fuelAmount = fuel.Amount;
-          //      _fuelPaidBy = fuel.PaidBy;
+                _fuelPaidBy = fuel.PaidBy;
 
                 ListViewItem searchfuel = new ListViewItem(_fuelID.ToString());
                 searchfuel.SubItems.Add(_plateNumber);
@@ -200,15 +238,40 @@ namespace VehicleMonitoringSystem
                 fuelLV.Items.Add(searchfuel);
             }
         }
+
+        public void LoadStatement()
+        {
+            _statements = _statement.RetrieveStatementList(_conditionString1);
+            statementLV.Items.Clear();
+
+            foreach (Statement statement in _statements)
+            {
+                _supplierID = statement.SupplierID;
+                _invoiceNumber = statement.InvoiceNumber;
+                _fuelAmount = statement.FuelAmountDue;
+                _repairAmount = statement.RepairAmountDue;
+                _statementTotal = _statementTotal + _repairAmount + _fuelAmount;
+                totalDueTB.Text = "P" + _statementTotal.ToString("N2");
+                //_dateDue = statement.DateDue;
+
+                ListViewItem searchStatement = new ListViewItem(_supplierID.ToString());
+                searchStatement.SubItems.Add(_invoiceNumber);
+                searchStatement.SubItems.Add(_fuelAmount.ToString("N2"));
+                searchStatement.SubItems.Add(_repairAmount.ToString("N2"));
+                //searchStatement.SubItems.Add(_dateDue.ToString());
+
+                statementLV.Items.Add(searchStatement);
+            }
+        }
         #endregion
-        
         private void ShowData(string plateNumber)
         {
             LoadRegistration(_plateNumber);
             LoadInsurance(_plateNumber);
             LoadRepair(_plateNumber);
             Loadfuel(_plateNumber);
-            
+
+            _vehicle = _vehicle.RetrieveVehicleInfo(plateNumber);
             plateNumberTB.Text = _vehicle.PlateNumber;
             crNumberTB.Text = _vehicle.CRNumber;
             crDateDTP.Value = _vehicle.CRDate;
@@ -232,12 +295,13 @@ namespace VehicleMonitoringSystem
             insuranceRenewalDTP.Value = _insurance.Renewal;
             insuranceAmountTB.Text = _insurance.Amount.ToString("N2");
 
-          //  repairPlateNumberTB.Text = _repair.PlateNumber;
+            repairPlateNumberTB.Text = _repair.PlateNumber;
             repairDateDTP.Value = _repair.RepairDate;
             repairTypeOfRepairTB.Text = _repair.TypeOfRepair;
             repairSupplierCB.Text = _supplier.RetrieveSupplierInfo(_repair.SupplierID).SupplierName;
             repairAmountTB.Text = _repair.Amount.ToString("N2");
-          //  repairPaidByTB.Text = _repair.PaidBy;
+            repairDueDateDTP.Value = _repairDueDate;
+           // repairPaidByTB.Text = _repair.PaidBy;
             
             fuelPlateNumberTB.Text = _fuel.PlateNumber;
             fuelVehicleTB.Text = _vehicle.RetrieveVehicleInfo(_fuel.PlateNumber).Category;
@@ -245,10 +309,14 @@ namespace VehicleMonitoringSystem
             fuelTypeOfFuelCB.Text = _fuel.TypeOfFuel;
             fuelSupplierTB.Text = _supplier.RetrieveSupplierInfo(_fuel.SupplierID).SupplierName;
             fuelAmountTB.Text = _fuel.Amount.ToString("N2");
-           // fuelPaidByTB.Text = _fuel.PaidBy;
+            fuelPaidByTB.Text = _fuel.PaidBy;
         }
-
-
+        public void AddPart()
+        {
+            NewPartForm partForm = new NewPartForm(this);
+            partForm.Show();
+        }
+        #endregion
 
         #region Tool Strip Menu
         private void reportsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -275,11 +343,6 @@ namespace VehicleMonitoringSystem
         {
             NewFuelForm newfuelForm = new NewFuelForm();
             newfuelForm.ShowDialog();
-        }
-        private void newMaintenanceTSM_Click(object sender, EventArgs e)
-        {
-         /*   NewMaintenanceForm newMaintenanceForm = new NewMaintenanceForm();
-            newMaintenanceForm.ShowDialog();*/
         }
         private void editInformationTSM_Click(object sender, EventArgs e)
         {
@@ -370,7 +433,7 @@ namespace VehicleMonitoringSystem
         }
         private void editRepairTSM_Click(object sender, EventArgs e)
         {
-           /* if (repairEditB.Text == "Edit")
+            if (repairEditB.Text == "Edit")
             {
                 repairEditB.Text = "Save";
                 EnableRepair();
@@ -382,9 +445,9 @@ namespace VehicleMonitoringSystem
                     _typeOfRepair != repairTypeOfRepairTB.Text ||
                     _repairSupplier != repairSupplierCB.Text ||
                     _repairAmount != double.Parse(repairAmountTB.Text) ||
-                    _repairPaidBy != repairPaidByTB.Text)
+                    _repairDueDate != repairDueDateDTP.Value)
                 {
-                    _repair = new Repair(_repair.RepairID, _repair.PlateNumber,repairDateDTP.Value,repairTypeOfRepairTB.Text,int.Parse(repairSupplierCB.Text),repairSupplierInvoiceNumberTB.Text,double.Parse(repairAmountTB.Text),repairPaidByTB.Text);
+                    _repair = new Repair(_repair.RepairID, _repair.PlateNumber,repairDateDTP.Value,repairTypeOfRepairTB.Text,int.Parse(repairSupplierCB.Text),repairSupplierInvoiceNumberTB.Text,double.Parse(repairAmountTB.Text),repairDueDateDTP.Value);
                 }
                 _repair.UpdateRepairInfo(_repair);
                 DisableRepair();
@@ -394,11 +457,11 @@ namespace VehicleMonitoringSystem
                 LoadInsurance(_plateNumber);
                 LoadRepair(_plateNumber);
                 Loadfuel(_plateNumber);
-            }*/
+            }
         }
         private void editFuelTSM_Click(object sender, EventArgs e)
         {
-           /* switch (fuelEditB.Text)
+            switch (fuelEditB.Text)
             {
                 case "Edit":
                     fuelEditB.Text = "Save";
@@ -431,10 +494,90 @@ namespace VehicleMonitoringSystem
                     LoadRepair(_plateNumber);
                     Loadfuel(_plateNumber);
                     break;
-            }*/
+            }
+        }
+        private void editMaintenanceB_Click(object sender, EventArgs e)
+        {
+            switch (editMaintenanceB.Text)
+            {
+                case "Edit":
+                    editMaintenanceB.Text = "Update";
+                    EnableMaintenance();
+                    break;
+
+                case "Update":
+
+                    _maintenanceID = int.Parse(maintenanceLV.SelectedItems[0].Text);
+                    _partID = _part.RetrievePartID(partCB.Text);
+                    _maintenance = new Maintenance(_maintenance.MaintenanceID,
+                                    maintenancePlateNumberTB.Text,
+                                   _partID);
+
+                    _maintenance.UpdateMaintenanceInfo(_maintenance);
+                    editMaintenanceB.Text = "Edit";
+
+                    LoadRegistration(_plateNumber);
+                    LoadInsurance(_plateNumber);
+                    LoadRepair(_plateNumber);
+                    Loadfuel(_plateNumber);
+                    MaintenanceListLoad();
+                    DisableMaintenance();
+                    break;
+            }
+        }
+        private void vehicleListLV_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (vehicleListLV.SelectedItems.Count > 0)
+            {
+                _plateNumber = vehicleListLV.SelectedItems[0].Text;
+                ShowData(_plateNumber);
+            }
+        }
+        private void maintenanceLV_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (maintenanceLV.SelectedItems.Count > 0)
+            {
+                _maintenanceID = int.Parse(maintenanceLV.SelectedItems[0].Text);
+                _maintenance.RetrieveMaintenanceInfo(_maintenanceID);
+
+                maintenancePlateNumberTB.Text = _maintenance.PlateNumber;
+                partCB.Text = _part.RetrievePartInfo(_maintenance.PartID).Description;
+            }
         }
 
-        private void vehicleListLV_SelectedIndexChanged(object sender, EventArgs e)
+        private void MaintenanceTSM_Click(object sender, EventArgs e)
+        {
+            NewMaintenanceForm newMaintenanceForm = new NewMaintenanceForm();
+            newMaintenanceForm.ShowDialog();
+        }
+        private void PaymentTSM_Click(object sender, EventArgs e)
+        {
+            NewPaymentForm newPaymentForm = new NewPaymentForm();
+            newPaymentForm.ShowDialog();
+        }
+        private void SupplierTSM_Click(object sender, EventArgs e)
+        {
+            NewSupplierForm newSupplier = new NewSupplierForm();
+            newSupplier.ShowDialog();
+        }
+
+        private void supplierSortCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (supplierSortCB.SelectedIndex > -1)
+            {
+                _conditionString1 = "WHERE supplier.SupplierName = '" + supplierSortCB.Text + "' ";
+                totalDueTB.Text = "";
+                LoadStatement();
+            }
+            else
+            {
+                _conditionString1 = "";
+            }
+            
+        }
+
+
+        private void VehicleListLV_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (vehicleListLV.SelectedItems.Count > 0) 
             { 
@@ -442,34 +585,38 @@ namespace VehicleMonitoringSystem
                 ShowData(_plateNumber);
             }
         }
-        private void repairLV_SelectedIndexChanged(object sender, EventArgs e)
+        private void RepairLV_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (repairLV.SelectedItems.Count > 0)
             {
                 _repairID = int.Parse(repairLV.SelectedItems[0].Text);
                 _repair.RetrieveRepairInfo(_repairID);
 
-             //   repairPlateNumberTB.Text = _repair.PlateNumber;
+                repairPlateNumberTB.Text = _repair.PlateNumber;
                 repairDateDTP.Value = _repair.RepairDate;
                 repairTypeOfRepairTB.Text = _repair.TypeOfRepair;
                 repairSupplierCB.Text = _supplier.RetrieveSupplierInfo(_repair.SupplierID).SupplierName;
                 repairAmountTB.Text = _repair.Amount.ToString("N2");
-             //   repairPaidByTB.Text = _repair.PaidBy;
             }
         }
-        private void viewRepairB_Click(object sender, EventArgs e)
+        private void ViewRepairB_Click(object sender, EventArgs e)
         {
             RepairDetailsForm repairDetailsForm = new RepairDetailsForm();
             repairDetailsForm.ShowDialog();
         }
-
-        private void paymentToolStripMenuItem_Click(object sender, EventArgs e)
+        private void maintenanceCancelB_Click(object sender, EventArgs e)
         {
-            NewPaymentForm newPaymentForm = new NewPaymentForm();
-            newPaymentForm.ShowDialog();
+            DisableMaintenance();
         }
+        private void PartsForRepairTSM_Click(object sender, EventArgs e)
+        {
+            NewPartForm partForm = new NewPartForm();
+            partForm.Show();
+        }
+
         #endregion
 
+        #region Other Methods
         #region Edit Cancel Clear
         private void editB_Click(object sender, EventArgs e)
         {
@@ -620,7 +767,7 @@ namespace VehicleMonitoringSystem
         {
             Button bt = (Button)sender;
 
-          /*  switch (bt.Text)
+            switch (bt.Text)
             {
                 case "Edit":
                     repairEditB.Text = "Save";
@@ -632,16 +779,15 @@ namespace VehicleMonitoringSystem
                     _typeOfRepair != repairTypeOfRepairTB.Text ||
                     _repairSupplier != repairSupplierCB.Text ||
                     _repairAmount != double.Parse(repairAmountTB.Text) ||
-                    _repairPaidBy != repairPaidByTB.Text)
+                    _repairDueDate != repairDueDateDTP.Value)
                     {
-                        _repair = new Repair(_repair.RepairID,
+                        _repair = new Repair(int.Parse(_repair.RepairID.ToString()),
                                              _repair.PlateNumber,
                                              repairDateDTP.Value,
                                              repairTypeOfRepairTB.Text,
-                                             int.Parse(repairSupplierCB.Text),
+                                             _supplier.RetrieveSupplierID(repairSupplierCB.Text),
                                              repairSupplierInvoiceNumberTB.Text,
-                                             double.Parse(repairAmountTB.Text),
-                                             repairPaidByTB.Text);
+                                             double.Parse(repairAmountTB.Text), repairDueDateDTP.Value);
                     }
 
                     _repair.UpdateRepairInfo(_repair);
@@ -653,7 +799,7 @@ namespace VehicleMonitoringSystem
                     LoadRepair(_plateNumber);
                     Loadfuel(_plateNumber);
                     break;
-            }*/
+            }
         }
         private void repairCancelB_Click(object sender, EventArgs e)
         {
@@ -668,7 +814,7 @@ namespace VehicleMonitoringSystem
 
         private void fuelEditB_Click(object sender, EventArgs e)
         {
-            /*switch (fuelEditB.Text)
+            switch (fuelEditB.Text)
             {
                 case "Edit":
                     fuelEditB.Text = "Save";
@@ -701,7 +847,7 @@ namespace VehicleMonitoringSystem
                     LoadRepair(_plateNumber);
                     Loadfuel(_plateNumber);
                     break;
-            }*/
+            }
         }
         private void fuelCancelB_Click(object sender, EventArgs e)
         {
@@ -863,7 +1009,7 @@ namespace VehicleMonitoringSystem
             repairDateDTP.Enabled = true;
             repairTypeOfRepairTB.Enabled = true;
             repairAmountTB.Enabled = true;
-            repairPaidByTB.Enabled = true;
+            repairSupplierCB.Enabled = true;
 
             repairCancelB.Visible = true;
             repairClearB.Visible = true;
@@ -873,7 +1019,6 @@ namespace VehicleMonitoringSystem
             repairDateDTP.Value = DateTime.Now;
             repairTypeOfRepairTB.Text = "";
             repairAmountTB.Text = "";
-            repairPaidByTB.Text = "";
         }
         private void DisableRepair()
         {
@@ -881,12 +1026,23 @@ namespace VehicleMonitoringSystem
             repairDateDTP.Enabled = false;
             repairTypeOfRepairTB.Enabled = false;
             repairAmountTB.Enabled = false;
-            repairPaidByTB.Enabled = false;
+            repairDueDateDTP.Enabled = false;
 
             repairCancelB.Visible = false;
             repairClearB.Visible = false;
         }
+        private void EnableMaintenance()
+        {
+            partCB.Enabled = true;
+            maintenanceCancelB.Visible = true;
 
+        }
+        private void DisableMaintenance()
+        {
+            partCB.Enabled = false;
+            maintenanceCancelB.Visible = false;
+        }
+        #endregion
         #endregion
     }
 }
