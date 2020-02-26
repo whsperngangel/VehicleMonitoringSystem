@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 
-namespace VehicleMonitoringSystem
+namespace VehicleMonitoringSystem.Payment
 {
-    class Payment
+    class Payments
     {
         #region Variables
         public int PaymentID,
                    StatementID;
-
         public string DatePaid,
                       AmountPaid,
                       PaidBy;
@@ -23,13 +22,13 @@ namespace VehicleMonitoringSystem
 
 
         #region Constructors
-        public Payment() { }
+        public Payments() { }
 
-        public Payment (int paymentID,
-                        int statementID,
-                        string datePaid,
-                        string amountPaid,
-                        string paidBy)
+        public Payments (int paymentID,
+                         int statementID,
+                         string datePaid,
+                         string amountPaid,
+                         string paidBy)
         {
             PaymentID = paymentID;
             StatementID = statementID;
@@ -41,7 +40,7 @@ namespace VehicleMonitoringSystem
 
 
         #region Payment Methods
-        public void InsertPayment(Payment payment)
+        public void InsertPayment(Payments payments)
         {
             try
             {
@@ -51,14 +50,14 @@ namespace VehicleMonitoringSystem
                 cmd.CommandText = @"INSERT INTO Payment(PaymentID, StatementID, DatePaid, AmountPaid, PaidBy)
                                                   VALUE(@PaymentID, @StatementID, @DatePaid, @AmountPaid, @PaidBy)";
 
-                cmd.Parameters.AddWithValue("@PaymentID", payment.PaymentID);
-                cmd.Parameters.AddWithValue("@StatementID", payment.StatementID);
-                cmd.Parameters.AddWithValue("@DatePaid", payment.DatePaid);
-                cmd.Parameters.AddWithValue("@AmountPaid", payment.AmountPaid);
-                cmd.Parameters.AddWithValue("@PaidBy", payment.PaidBy);
+                cmd.Parameters.AddWithValue("@PaymentID", payments.PaymentID);
+                cmd.Parameters.AddWithValue("@StatementID", payments.StatementID);
+                cmd.Parameters.AddWithValue("@DatePaid", payments.DatePaid);
+                cmd.Parameters.AddWithValue("@AmountPaid", payments.AmountPaid);
+                cmd.Parameters.AddWithValue("@PaidBy", payments.PaidBy);
 
                 cmd.ExecuteNonQuery();
-                MessageBox.Show(AmountPaid + " has been paid and recorded!");
+                MessageBox.Show("New Payment Record has been saved!");
                 _dbOp.DBClose();
             }
             catch(Exception ex)
@@ -67,9 +66,9 @@ namespace VehicleMonitoringSystem
             }
         }
 
-        public Payment RetrievePaymentInfo(int paymentID)
+        public Payments RetrievePaymentInfo(int paymentID)
         {
-            Payment temp = new Payment();
+            Payments temp = new Payments();
 
             try
             {
@@ -87,7 +86,7 @@ namespace VehicleMonitoringSystem
                     AmountPaid = (string)reader.GetValue(3);
                     PaidBy = (string)reader.GetValue(4);
 
-                    temp = new Payment(PaymentID, StatementID, DatePaid, AmountPaid, PaidBy);
+                    temp = new Payments(PaymentID, StatementID, DatePaid, AmountPaid, PaidBy);
                 }
                 reader.Close();
                 _dbOp.DBClose();
@@ -99,16 +98,16 @@ namespace VehicleMonitoringSystem
             return temp;
         }
 
-        public List<Payment> RetrievePaymentList()
+        public List<Payments> RetrievePaymentList()
         {
-            List<Payment> paymentList = new List<Payment>();
+            List<Payments> paymentList = new List<Payments>();
             try
             {
                 _dbOp.DBConnect();
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
                 cmd.CommandText = "SELECT * FROM Payment";
                 MySqlDataReader reader = cmd.ExecuteReader();
-                Payment temp = new Payment();
+                Payments temp = new Payments();
 
                 while (reader.Read())
                 {
@@ -118,7 +117,7 @@ namespace VehicleMonitoringSystem
                     AmountPaid = (string)reader.GetValue(3);
                     PaidBy = (string)reader.GetValue(4);
 
-                    temp = new Payment(PaymentID, StatementID, DatePaid, AmountPaid, PaidBy);
+                    temp = new Payments(PaymentID, StatementID, DatePaid, AmountPaid, PaidBy);
                     paymentList.Add(temp);
                 }
                 reader.Close();
@@ -131,7 +130,7 @@ namespace VehicleMonitoringSystem
             return paymentList;
         }
 
-        public void UpdatePaymentInfo(Payment payment)
+        public void UpdatePaymentInfo(Payments payments)
         {
             try
             {
@@ -144,11 +143,11 @@ namespace VehicleMonitoringSystem
                                                        AmountPaid = @AmountPaid
                                                        PaidBy = @PaidBy";
 
-                cmd.Parameters.AddWithValue("@PaymentID", payment.PaymentID);
-                cmd.Parameters.AddWithValue("@StatementID", payment.StatementID);
-                cmd.Parameters.AddWithValue("@DatePaid", payment.DatePaid);
-                cmd.Parameters.AddWithValue("@AmountPaid", payment.AmountPaid);
-                cmd.Parameters.AddWithValue("@PaidBy", payment.PaidBy);
+                cmd.Parameters.AddWithValue("@PaymentID", payments.PaymentID);
+                cmd.Parameters.AddWithValue("@StatementID", payments.StatementID);
+                cmd.Parameters.AddWithValue("@DatePaid", payments.DatePaid);
+                cmd.Parameters.AddWithValue("@AmountPaid", payments.AmountPaid);
+                cmd.Parameters.AddWithValue("@PaidBy", payments.PaidBy);
 
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Payment Record has been updated!");
