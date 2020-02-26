@@ -11,9 +11,13 @@ namespace VehicleMonitoringSystem
     class Statement
     {
         #region Variables
-        public int StatementID,
-                   SupplierID,
-                   PaymentID;
+
+        public int SupplierID;
+        public string InvoiceNumber;
+        public Double FuelAmountDue,
+            RepairAmountDue,
+            TotalDue;
+        public DateTime DateDue;
 
         DBOperation _dbOp = new DBOperation();
 
@@ -22,21 +26,26 @@ namespace VehicleMonitoringSystem
         #region Constructors
 
         public Statement() { }
-
-        public Statement(int statementID,
-                         int supplierID, 
-                         int paymentID)
+        public Statement(int supplierID, 
+                         string invoiceNumber, 
+                         Double fuelAmountDue, 
+                         Double repairAmountDue/*, DateTime dateDue*/)
         {
-            StatementID = statementID;
             SupplierID = supplierID;
-            PaymentID = paymentID;
+            InvoiceNumber = invoiceNumber;
+            FuelAmountDue = fuelAmountDue;
+            RepairAmountDue = repairAmountDue;
+            //DateDue = dateDue;
         }
-
+        //public Statement(Double totalDue)
+        //{
+        //    TotalDue = totalDue;
+        //}
         #endregion
 
         #region Statement Methods
 
-        public List<Statement> RetrieveStatementList()
+        public List<Statement> RetrieveStatementList(string conditionString1)
         {
             List<Statement> statements = new List<Statement>();
 
@@ -46,7 +55,7 @@ namespace VehicleMonitoringSystem
 
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
 
-                cmd.CommandText = @"SELECT * FROM Statement";
+                cmd.CommandText = @"SELECT supplier.SupplierID, repair.InvoiceNumber, fuel.Amount, repair.Amount FROM supplier INNER JOIN repair ON supplier.SupplierID=repair.SupplierID JOIN fuel ON fuel.SupplierID=repair.SupplierID " + conditionString1;
 
                 MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -54,11 +63,13 @@ namespace VehicleMonitoringSystem
 
                 while (reader.Read())
                 {
-                    StatementID = (int)reader.GetValue(0);
-                    SupplierID = (int)reader.GetValue(1);
-                    PaymentID = (int)reader.GetValue(2);
+                    SupplierID = (int)reader.GetValue(0);
+                    InvoiceNumber = (string)reader.GetValue(1);
+                    FuelAmountDue = (Double)reader.GetValue(2);
+                    RepairAmountDue = (Double)reader.GetValue(3);
+                    //DateDue = (DateTime)reader.GetValue(3);
 
-                    temp = new Statement(StatementID, SupplierID, PaymentID);
+                    temp = new Statement(SupplierID, InvoiceNumber, FuelAmountDue, RepairAmountDue/*, DateDue*/);
                     statements.Add(temp);
                 }
                 reader.Close();
@@ -79,20 +90,26 @@ namespace VehicleMonitoringSystem
             try
             {
                 _dbOp.DBConnect();
+
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
+
                 cmd.CommandText = @"SELECT * FROM Statement " + "WHERE StatementID = @StatementID";
                 cmd.Parameters.AddWithValue("@StatementID", statementID);
+
                 MySqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    StatementID = (int)reader.GetValue(0);
-                    SupplierID = (int)reader.GetValue(1);
-                    PaymentID = (int)reader.GetValue(2);
-
-                    temp = new Statement(StatementID, SupplierID, PaymentID);
+                    SupplierID = (int)reader.GetValue(0);
+                    InvoiceNumber = (string)reader.GetValue(1);
+                    FuelAmountDue = (Double)reader.GetValue(2);
+                    RepairAmountDue = (Double)reader.GetValue(3);
+                    //DateDue = (DateTime)reader.GetValue(4);
+               
+                    temp = new Statement(SupplierID, InvoiceNumber, FuelAmountDue, RepairAmountDue/*, DateDue*/);
                 }
                 reader.Close();
+
                 _dbOp.DBClose();
             }
             catch (Exception ex)
@@ -101,10 +118,6 @@ namespace VehicleMonitoringSystem
             }
             return temp;
         }
-
-
-
-
 
         //public Statement GetTotal()
         //{
