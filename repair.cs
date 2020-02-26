@@ -12,13 +12,13 @@ namespace VehicleMonitoringSystem
     {
         #region Variable
         public int RepairID,
-                   SupplierID,
-                   MaintenanceID;
+                   MaintenanceID,
+                   SupplierID;
         public string TypeOfRepair,
                       InvoiceNumber;
         public DateTime RepairDate;
         public double Amount;
-        public Boolean Paid;
+        public bool Paid;
 
         List<Repair> _repairs = new List<Repair>();
 
@@ -30,12 +30,12 @@ namespace VehicleMonitoringSystem
 
         public Repair(int repairID,
                       int maintenanceID,
-                      int supplierID, 
+                      int supplierID,
                       DateTime repairDate,
                       string typeOfRepair,
                       string invoiceNumber,
                       double amount,
-                      Boolean paid)
+                      bool paid)
         {
             RepairID = repairID;
             MaintenanceID = maintenanceID;
@@ -54,21 +54,39 @@ namespace VehicleMonitoringSystem
             try
             {
                 _dbOp.DBConnect();
-                MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
+                MySqlCommand cmdRepair = _dbOp._dbConn.CreateCommand();
 
-                cmd.CommandText = @"INSERT INTO Repair(RepairID, MaintenanceID, SupplierID, RepairDate, TypeOfRepair, InvoiceNumber, Amount, Paid) 
-                                                      VALUES(@RepairID, @MaintenanceID, @SupplierID, @RepairDate, @TypeOfRepair, @InvoiceNumber, @Amount, @Paid)";
+                cmdRepair.CommandText = @"INSERT INTO Repair(RepairID,  
+                                                             MaintenanceID,
+                                                             SupplierID,  
+                                                             PlateNumber,  
+                                                             RepairDate,  
+                                                             TypeOfRepair,  
+                                                             InvoiceNumber,  
+                                                             Amount,  
+                                                             Paid)
 
-                cmd.Parameters.AddWithValue("@RepairID", repair.RepairID);
-                cmd.Parameters.AddWithValue("#MaintenanceID", repair.MaintenanceID);
-                cmd.Parameters.AddWithValue("@SupplierID", repair.SupplierID);
-                cmd.Parameters.AddWithValue("@RepairDate", repair.RepairDate);
-                cmd.Parameters.AddWithValue("@TypeOfRepair", repair.TypeOfRepair);
-                cmd.Parameters.AddWithValue("@InvoiceNumber", repair.InvoiceNumber);
-                cmd.Parameters.AddWithValue("@Amount", repair.Amount);
-                cmd.Parameters.AddWithValue("@Paid", repair.Paid);
+                                                      VALUES(@RepairID,  
+                                                             @MaintenanceID,
+                                                             @SupplierID,  
+                                                             @PlateNumber,  
+                                                             @RepairDate,  
+                                                             @TypeOfRepair,  
+                                                             @InvoiceNumber,  
+                                                             @Amount,  
+                                                             @Paid)";
 
-                cmd.ExecuteNonQuery();
+                cmdRepair.Parameters.AddWithValue("@RepairID", repair.RepairID);
+                cmdRepair.Parameters.AddWithValue("@MaintenanceID", repair.MaintenanceID);
+                cmdRepair.Parameters.AddWithValue("@SupplierID", repair.SupplierID);
+                cmdRepair.Parameters.AddWithValue("@RepairDate", repair.RepairDate);
+                cmdRepair.Parameters.AddWithValue("@TypeOfRepair", repair.TypeOfRepair);
+                cmdRepair.Parameters.AddWithValue("@InvoiceNumber", repair.InvoiceNumber);
+                cmdRepair.Parameters.AddWithValue("@Amount", repair.Amount);
+                cmdRepair.Parameters.AddWithValue("@Paid", repair.Paid);
+
+                cmdRepair.ExecuteNonQuery();
+
                 MessageBox.Show("New Repair Record has been saved!");
                 _dbOp.DBClose();
             }
@@ -101,7 +119,7 @@ namespace VehicleMonitoringSystem
                     TypeOfRepair = (string)reader.GetValue(4);
                     InvoiceNumber = (string)reader.GetValue(5);
                     Amount = (double)reader.GetValue(6);
-                    Paid = (Boolean)reader.GetValue(7);
+                    Paid = (bool)reader.GetValue(7);
 
                     temp = new Repair(RepairID,
                                       MaintenanceID,
@@ -143,7 +161,7 @@ namespace VehicleMonitoringSystem
                     TypeOfRepair = (string)reader.GetValue(4);
                     InvoiceNumber = (string)reader.GetValue(5);
                     Amount = (double)reader.GetValue(6);
-                    Paid = (Boolean)reader.GetValue(7);
+                    Paid = (bool)reader.GetValue(7);
 
                     temp = new Repair(RepairID,
                                       MaintenanceID,
@@ -157,6 +175,7 @@ namespace VehicleMonitoringSystem
                     repairList.Add(temp);
                 }
                 reader.Close();
+
                 _dbOp.DBClose();
             }
             catch (Exception ex)
@@ -166,7 +185,7 @@ namespace VehicleMonitoringSystem
             return repairList;
         }
 
-        public List<Repair> RetrieveRepairList(string plateNumber)
+        public List<Repair> RetrieveRepairList(string repairID)
         {
             List<Repair> repairList = new List<Repair>();
 
@@ -176,8 +195,8 @@ namespace VehicleMonitoringSystem
 
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
 
-                cmd.CommandText = "SELECT * FROM Repair " + "WHERE PlateNumber = @PlateNumber";
-                cmd.Parameters.AddWithValue("@PlateNumber", plateNumber);
+                cmd.CommandText = "SELECT * FROM Repair " + "WHERE RepairID = @RepairID";
+                cmd.Parameters.AddWithValue("@RepairID", repairID);
 
                 MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -192,7 +211,7 @@ namespace VehicleMonitoringSystem
                     TypeOfRepair = (string)reader.GetValue(4);
                     InvoiceNumber = (string)reader.GetValue(5);
                     Amount = (double)reader.GetValue(6);
-                    Paid = (Boolean)reader.GetValue(7);
+                    Paid = (bool)reader.GetValue(7);
 
                     temp = new Repair(RepairID,
                                       MaintenanceID,
@@ -206,7 +225,6 @@ namespace VehicleMonitoringSystem
                     repairList.Add(temp);
                 }
                 reader.Close();
-
                 _dbOp.DBClose();
             }
             catch (Exception ex)
@@ -224,16 +242,18 @@ namespace VehicleMonitoringSystem
 
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
 
-                cmd.CommandText = @"UPDATE Repair SET RepairID = @RepairID, 
+                cmd.CommandText = @"UPDATE Repair SET RepairID = @RepairID,  
+                                                      MaintenanceID = @MaintenanceID,
+                                                      SupplierID = @SupplierID,  
                                                       PlateNumber = @PlateNumber, 
                                                       RepairDate = @RepairDate, 
                                                       TypeOfRepair = @TypeOfRepair, 
-                                                      SupplierID = @SupplierID,  
                                                       InvoiceNumber = @InvoiceNumber, 
-                                                      Amount = @Amount" + "WHERE RepairID = @RepairID";
+                                                      Amount = @Amount,  
+                                                      DueDate = @DueDate " + "WHERE RepairID = @RepairID";
 
                 cmd.Parameters.AddWithValue("@RepairID", repair.RepairID);
-                cmd.Parameters.AddWithValue("#MaintenanceID", repair.MaintenanceID);
+                cmd.Parameters.AddWithValue("@MaintenanceID", repair.MaintenanceID);
                 cmd.Parameters.AddWithValue("@SupplierID", repair.SupplierID);
                 cmd.Parameters.AddWithValue("@RepairDate", repair.RepairDate);
                 cmd.Parameters.AddWithValue("@TypeOfRepair", repair.TypeOfRepair);
@@ -242,9 +262,7 @@ namespace VehicleMonitoringSystem
                 cmd.Parameters.AddWithValue("@Paid", repair.Paid);
 
                 cmd.ExecuteNonQuery();
-
                 MessageBox.Show("Updated Repair Record has been saved!");
-
                 _dbOp.DBClose();
             }
             catch (Exception ex)
