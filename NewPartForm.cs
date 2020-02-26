@@ -15,11 +15,11 @@ namespace VehicleMonitoringSystem
     {
         #region Variable
         private int _partID;
-        private string _description, partID;
+        private string _description;
 
         private Part _part = new Part();
         private List<Part> _parts = new List<Part>();
-        private MainForm _mainForm;
+       // private MainForm _mainForm;
         #endregion
 
         #region  Constructors
@@ -33,15 +33,36 @@ namespace VehicleMonitoringSystem
         public NewPartForm(MainForm mainForm)
         {
             InitializeComponent();
-            _mainForm = mainForm;
+        //    _mainForm = mainForm;
             ListViewLoad();
         }
         #endregion
 
-        #region Gas Methods
+        #region Part Methods
         #endregion
         private void addPartB_Click(object sender, EventArgs e)
         {
+            //switch (addPartB.Text)
+            //{
+            //    case "Add":
+            //        _partID = _part.CreatePartID();
+            //        _description = partDescriptionTB.Text.Trim();
+
+            //        _part = new Part(_partID, _description);
+
+            //        _part.InsertPart(_part);
+            //        break;
+
+            //    case "Update":
+            //        if (partDescriptionTB.Text != _description)
+            //        {
+            //            _part = new Part(int.Parse(partIDTB.Text), partDescriptionTB.Text);
+            //            _part.UpdatePartInfo(_part);
+            //        }
+            //        addPartB.Text = "Add";
+            //        break;
+            //}
+
             if (addPartB.Text == "Add")
             {
                 _partID = _part.CreatePartID();
@@ -49,40 +70,37 @@ namespace VehicleMonitoringSystem
 
                 _part = new Part(_partID, _description);
                 _part.InsertPart(_part);
-
-                partDescriptionTB.Text = "";
             }
             else if (addPartB.Text == "Update")
             {
-                if (partID != partIDTB.Text ||
-                   _description != partDescriptionTB.Text)
+                if (/*partID != partIDTB.Text ||*/
+                   partDescriptionTB.Text != _description)
                 {
                     _partID = int.Parse(partIDTB.Text);
                     _description = partDescriptionTB.Text;
-                    
+
                     _part = new Part(_partID, _description);
-                }
 
                 _part.UpdatePartInfo(_part);
                 partDescriptionTB.Text = "";
-                
+                }
+                addPartB.Text = "Save";
             }
+            ClearFields();
             ListViewLoad();
-
-
         }
         private void ListViewLoad()
         {
             _parts = _part.RetrievePartList();
+            partListLV.Items.Clear();
             foreach (Part p in _parts)
             {
                 _partID = p.PartID;
                 _description = p.Description;
 
-                ListViewItem partList = new ListViewItem();
+                ListViewItem partList = new ListViewItem(_partID.ToString());
                 partList.SubItems.Add(_partID.ToString());
                 partList.SubItems.Add(_description);
-               
                 partListLV.Items.Add(partList);
             }
         }
@@ -92,10 +110,27 @@ namespace VehicleMonitoringSystem
             addPartB.Text = "Update";
             if (partListLV.SelectedItems.Count > 0)
             {
-                ListViewItem selectedPart = partListLV.SelectedItems[0];
-                partDescriptionTB.Text = selectedPart.SubItems[2].Text;
-                partIDTB.Text = selectedPart.SubItems[1].Text;
+                //ListViewItem selectedPart = partListLV.SelectedItems[0];
+                //partDescriptionTB.Text = selectedPart.SubItems[2].Text;
+                //partIDTB.Text = selectedPart.SubItems[1].Text;
+
+                _partID = int.Parse(partListLV.SelectedItems[0].Text);
+                _part = _part.RetrievePartInfo(int.Parse(_partID.ToString()));
+
+                partIDTB.Text = _partID.ToString();
+                partDescriptionTB.Text = _part.Description;
             }
+            else
+            {
+                addPartB.Text = "Add";
+                ClearFields();
+            }
+        }
+
+        public void ClearFields()
+        {
+            partIDTB.Text = _part.CreatePartID().ToString();
+            partDescriptionTB.Text = "";
         }
     }
 }
