@@ -33,9 +33,8 @@ namespace VehicleMonitoringSystem
         private Vehicle _vehicle = new Vehicle();
         private Registration _registration = new Registration();
         List<Vehicle> _vehicles = new List<Vehicle>();
+        private MainForm _mainForm;
         #endregion
-
-
 
         #region  Constructors
         public NewVehicleForm()
@@ -44,8 +43,6 @@ namespace VehicleMonitoringSystem
             ComboBoxLoad();
         }
         #endregion
-
-
 
         #region Vehicle Methods
         private void ComboBoxLoad()
@@ -63,7 +60,7 @@ namespace VehicleMonitoringSystem
         {
             try
             {
-                plateNumber = plateNumberTB.Text.Trim(new Char[] { ' ' });
+                plateNumber = plateNumberTB.Text.Trim();
                 registeredName = registeredNameTB.Text.Trim();
                 orNumber = orNumberTB.Text.Trim();
                 orDate = orDateDTP.Value;
@@ -78,12 +75,13 @@ namespace VehicleMonitoringSystem
                 remarks = remarksRTB.Text.Trim();
 
                 _vehicle = new Vehicle(plateNumber, listing, brand, category, crNumber, crDate, issuedTo);
-                _registration = new Registration(registrationID, plateNumber, registeredName, orNumber, orDate, renewal, amount, remarks);
+                _registration = new Registration(registrationID,plateNumber, registeredName, orNumber, orDate, renewal, amount, remarks);
 
                 _vehicle.InsertVehicle(_vehicle);
                 _registration.InsertRegistration(_registration);
-
+                
                 this.Close();
+                _mainForm.ListViewLoad();
             }
             catch (Exception ex)
             {
@@ -106,41 +104,8 @@ namespace VehicleMonitoringSystem
             listingCB.Text = "";
             brandCB.Text = "";
             categoryCB.Text = "";
-            amountTB.Text = "0.00";
+            amountTB.Text = "";
             remarksRTB.Text = "";
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-        private void plateNumberTB_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == ' ')
-            {
-                e.Handled = true;
-            }
-        }
-        private void amountTB_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-            (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-
-                if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-                {
-                    e.Handled = true;
-                }
-            }
         }
         #endregion
     }
