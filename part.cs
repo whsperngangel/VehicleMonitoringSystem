@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 
@@ -21,7 +22,7 @@ namespace VehicleMonitoringSystem
 
         #region Constructor
         public Part() { }
-        public Part(int partID,string description)
+        public Part(int partID, string description)
         {
             PartID = partID;
             Description = description;
@@ -63,7 +64,7 @@ namespace VehicleMonitoringSystem
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
 
                 cmd.CommandText = @"SELECT * FROM Part " + "WHERE PartID = @PartID";
-                cmd.Parameters.AddWithValue("@PartID", PartID);
+                cmd.Parameters.AddWithValue("@PartID", partID);
 
                 MySqlDataReader reader = cmd.ExecuteReader();
 
