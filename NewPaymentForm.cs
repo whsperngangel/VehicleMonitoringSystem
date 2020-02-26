@@ -1,15 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using VehicleMonitoringSystem.Payment;
 
 namespace VehicleMonitoringSystem
-{ 
+{
     public partial class NewPaymentForm : Form
     {
         #region Variables
@@ -23,9 +18,9 @@ namespace VehicleMonitoringSystem
         private double balance; 
 
         private Supplier _supplier = new Supplier();
-        private Payment _payment = new Payment();
+        private Payments _payment = new Payments();
         List<Supplier> _suppliers = new List<Supplier>();
-        List<Payment> _payments = new List<Payment>();
+        List<Payments> _payments = new List<Payments>();
         #endregion
 
         #region Constructors
@@ -48,7 +43,7 @@ namespace VehicleMonitoringSystem
             }
 
             _payments = _payment.RetrievePaymentList();
-            foreach (Payment p in _payments)
+            foreach (Payments p in _payments)
             {
                 paidByCB.Items.Add(p. PaidBy);
             }
@@ -66,7 +61,7 @@ namespace VehicleMonitoringSystem
                 paidBy = paidByCB.Text.Trim();
 
                 _supplier = new Supplier(supplierID, supplierName);
-                _payment = new Payment(paymentID, statementID, datePaid, amountPaid, paidBy);
+                _payment = new Payments(paymentID, statementID, datePaid, amountPaid, paidBy);
             }
             catch (Exception ex)
             {
@@ -74,6 +69,10 @@ namespace VehicleMonitoringSystem
             }
         }
 
+        private void supplierCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
 
         private void clearB_Click(object sender, EventArgs e)
         {
