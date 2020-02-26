@@ -12,43 +12,75 @@ namespace VehicleMonitoringSystem
 {
     public partial class NewMaintenanceForm : Form
     {
-        #region Variable
-        public int maintenanceID,
-                   partID,
-                   repairID;
-        public string plateNumber,
-                      typeOfRepair,
-                      description;
-        public DateTime date;
+        #region Variables
+        private string _plateNumber;
+        private int _maintenanceID, _partID;
 
         private Maintenance _maintenance = new Maintenance();
-        private Repair _repair = new Repair();
+        private Vehicle _vehicle = new Vehicle();
+        private List<Vehicle> _vehicles = new List<Vehicle>();
+        private List<Maintenance> _maintenances = new List<Maintenance>();
         private Part _part = new Part();
-
-
-        List<Maintenance> _maintenances = new List<Maintenance>();
-        List<Repair> _repairs = new List<Repair>();
-        List<Part> _parts = new List<Part>();
+        private List<Part> _parts = new List<Part>();
         #endregion
-
-
 
         #region Constructors
         public NewMaintenanceForm()
         {
             InitializeComponent();
+            ComboBox();
         }
+
         #endregion
 
-
-
-        #region Maintenance Form Methods
-        private void nextB_Click(object sender, EventArgs e)
+        #region UI Methods
+        private void ComboBox()
         {
-            NewRepairForm newRepairForm = new NewRepairForm();
-            newRepairForm.Show();
+            _vehicles = _vehicle.RetrieveVehicleList();
+            foreach (Vehicle v in _vehicles)
+            {
+                plateNumberCB.Items.Add(v.PlateNumber);
+            }
+            _parts = _part.RetrievePartList();
+            foreach (Part p in _parts)
+            {
+                partCB.Items.Add(p.Description);
+            }
         }
 
+        private void addB_Click(object sender, EventArgs e)
+        {
+            NewPartForm newPartForm = new NewPartForm();
+            newPartForm.ShowDialog();
+        }
+        private void cancelB_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+        private void nextB_Click(object sender, EventArgs e)
+        {
+            _maintenanceID = _maintenance.CreateMaintenanceID();
+            _plateNumber = plateNumberCB.Text.Trim();
+            _partID = _part.RetrievePartID(partCB.Text.Trim());
+
+            _maintenance = new Maintenance(_maintenanceID, _plateNumber, _partID);
+            _maintenance.InsertMaintenance(_maintenance);
+
+            Close();
+            NewRepairForm newRepairForm = new NewRepairForm();
+            newRepairForm.ShowDialog();
+        }
+        private void doneB_Click(object sender, EventArgs e)
+        {
+            _maintenanceID = _maintenance.CreateMaintenanceID();
+            _plateNumber = plateNumberCB.Text.Trim();
+            _partID = _part.RetrievePartID(partCB.Text.Trim());
+
+            _maintenance = new Maintenance(_maintenanceID, _plateNumber, _partID);
+            _maintenance.InsertMaintenance(_maintenance);
+
+
+        }
         #endregion
     }
 }
