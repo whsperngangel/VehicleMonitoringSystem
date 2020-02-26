@@ -320,6 +320,7 @@ namespace VehicleMonitoringSystem
             // 
             // plateNumberCB
             // 
+            this.plateNumberCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.plateNumberCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.plateNumberCB.FormattingEnabled = true;
             this.plateNumberCB.Location = new System.Drawing.Point(155, 14);
