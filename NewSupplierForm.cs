@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 
 namespace VehicleMonitoringSystem
 {
@@ -22,15 +21,15 @@ namespace VehicleMonitoringSystem
         public NewSupplierForm()
         {
             InitializeComponent();
-            //supplierIDTB.Text = _suppliers.CreateSupplierID().ToString();
+            supplierIDTB.Text = _suppliers.CreateSupplierID().ToString();
         }
 
-        internal NewSupplierForm(MainForm mainForm)
-        {
-            InitializeComponent();
-            supplierIDTB.Text = _suppliers.CreateSupplierID().ToString();
-            _mainForm = mainForm;
-        }
+        //internal NewSupplierForm(MainForm mainForm)
+        //{
+        //    InitializeComponent();
+        //    supplierIDTB.Text = _suppliers.CreateSupplierID().ToString();
+        //    _mainForm = mainForm;
+        //}
 
         private void saveB_Click(object sender, EventArgs e)
         {
