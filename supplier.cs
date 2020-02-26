@@ -8,89 +8,67 @@ using System.Windows.Forms;
 
 namespace VehicleMonitoringSystem
 {
-    class Statement
+    class Supplier
     {
-        #region Variables
-        public int StatementID,
-                   SupplierID,
-                   PaymentID;
+        #region Variable
+        public int SupplierID;
+        public string SupplierName;
 
         DBOperation _dbOp = new DBOperation();
-
         #endregion
 
-        #region Constructors
-
-        public Statement() { }
-
-        public Statement(int statementID,
-                         int supplierID, 
-                         int paymentID)
+        #region Constructor
+        public Supplier() { }
+        public Supplier(int supplierID,
+                        string supplierName)
         {
-            StatementID = statementID;
             SupplierID = supplierID;
-            PaymentID = paymentID;
+            SupplierName = supplierName;
         }
-
         #endregion
 
-        #region Statement Methods
-
-        public List<Statement> RetrieveStatementList()
+        #region Supplier Method
+        public void InsertSupplier(Supplier supplier)
         {
-            List<Statement> statements = new List<Statement>();
-
             try
             {
                 _dbOp.DBConnect();
-
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
 
-                cmd.CommandText = @"SELECT * FROM Statement";
+                cmd.CommandText = @"INSERT INTO Supplier(SupplierID, SupplierName) 
+                                                  VALUES(@SupplierID, @SupplierName)";
 
-                MySqlDataReader reader = cmd.ExecuteReader();
+                cmd.Parameters.AddWithValue("@SupplierID", supplier.SupplierID);
+                cmd.Parameters.AddWithValue("@SupplierName", supplier.SupplierName);
 
-                Statement temp = new Statement();
-
-                while (reader.Read())
-                {
-                    StatementID = (int)reader.GetValue(0);
-                    SupplierID = (int)reader.GetValue(1);
-                    PaymentID = (int)reader.GetValue(2);
-
-                    temp = new Statement(StatementID, SupplierID, PaymentID);
-                    statements.Add(temp);
-                }
-                reader.Close();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("New Supplier Record has been saved!");
                 _dbOp.DBClose();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
-
-            return statements;
         }
 
-        public Statement RetrieveStatementInfo(int statementID)
+        public Supplier RetrieveSupplierInfo(int supplierID)
         {
-            Statement temp = new Statement();
+            Supplier temp = new Supplier();
 
             try
             {
                 _dbOp.DBConnect();
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
-                cmd.CommandText = @"SELECT * FROM Statement " + "WHERE StatementID = @StatementID";
-                cmd.Parameters.AddWithValue("@StatementID", statementID);
+                cmd.CommandText = @"SELECT * FROM Supplier " + "WHERE SupplierID = @SupplierID";
+                cmd.Parameters.AddWithValue("@SupplierID", supplierID);
                 MySqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    StatementID = (int)reader.GetValue(0);
-                    SupplierID = (int)reader.GetValue(1);
-                    PaymentID = (int)reader.GetValue(2);
+                    SupplierID = (int)reader.GetValue(0);
+                    SupplierName = (string)reader.GetValue(1);
 
-                    temp = new Statement(StatementID, SupplierID, PaymentID);
+                    temp = new Supplier(SupplierID, SupplierName);
                 }
                 reader.Close();
                 _dbOp.DBClose();
@@ -102,45 +80,106 @@ namespace VehicleMonitoringSystem
             return temp;
         }
 
+        public List<Supplier> RetrieveSupplierList()
+        {
+            List<Supplier> supplierList = new List<Supplier>();
 
+            try
+            {
+                _dbOp.DBConnect();
+                MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM Supplier";
+                MySqlDataReader reader = cmd.ExecuteReader();
+                Supplier temp = new Supplier();
 
+                while (reader.Read())
+                {
+                    SupplierID = (int)reader.GetValue(0);
+                    SupplierName = (string)reader.GetValue(1);
 
+                    temp = new Supplier(SupplierID, SupplierName);
+                    supplierList.Add(temp);
+                }
+                reader.Close();
+                _dbOp.DBClose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return supplierList;
+        }
 
-        //public Statement GetTotal()
-        //{
-        //    Statement temp = new Statement(int statementID);
+        public int RetrieveSupplierID(string supplierName)
+        {
+            try
+            {
+                _dbOp.DBConnect();
+                MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM Supplier " + "WHERE SupplierName = @SupplierName";
+                cmd.Parameters.AddWithValue("@SupplierName", supplierName);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                Supplier temp = new Supplier();
 
-        //    try
-        //    {
-        //        _dbOp.DBConnect();
+                while (reader.Read())
+                {
+                    SupplierID = (int)reader.GetValue(0);
+                    SupplierName = (string)reader.GetValue(1);
 
-        //        MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
+                    temp = new Supplier(SupplierID, SupplierName);
+                }
+                reader.Close();
 
-        //        cmd.CommandText = @"SELECT(SELECT(SUM(Amount)) FROM fuel) + (SELECT(SUM(Amount)) FROM repair) FROM DUAL";
-        //        cmd.Parameters.AddWithValue("@StatementID", statementID);
+                _dbOp.DBClose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return SupplierID;
+        }
+        public void UpdateSupplierInfo(Supplier supplier)
+        {
+            try
+            {
+                _dbOp.DBConnect();
+                MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
+                cmd.CommandText = @"UPDATE Supplier SET SupplierID = @SupplierID,SupplierName = @SupplierName" + " WHERE SupplierID = @SupplierID";
+                cmd.Parameters.AddWithValue("@SupplierID", supplier.SupplierID);
+                cmd.Parameters.AddWithValue("@SupplierName", supplier.SupplierName);
 
-        //        MySqlDataReader reader = cmd.ExecuteReader();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Updated Supplier Record has been saved!");
+                _dbOp.DBClose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
 
-        //        while (reader.Read())
-        //        {
-        //            SupplierID = (int)reader.GetValue(0);
-        //            InvoiceNumber = (string)reader.GetValue(1);
-        //            FuelAmountDue = (Double)reader.GetValue(0);
-        //            RepairAmountDue = (Double)reader.GetValue(1);
-        //            DateDue = (DateTime)reader.GetValue(4);
+        public int CreateSupplierID()
+        {
+            SupplierID = CountSupplier();
+            return SupplierID;
+        }
 
-        //            temp = new Statement(SupplierID, InvoiceNumber, FuelAmountDue, RepairAmountDue/*, DateDue*/);
-        //        }
-        //        reader.Close();
+        public int CountSupplier()
+        {
+            int count = 1;
+            _dbOp.DBConnect();
+            MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
+            cmd.CommandText = @"SELECT * FROM Supplier";
+            MySqlDataReader reader = cmd.ExecuteReader();
 
-        //        _dbOp.DBClose();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.ToString());
-        //    }
-        //    return temp;
-        //}
+            while (reader.Read())
+            {
+                count++;
+            }
+            reader.Close();
+            _dbOp.DBClose();
+            return count;
+        }
 
         #endregion
     }
