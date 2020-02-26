@@ -21,25 +21,17 @@ namespace VehicleMonitoringSystem
         DBOperation _dbOp = new DBOperation();
         #endregion
 
-
-
         #region Constructors
         public Vehicle() { }
         
-        public Vehicle(string plateNumber, 
-                       string listing, 
-                       string brand, 
-                       string category, 
-                       string crNumber, 
-                       DateTime crDate, 
-                       string issuedTo)
+        public Vehicle(string plateNumber, string listing, string brand, string category, string cRNumber, DateTime cRDate, string issuedTo)
         {
             PlateNumber = plateNumber;
             Listing = listing;
             Brand = brand;
             Category = category;
-            CRNumber = crNumber;
-            CRDate = crDate;
+            CRNumber = cRNumber;
+            CRDate = cRDate;
             IssuedTo = issuedTo;
         }
         #endregion
@@ -54,10 +46,23 @@ namespace VehicleMonitoringSystem
                 _dbOp.DBConnect();
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
 
-                cmd.CommandText = @"INSERT INTO Vehicle(PlateNumber, Listing, Brand, Category, CRNumber, CRDate, IssuedTo)
-                                                 VALUES(@PlateNumber, @Listing, @Brand, @Category, @CRNumber, @CRDate, @IssuedTo)";
+                cmd.CommandText = @"INSERT INTO Vehicle(PlateNumber,
+                                                        Listing,
+                                                        Brand,
+                                                        Category,
+                                                        CRNumber,
+                                                        CRDate,
+                                                        IssuedTo)
+                                                        
+                                                 VALUES(@PlateNumber,
+                                                        @Listing,
+                                                        @Brand, 
+                                                        @Category,
+                                                        @CRNumber, 
+                                                        @CRDate, 
+                                                        @IssuedTo)";
         
-                cmd.Parameters.AddWithValue("@PlateNumber", vehicle.PlateNumber.Trim());
+                cmd.Parameters.AddWithValue("@PlateNumber", vehicle.PlateNumber);
                 cmd.Parameters.AddWithValue("@Listing", vehicle.Listing);
                 cmd.Parameters.AddWithValue("@Brand", vehicle.Brand);
                 cmd.Parameters.AddWithValue("@Category", vehicle.Category);
@@ -97,7 +102,13 @@ namespace VehicleMonitoringSystem
                     CRDate = (DateTime)reader.GetValue(5);
                     IssuedTo = (string)reader.GetValue(6);
 
-                    temp = new Vehicle(PlateNumber, Listing, Brand, Category, CRNumber, CRDate, IssuedTo);
+                    temp = new Vehicle(PlateNumber,
+                                       Listing, 
+                                       Brand,
+                                       Category, 
+                                       CRNumber, 
+                                       CRDate, 
+                                       IssuedTo);
                 }
                 reader.Close();
                 _dbOp.DBClose();
@@ -131,7 +142,14 @@ namespace VehicleMonitoringSystem
                     CRDate = (DateTime)reader.GetValue(5);
                     IssuedTo = (string)reader.GetValue(6);
 
-                    temp = new Vehicle(PlateNumber, Listing, Brand, Category, CRNumber, CRDate, IssuedTo);
+                    temp = new Vehicle(PlateNumber,
+                                       Listing,
+                                       Brand,
+                                       Category,
+                                       CRNumber,
+                                       CRDate,
+                                       IssuedTo);
+
                     vehicleList.Add(temp);
                 }
 
