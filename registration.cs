@@ -53,23 +53,8 @@ namespace VehicleMonitoringSystem
                 _dbOp.DBConnect();
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
 
-                cmd.CommandText = @"INSERT INTO Registration(RegistrationID, 
-                                                             PlateNumber,
-                                                             RegisteredName,
-                                                             ORNumber,
-                                                             ORDate,
-                                                             Renewal,
-                                                             Amount,
-                                                             Remarks)
-                                                             
-                                                      VALUES(@RegistrationID, 
-                                                             @PlateNumber,
-                                                             @RegisteredName,
-                                                             @ORNumber,
-                                                             @ORDate,
-                                                             @Renewal,
-                                                             @Amount,
-                                                             @Remarks)";
+                cmd.CommandText = @"INSERT INTO Registration(RegistrationID, PlateNumber,RegisteredName,ORNumber,ORDate,Renewal,Amount,Remarks)
+                        VALUES(@RegistrationID, @PlateNumber,@RegisteredName,@ORNumber,@ORDate,@Renewal,@Amount,@Remarks)";
 
                 cmd.Parameters.AddWithValue("@RegistrationID", registration.RegistrationID);
                 cmd.Parameters.AddWithValue("@PlateNumber", registration.PlateNumber);
@@ -111,14 +96,7 @@ namespace VehicleMonitoringSystem
                     Amount = (double)reader.GetValue(6);
                     Remarks = (string)reader.GetValue(7);
 
-                    temp = new Registration(RegistrationID,
-                                            PlateNumber,
-                                            RegisteredName,
-                                            ORNumber,
-                                            ORDate,
-                                            Renewal,
-                                            Amount,
-                                            Remarks);
+                    temp = new Registration(RegistrationID, plateNumber,RegisteredName,ORNumber,ORDate,Renewal,Amount,Remarks);
                 }
                 reader.Close();
                 _dbOp.DBClose();
@@ -153,15 +131,8 @@ namespace VehicleMonitoringSystem
                     Amount = (double)reader.GetValue(6);
                     Remarks = (string)reader.GetValue(7);
 
-                    temp = new Registration(RegistrationID,
-                                            PlateNumber,
-                                            RegisteredName,
-                                            ORNumber,
-                                            ORDate,
-                                            Renewal,
-                                            Amount,
-                                            Remarks);
-
+                    temp = new Registration(RegistrationID,PlateNumber,RegisteredName,ORNumber,ORDate,Renewal,Amount,Remarks);
+                    
                     registrationList.Add(temp);
                     
                 }
@@ -203,27 +174,6 @@ namespace VehicleMonitoringSystem
             {
                 MessageBox.Show(ex.ToString());
             }
-        }
-        public int CreateRegistrationID()
-        {
-            RegistrationID = CountRegistration();
-            return RegistrationID;
-        }
-
-        public int CountRegistration()
-        {
-            int count = 1;
-            _dbOp.DBConnect();
-            MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
-            cmd.CommandText = @"SELECT * FROM Registration";
-            MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                count++;
-            }
-            reader.Close();
-            _dbOp.DBClose();
-            return count;
         }
         #endregion
     }
