@@ -12,7 +12,8 @@ namespace VehicleMonitoringSystem
     {
         #region Variable
         public int MaintenanceID;
-        public string PlateNumber;
+        public string PlateNumber; //removed
+        public bool Status = false;
         public int PartID;
 
         DBOperation _dbOp = new DBOperation();
@@ -20,30 +21,33 @@ namespace VehicleMonitoringSystem
 
         #region Constructor
         public Maintenance() { }
-        public Maintenance(int maintenanceID, 
-                           string plateNumber, 
-                           int partID)
+        public Maintenance(int maintenanceID, string plateNumber, int partID, bool status) //added
         {
             MaintenanceID = maintenanceID;
             PlateNumber = plateNumber;
             PartID = partID;
+            Status = status;
         }
+        
         #endregion
 
         #region Maintenance Method
+        //dito
         public void InsertMaintenance(Maintenance maintenance)
         {
             try
             {
                 _dbOp.DBConnect();
+
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
 
-                cmd.CommandText = @"INSERT INTO Maintenance(MaintenanceID,PlateNumber,PartID) 
-                                                     VALUES(@MaintenanceID,@PlateNumber,@PartID)";
+                cmd.CommandText = @"INSERT INTO Maintenance(MaintenanceID,PlateNumber,PartID,Status) 
+                                    VALUES(@MaintenanceID,@PlateNumber,@PartID,@Status)";
 
                 cmd.Parameters.AddWithValue("@MaintenanceID", maintenance.MaintenanceID);
                 cmd.Parameters.AddWithValue("@PlateNumber", maintenance.PlateNumber);
                 cmd.Parameters.AddWithValue("@PartID", maintenance.PartID);
+                cmd.Parameters.AddWithValue("@Status", Status);
 
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Maintence Record has been saved!");
@@ -73,8 +77,9 @@ namespace VehicleMonitoringSystem
                     MaintenanceID = (int)reader.GetValue(0);
                     PlateNumber = (string)reader.GetValue(1);
                     PartID = (int)reader.GetValue(2);
+                    Status = (bool)reader.GetValue(3);
 
-                    _maintenance = new Maintenance(MaintenanceID, PlateNumber, PartID);
+                    _maintenance = new Maintenance(MaintenanceID, PlateNumber, PartID, Status);
                 }
                 reader.Close();
 
@@ -102,8 +107,9 @@ namespace VehicleMonitoringSystem
                     MaintenanceID = (int)reader.GetValue(0);
                     PlateNumber = (string)reader.GetValue(1);
                     PartID = (int)reader.GetValue(2);
+                    Status = (bool)reader.GetValue(3);
 
-                    _maintenance = new Maintenance(MaintenanceID, PlateNumber, PartID);
+                    _maintenance = new Maintenance(MaintenanceID, PlateNumber, PartID, Status);
                     _maintenances.Add(_maintenance);
                 }
                 reader.Close();
@@ -133,8 +139,9 @@ namespace VehicleMonitoringSystem
                     MaintenanceID = (int)reader.GetValue(0);
                     PlateNumber = (string)reader.GetValue(1);
                     PartID = (int)reader.GetValue(2);
+                    Status = (bool)reader.GetValue(3);
 
-                    temp = new Maintenance(MaintenanceID, PlateNumber, PartID);
+                    temp = new Maintenance(MaintenanceID, PlateNumber, PartID, Status);
                     maintenancePartList.Add(temp);
                 }
                 reader.Close();
@@ -165,10 +172,12 @@ namespace VehicleMonitoringSystem
                     MaintenanceID = (int)reader.GetValue(0);
                     PlateNumber = (string)reader.GetValue(1);
                     PartID = (int)reader.GetValue(2);
+                    Status = (bool)reader.GetValue(3);
 
-                    _maintenance = new Maintenance(MaintenanceID, PlateNumber, PartID);
+                    _maintenance = new Maintenance(MaintenanceID, PlateNumber, PartID, Status);
                 }
                 reader.Close();
+
                 _dbOp.DBClose();
             }
             catch (Exception ex)
@@ -177,16 +186,32 @@ namespace VehicleMonitoringSystem
             }
             return PartID;
         }
+        public void UpdateMaintenanceStatus(bool status)
+        {
+            try
+            {
+                _dbOp.DBConnect();
+                MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
+
+                cmd.CommandText = @"UPDATE Maintenance SET Status = @Status" + " WHERE MaintenanceID = @MaintenanceID";
+                cmd.Parameters.AddWithValue("@Status", status);
+
+                cmd.ExecuteNonQuery();
+                _dbOp.DBClose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
         public void UpdateMaintenanceInfo(Maintenance maintenance)
         {
             try
             {
                 _dbOp.DBConnect();
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
-                cmd.CommandText = @"UPDATE Maintenance SET MaintenanceID = @MaintenanceID,
-                                                           PlateNumber = @PlateNumber, 
-                                                           PartID = @PartID" + " WHERE PartID = @PartID";
 
+                cmd.CommandText = @"UPDATE Maintenance SET MaintenanceID = @MaintenanceID,PlateNumber = @PlateNumber, PartID = @PartID" + " WHERE MaintenanceID = @MaintenanceID";
                 cmd.Parameters.AddWithValue("@MaintenanceID", maintenance.MaintenanceID);
                 cmd.Parameters.AddWithValue("@PlateNumber", maintenance.PlateNumber);
                 cmd.Parameters.AddWithValue("@PartID", maintenance.PartID);
