@@ -33,10 +33,11 @@ namespace VehicleMonitoringSystem
             try
             {
                 _dbOp.DBConnect();
+
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
 
                 cmd.CommandText = @"INSERT INTO Supplier(SupplierID, SupplierName) 
-                                                  VALUES(@SupplierID, @SupplierName)";
+                                VALUES(@SupplierID, @SupplierName)";
 
                 cmd.Parameters.AddWithValue("@SupplierID", supplier.SupplierID);
                 cmd.Parameters.AddWithValue("@SupplierName", supplier.SupplierName);
@@ -71,6 +72,7 @@ namespace VehicleMonitoringSystem
                     temp = new Supplier(SupplierID, SupplierName);
                 }
                 reader.Close();
+
                 _dbOp.DBClose();
             }
             catch (Exception ex)
@@ -88,7 +90,7 @@ namespace VehicleMonitoringSystem
             {
                 _dbOp.DBConnect();
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
-                cmd.CommandText = "SELECT * FROM Supplier";
+                cmd.CommandText = "SELECT * FROM supplier";
                 MySqlDataReader reader = cmd.ExecuteReader();
                 Supplier temp = new Supplier();
 
@@ -129,7 +131,6 @@ namespace VehicleMonitoringSystem
                     temp = new Supplier(SupplierID, SupplierName);
                 }
                 reader.Close();
-
                 _dbOp.DBClose();
             }
             catch (Exception ex)
@@ -144,6 +145,7 @@ namespace VehicleMonitoringSystem
             {
                 _dbOp.DBConnect();
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
+
                 cmd.CommandText = @"UPDATE Supplier SET SupplierID = @SupplierID,SupplierName = @SupplierName" + " WHERE SupplierID = @SupplierID";
                 cmd.Parameters.AddWithValue("@SupplierID", supplier.SupplierID);
                 cmd.Parameters.AddWithValue("@SupplierName", supplier.SupplierName);
@@ -161,23 +163,27 @@ namespace VehicleMonitoringSystem
         public int CreateSupplierID()
         {
             SupplierID = CountSupplier();
+
             return SupplierID;
         }
 
         public int CountSupplier()
         {
             int count = 1;
+
             _dbOp.DBConnect();
+
             MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
             cmd.CommandText = @"SELECT * FROM Supplier";
-            MySqlDataReader reader = cmd.ExecuteReader();
 
+            MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
                 count++;
             }
             reader.Close();
             _dbOp.DBClose();
+
             return count;
         }
 
