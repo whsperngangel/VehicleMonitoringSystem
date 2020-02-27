@@ -27,19 +27,19 @@ namespace VehicleMonitoringSystem
 
         public Fuel(int fuelID,
                     string plateNumber, 
-                    int supplierID,
                     DateTime fuelDate, 
                     string typeOfFuel,
                     string invoiceNumber,
+                    int supplierID,
                     double amount, 
                     bool paid)
         {
             FuelID = fuelID;
             PlateNumber = plateNumber;
-            SupplierID = supplierID;
             FuelDate = fuelDate;
             TypeOfFuel = typeOfFuel;
             InvoiceNumber = invoiceNumber;
+            SupplierID = supplierID;
             Amount = amount;
             Paid = paid;
         }
@@ -53,32 +53,16 @@ namespace VehicleMonitoringSystem
                 _dbOp.DBConnect();
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
 
-                cmd.CommandText = @"INSERT INTO Fuel(FuelID,
-                                                     PlateNumber,
-                                                     SupplierID,
-                                                     FuelDate,
-                                                     TypeOfFuel,
-                                                     InvoiceNumber,
-                                                     Amount,
-                                                     Paid)
-
-                                               VALUE(@FuelID,
-                                                     @PlateNumber,
-                                                     @SupplierID,
-                                                     @FuelDate,
-                                                     @TypeOfFuel,
-                                                     @InvoiceNumber,
-                                                     @Amount,
-                                                     @Paid)";
+                cmd.CommandText = @"INSERT INTO Fuel(FuelID,PlateNumber,FuelDate,TypeOfFuel,InvoiceNumber,SupplierID,Amount,PaidBy)VALUE(@FuelID,@PlateNumber,@FuelDate,@TypeOfFuel,@InvoiceNumber,@SupplierID,@Amount,@PaidBy)";
 
                 cmd.Parameters.AddWithValue("@FuelID", fuel.FuelID);
                 cmd.Parameters.AddWithValue("@PlateNumber", fuel.PlateNumber);
-                cmd.Parameters.AddWithValue("@SupplierID", fuel.SupplierID);
                 cmd.Parameters.AddWithValue("@FuelDate", fuel.FuelDate);
                 cmd.Parameters.AddWithValue("@TypeOfFuel", fuel.TypeOfFuel);
                 cmd.Parameters.AddWithValue("@InvoiceNumber", fuel.InvoiceNumber);
+                cmd.Parameters.AddWithValue("@SupplierID", fuel.SupplierID);
                 cmd.Parameters.AddWithValue("@Amount", fuel.Amount);
-                cmd.Parameters.AddWithValue("@Paid", fuel.Paid);
+                cmd.Parameters.AddWithValue("@PaidBy", fuel.Paid);
 
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("New Fuel Record has been saved!");
@@ -107,26 +91,53 @@ namespace VehicleMonitoringSystem
                 {
                     FuelID = (int)reader.GetValue(0);
                     PlateNumber = (string)reader.GetValue(1);
-                    SupplierID = (int)reader.GetValue(2);
-                    FuelDate = (DateTime)reader.GetValue(3);
-                    TypeOfFuel = (string)reader.GetValue(4);
-                    InvoiceNumber = (string)reader.GetValue(5);
+                    FuelDate = (DateTime)reader.GetValue(2);
+                    TypeOfFuel = (string)reader.GetValue(3);
+                    InvoiceNumber = (string)reader.GetValue(4);
+                    SupplierID = (int)reader.GetValue(5);
                     Amount = (double)reader.GetValue(6);
                     Paid = (bool)reader.GetValue(7);
 
-                    temp = new Fuel(FuelID,
-                                    PlateNumber,
-                                    SupplierID,
-                                    FuelDate,
-                                    TypeOfFuel,
-                                    InvoiceNumber,
-                                    Amount,
-                                    Paid);
+                    temp = new Fuel(FuelID, PlateNumber, FuelDate, TypeOfFuel, InvoiceNumber, SupplierID, Amount, Paid);
                 }
                 reader.Close();
                 _dbOp.DBClose();
             }
             catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return temp;
+        }
+        public Fuel RetrieveFuelInfo(int fuelID)
+        {
+            Fuel temp = new Fuel();
+
+            try
+            {
+                _dbOp.DBConnect();
+                MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
+                cmd.CommandText = @"SELECT * FROM Fuel " + "WHERE FuelID = @FuelID";
+                cmd.Parameters.AddWithValue("@FuelID", fuelID);
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    FuelID = (int)reader.GetValue(0);
+                    PlateNumber = (string)reader.GetValue(1);
+                    FuelDate = (DateTime)reader.GetValue(2);
+                    TypeOfFuel = (string)reader.GetValue(3);
+                    InvoiceNumber = (string)reader.GetValue(4);
+                    SupplierID = (int)reader.GetValue(5);
+                    Amount = (double)reader.GetValue(6);
+                    Paid = (bool)reader.GetValue(7);
+
+                    temp = new Fuel(FuelID, PlateNumber, FuelDate, TypeOfFuel, InvoiceNumber, SupplierID, Amount, Paid);
+                }
+                reader.Close();
+                _dbOp.DBClose();
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
@@ -144,25 +155,18 @@ namespace VehicleMonitoringSystem
                 MySqlDataReader reader = cmd.ExecuteReader();
                 Fuel temp = new Fuel();
 
-                while (reader.Read())
+                while(reader.Read())
                 {
                     FuelID = (int)reader.GetValue(0);
                     PlateNumber = (string)reader.GetValue(1);
-                    SupplierID = (int)reader.GetValue(2);
-                    FuelDate = (DateTime)reader.GetValue(3);
-                    TypeOfFuel = (string)reader.GetValue(4);
-                    InvoiceNumber = (string)reader.GetValue(5);
+                    FuelDate = (DateTime)reader.GetValue(2);
+                    TypeOfFuel = (string)reader.GetValue(3);
+                    InvoiceNumber = (string)reader.GetValue(4);
+                    SupplierID = (int)reader.GetValue(5);
                     Amount = (double)reader.GetValue(6);
                     Paid = (bool)reader.GetValue(7);
 
-                    temp = new Fuel(FuelID,
-                                    PlateNumber,
-                                    SupplierID,
-                                    FuelDate,
-                                    TypeOfFuel,
-                                    InvoiceNumber,
-                                    Amount,
-                                    Paid);
+                    temp = new Fuel(FuelID, PlateNumber, FuelDate, TypeOfFuel, InvoiceNumber, SupplierID, Amount, Paid);
 
                     fuelList.Add(temp);
                 }
@@ -188,25 +192,18 @@ namespace VehicleMonitoringSystem
                 MySqlDataReader reader = cmd.ExecuteReader();
                 Fuel temp = new Fuel();
 
-                while (reader.Read())
+                while(reader.Read())
                 {
                     FuelID = (int)reader.GetValue(0);
                     PlateNumber = (string)reader.GetValue(1);
-                    SupplierID = (int)reader.GetValue(2);
-                    FuelDate = (DateTime)reader.GetValue(3);
-                    TypeOfFuel = (string)reader.GetValue(4);
-                    InvoiceNumber = (string)reader.GetValue(5);
+                    FuelDate = (DateTime)reader.GetValue(2);
+                    TypeOfFuel = (string)reader.GetValue(3);
+                    InvoiceNumber = (string)reader.GetValue(4);
+                    SupplierID = (int)reader.GetValue(5);
                     Amount = (double)reader.GetValue(6);
                     Paid = (bool)reader.GetValue(7);
 
-                    temp = new Fuel(FuelID,
-                                    PlateNumber, 
-                                    SupplierID, 
-                                    FuelDate, 
-                                    TypeOfFuel,
-                                    InvoiceNumber,
-                                    Amount, 
-                                    Paid);
+                    temp = new Fuel(FuelID, PlateNumber, FuelDate, TypeOfFuel, InvoiceNumber, SupplierID, Amount, Paid);
 
                     fuelList.Add(temp);
                 }
@@ -227,23 +224,16 @@ namespace VehicleMonitoringSystem
                 _dbOp.DBConnect();
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
 
-                cmd.CommandText = @"UPDATE Fuel SET FuelID = @FuelID, 
-                                                    PlateNumber = @PlateNumber, 
-                                                    SupplierID = @SupplierID, 
-                                                    FuelDate = @FuelDate, 
-                                                    TypeOfFuel = @TypeOfFuel, 
-                                                    InvoiceNumber = @InvoiceNumber, 
-                                                    Amount = @Amount, 
-                                                    Paid = @Paid " + "WHERE FuelID = @FuelID";
+                cmd.CommandText = @"UPDATE Fuel SET FuelID = @FuelID, PlateNumber = @PlateNumber,FuelDate = @FuelDate,TypeOfFuel = @TypeOfFuel, InvoiceNumber = @InvoiceNumber, SupplierID = @SupplierID,Amount = @Amount,Paid = @Paid " + "WHERE FuelID = @FuelID";
 
                 cmd.Parameters.AddWithValue("@FuelID", fuel.FuelID);
                 cmd.Parameters.AddWithValue("@PlateNumber", fuel.PlateNumber);
-                cmd.Parameters.AddWithValue("@SupplierID", fuel.SupplierID);
                 cmd.Parameters.AddWithValue("@FuelDate", fuel.FuelDate);
                 cmd.Parameters.AddWithValue("@TypeOfFuel", fuel.TypeOfFuel);
                 cmd.Parameters.AddWithValue("@InvoiceNumber", fuel.InvoiceNumber);
+                cmd.Parameters.AddWithValue("@SupplierID", fuel.SupplierID);
                 cmd.Parameters.AddWithValue("@Amount", fuel.Amount);
-                cmd.Parameters.AddWithValue("@Paid", fuel.Paid);
+                cmd.Parameters.AddWithValue("@PaidBy", fuel.Paid);
 
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Fuel Record has been updated!");
