@@ -23,7 +23,6 @@ namespace VehicleMonitoringSystem
         private DateTime durationFrom,
                          durationTo,
                          renewal;
-
         private double amount;
 
         private Insurance _insurance = new Insurance();
@@ -33,9 +32,6 @@ namespace VehicleMonitoringSystem
         List<Insurance> _insurances = new List<Insurance>();
         List<Vehicle> _vehicles = new List<Vehicle>();
         #endregion
-
-
-
         #region Constructors
         public NewInsuranceForm()
         {
@@ -44,8 +40,6 @@ namespace VehicleMonitoringSystem
             ComboBoxLoad();
         }
         #endregion
-
-
 
         #region Insurance Methods
         private void ShowData(string plateNumber)
@@ -60,7 +54,6 @@ namespace VehicleMonitoringSystem
             renewalDTP.Value = _insurance.Renewal;
             amountTB.Text = _insurance.Amount.ToString("N2");
         }
-
         private void ComboBoxLoad()
         {
             _vehicles = _vehicle.RetrieveVehicleList();
@@ -79,34 +72,57 @@ namespace VehicleMonitoringSystem
 
         private void saveB_Click(object sender, EventArgs e)
         {
-            try
+            if (plateNumberCB.Text == "")
             {
-                insuranceID = int.Parse(insuranceIDTB.Text.Trim());
-                plateNumber = plateNumberCB.Text.Trim();
-                registeredName = registeredNameTB.Text.Trim();
-                company = companyCB.Text.Trim();
-                durationFrom = durationFromDTP.Value;
-                durationTo = durationToDTP.Value;
-                amount = double.Parse(amountTB.Text.Trim());
-                renewal = renewalDTP.Value;
-
-                _insurance = new Insurance(insuranceID,
-                                          plateNumber,
-                                          company,
-                                          durationFrom,
-                                          durationTo,
-                                          renewal,
-                                          amount);
-
-            //    _registration = new Registration(platenumber,registeredName);
-
-                _insurance.InsertInsurance(_insurance);
-                _registration.InsertRegistration(_registration);
-                Close();
+                MessageBox.Show("Please choose a PLATE NUMBER", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            catch (Exception ex)
+            else if (registeredNameTB.Text == "")
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Please enter the REGISTERED NAME", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (companyCB.Text == "")
+            {
+                MessageBox.Show("Please choose a COMPANY", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (amountTB.Text == "")
+            {
+                MessageBox.Show("Please insert an AMOUNT", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (renewalDTP.Value == DateTime.Now)
+            {
+                MessageBox.Show("Please insert the RENEWAL DATE", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                try
+                {
+                    insuranceID = int.Parse(insuranceIDTB.Text.Trim());
+                    plateNumber = plateNumberCB.Text.Trim();
+                    registeredName = registeredNameTB.Text.Trim();
+                    company = companyCB.Text.Trim();
+                    durationFrom = durationFromDTP.Value;
+                    durationTo = durationToDTP.Value;
+                    amount = double.Parse(amountTB.Text.Trim());
+                    renewal = renewalDTP.Value;
+
+                    _insurance = new Insurance(insuranceID,
+                                              plateNumber,
+                                              company,
+                                              durationFrom,
+                                              durationTo,
+                                              renewal,
+                                              amount);
+
+                    //    _registration = new Registration(platenumber,registeredName);
+
+                    _insurance.InsertInsurance(_insurance);
+                    _registration.InsertRegistration(_registration);
+                    Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
             }
         }
 
@@ -198,7 +214,7 @@ namespace VehicleMonitoringSystem
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(12, 163);
+            this.label10.Location = new System.Drawing.Point(12, 166);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(69, 20);
             this.label10.TabIndex = 5;
@@ -210,7 +226,7 @@ namespace VehicleMonitoringSystem
             this.registeredNameTB.Location = new System.Drawing.Point(155, 52);
             this.registeredNameTB.Name = "registeredNameTB";
             this.registeredNameTB.Size = new System.Drawing.Size(667, 26);
-            this.registeredNameTB.TabIndex = 7;
+            this.registeredNameTB.TabIndex = 1;
             // 
             // amountTB
             // 
@@ -218,7 +234,8 @@ namespace VehicleMonitoringSystem
             this.amountTB.Location = new System.Drawing.Point(155, 160);
             this.amountTB.Name = "amountTB";
             this.amountTB.Size = new System.Drawing.Size(667, 26);
-            this.amountTB.TabIndex = 11;
+            this.amountTB.TabIndex = 5;
+            this.amountTB.Text = "0.00";
             // 
             // durationFromDTP
             // 
@@ -235,7 +252,7 @@ namespace VehicleMonitoringSystem
             this.saveB.Location = new System.Drawing.Point(585, 227);
             this.saveB.Name = "saveB";
             this.saveB.Size = new System.Drawing.Size(75, 29);
-            this.saveB.TabIndex = 13;
+            this.saveB.TabIndex = 7;
             this.saveB.Text = "Save";
             this.saveB.UseVisualStyleBackColor = true;
             this.saveB.Click += new System.EventHandler(this.saveB_Click);
@@ -246,7 +263,7 @@ namespace VehicleMonitoringSystem
             this.cencelB.Location = new System.Drawing.Point(666, 227);
             this.cencelB.Name = "cencelB";
             this.cencelB.Size = new System.Drawing.Size(75, 29);
-            this.cencelB.TabIndex = 14;
+            this.cencelB.TabIndex = 8;
             this.cencelB.Text = "Cancel";
             this.cencelB.UseVisualStyleBackColor = true;
             // 
@@ -256,7 +273,7 @@ namespace VehicleMonitoringSystem
             this.clearB.Location = new System.Drawing.Point(747, 227);
             this.clearB.Name = "clearB";
             this.clearB.Size = new System.Drawing.Size(75, 29);
-            this.clearB.TabIndex = 15;
+            this.clearB.TabIndex = 9;
             this.clearB.Text = "Clear";
             this.clearB.UseVisualStyleBackColor = true;
             // 
@@ -267,7 +284,7 @@ namespace VehicleMonitoringSystem
             this.renewalDTP.Location = new System.Drawing.Point(155, 195);
             this.renewalDTP.Name = "renewalDTP";
             this.renewalDTP.Size = new System.Drawing.Size(667, 26);
-            this.renewalDTP.TabIndex = 12;
+            this.renewalDTP.TabIndex = 6;
             // 
             // durationToDTP
             // 
@@ -276,7 +293,7 @@ namespace VehicleMonitoringSystem
             this.durationToDTP.Location = new System.Drawing.Point(502, 125);
             this.durationToDTP.Name = "durationToDTP";
             this.durationToDTP.Size = new System.Drawing.Size(320, 26);
-            this.durationToDTP.TabIndex = 12;
+            this.durationToDTP.TabIndex = 4;
             // 
             // label11
             // 
@@ -312,7 +329,7 @@ namespace VehicleMonitoringSystem
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(104, 163);
+            this.label13.Location = new System.Drawing.Point(104, 166);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(41, 20);
             this.label13.TabIndex = 2;
@@ -321,12 +338,13 @@ namespace VehicleMonitoringSystem
             // plateNumberCB
             // 
             this.plateNumberCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.plateNumberCB.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.plateNumberCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.plateNumberCB.FormattingEnabled = true;
             this.plateNumberCB.Location = new System.Drawing.Point(155, 14);
             this.plateNumberCB.Name = "plateNumberCB";
             this.plateNumberCB.Size = new System.Drawing.Size(667, 28);
-            this.plateNumberCB.TabIndex = 12;
+            this.plateNumberCB.TabIndex = 0;
             // 
             // companyCB
             // 
@@ -335,7 +353,7 @@ namespace VehicleMonitoringSystem
             this.companyCB.Location = new System.Drawing.Point(155, 87);
             this.companyCB.Name = "companyCB";
             this.companyCB.Size = new System.Drawing.Size(667, 28);
-            this.companyCB.TabIndex = 12;
+            this.companyCB.TabIndex = 3;
             // 
             // insuranceIDTB
             // 
