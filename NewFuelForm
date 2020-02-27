@@ -16,11 +16,12 @@ namespace VehicleMonitoringSystem
         #region Variable
         private int fuelID,
                     supplierID;
+
         private string plateNumber,
                        vehicle,
                        typeOfFuel,
                        invoiceNumber;
-        private bool paid;
+        private bool paid = false;
 
         private DateTime date;
         private double amount;
@@ -38,7 +39,7 @@ namespace VehicleMonitoringSystem
         }
         #endregion
 
-        #region Gas Methods
+        #region Fuel Methods
         private void ShowData(string plateNumber)
         {
             _fuel = _fuel.RetrieveFuelInfo(plateNumber);
@@ -49,20 +50,11 @@ namespace VehicleMonitoringSystem
             typeOfFuelCB.Text = _fuel.TypeOfFuel;
            // supplierCB.Text = _fuel.SupplierID;
             amountTB.Text = _fuel.Amount.ToString("N2");
-            paidTB.Text = _fuel.Paid.ToString();
         }
-
         private void NewFuelForm_Load(object sender, EventArgs e)
         {
 
         }
-
-        private void addB_Click(object sender, EventArgs e)
-        {
-            NewSupplierForm newSupplierForm = new NewSupplierForm();
-            newSupplierForm.ShowDialog();
-        }
-
         private void ComboBoxLoad()
         {
             _fuels = _fuel.RetrieveFuelList();
@@ -71,56 +63,133 @@ namespace VehicleMonitoringSystem
                 plateNumberCB.Items.Add(f.PlateNumber);
                 typeOfFuelCB.Items.Add(f.TypeOfFuel);
                // supplierCB.Items.Add(f.Supplier);
-               // paidTB.Items.Add(f.Paid);
             }
         }
-
-
         //Entry Buttons
-        private void saveB_Click(object sender, EventArgs e)
+        private void newB_Click(object sender, EventArgs e)
         {
-            try
+            NewSupplierForm newSupplierForm = new NewSupplierForm();
+            newSupplierForm.ShowDialog();
+        }
+        private void doneB_Click(object sender, EventArgs e)
+        {
+            if (plateNumberCB.Text == "")
             {
-                fuelID = int.Parse(fuelIDTB.Text.Trim());
-                plateNumber = plateNumberCB.Text.Trim();
-                supplierID = _supplier.RetrieveSupplierID(supplierCB.Text.Trim());
-                vehicle = vehicleCB.Text.Trim();
-                date = dateDTP.Value;
-                typeOfFuel = typeOfFuelCB.Text.Trim();
-                amount = double.Parse(amountTB.Text.Trim());
-                paid = bool.Parse(paidTB.Text.Trim());
-
-
-                _fuel = new Fuel(fuelID,
-                                 plateNumber,
-                                 supplierID,
-                                 date,
-                                 typeOfFuel,
-                                 invoiceNumber,
-                                 amount,
-                                 paid);
-
-                _fuel.InsertFuel(_fuel);
-                Close();
+                MessageBox.Show("Please choose a PLATE NUMBER", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            catch (Exception ex)
+            else if (vehicleCB.Text == "")
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Please choose a VEHICLE", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (typeOfFuelCB.Text == "")
+            {
+                MessageBox.Show("Please choose the TYPE OF FUEL", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (invoiceNumberTB.Text == "")
+            {
+                MessageBox.Show("Please insert an INVOICE NUMBER", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (supplierCB.Text == "")
+            {
+                MessageBox.Show("Please choose a SUPPLIER/n If the SUPPLIER does not exist, create NEW SUPPLIER", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (amountTB.Text == "")
+            {
+                MessageBox.Show("Please insert the AMOUNT", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                try
+                {
+                    fuelID = int.Parse(fuelIDTB.Text.Trim());
+                    plateNumber = plateNumberCB.Text.Trim();
+                    vehicle = vehicleCB.Text.Trim();
+                    date = dateDTP.Value;
+                    typeOfFuel = typeOfFuelCB.Text.Trim();
+                    invoiceNumber = invoiceNumberTB.Text.Trim();
+                    supplierID = _supplier.RetrieveSupplierID(supplierCB.Text.Trim());
+                    amount = double.Parse(amountTB.Text.Trim());
+
+                    _fuel = new Fuel(fuelID,
+                                     plateNumber,
+                                     date,
+                                     typeOfFuel,
+                                     invoiceNumber,
+                                     supplierID,
+                                     amount,
+                                     paid);
+
+                    _fuel.InsertFuel(_fuel);
+                    Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
             }
         }
         private void cancelB_Click(object sender, EventArgs e)
         {
             Close();
         }
-        private void clearB_Click(object sender, EventArgs e)
+        private void payB_Click(object sender, EventArgs e)
         {
-            plateNumberCB.Text = "";
-            vehicleCB.Text = "";
-            dateDTP.Value = DateTime.Now;
-            typeOfFuelCB.Text = "";
-            supplierCB.Text = "";
-            amountTB.Text = "";
-            paidTB.Text = "";
+            if (plateNumberCB.Text == "")
+            {
+                MessageBox.Show("Please choose a PLATE NUMBER", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (vehicleCB.Text == "")
+            {
+                MessageBox.Show("Please choose a VEHICLE", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (typeOfFuelCB.Text == "")
+            {
+                MessageBox.Show("Please choose the TYPE OF FUEL", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (invoiceNumberTB.Text == "")
+            {
+                MessageBox.Show("Please insert an INVOICE NUMBER", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (supplierCB.Text == "")
+            {
+                MessageBox.Show("Please choose a SUPPLIER/n If the SUPPLIER does not exist, create NEW SUPPLIER", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (amountTB.Text == "")
+            {
+                MessageBox.Show("Please insert the AMOUNT", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                try
+                {
+                    fuelID = int.Parse(fuelIDTB.Text.Trim());
+                    plateNumber = plateNumberCB.Text.Trim();
+                    vehicle = vehicleCB.Text.Trim();
+                    date = dateDTP.Value;
+                    typeOfFuel = typeOfFuelCB.Text.Trim();
+                    invoiceNumber = invoiceNumberTB.Text.Trim();
+                    supplierID = _supplier.RetrieveSupplierID(supplierCB.Text.Trim());
+                    amount = double.Parse(amountTB.Text.Trim());
+
+                    _fuel = new Fuel(fuelID,
+                                     plateNumber,
+                                     date,
+                                     typeOfFuel,
+                                     invoiceNumber,
+                                     supplierID,
+                                     amount,
+                                     paid);
+
+                    _fuel.InsertFuel(_fuel);
+                    NewPaymentForm newPaymentForm = new NewPaymentForm();
+                    newPaymentForm.ShowDialog();
+                    Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
         }
         #endregion
     }
