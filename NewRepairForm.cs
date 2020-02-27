@@ -247,8 +247,6 @@ namespace VehicleMonitoringSystem
             partSupplierCB.Enabled = false;
             partDateDTP.Enabled = false;
             partInvoiceNumberTB.Enabled = false;
-
-
         }
         #endregion
         #endregion
