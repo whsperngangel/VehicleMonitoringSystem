@@ -12,7 +12,7 @@ namespace VehicleMonitoringSystem
 {
     public partial class NewSupplierForm : Form
     {
-        private int _supplierID = 0;
+        private int _supplierID;
         private string _supplierName = "";
 
         DBOperation _dbOp = new DBOperation();
