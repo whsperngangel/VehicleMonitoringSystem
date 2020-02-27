@@ -49,7 +49,7 @@ namespace VehicleMonitoringSystem
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 15);
+            this.label1.Location = new System.Drawing.Point(64, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 20);
             this.label1.TabIndex = 0;
@@ -58,7 +58,7 @@ namespace VehicleMonitoringSystem
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 159);
+            this.label2.Location = new System.Drawing.Point(52, 144);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(83, 20);
             this.label2.TabIndex = 1;
@@ -67,7 +67,7 @@ namespace VehicleMonitoringSystem
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 200);
+            this.label3.Location = new System.Drawing.Point(31, 183);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(104, 20);
             this.label3.TabIndex = 2;
@@ -77,33 +77,33 @@ namespace VehicleMonitoringSystem
             // 
             this.supplierCB.AllowDrop = true;
             this.supplierCB.FormattingEnabled = true;
-            this.supplierCB.Location = new System.Drawing.Point(122, 12);
+            this.supplierCB.Location = new System.Drawing.Point(141, 12);
             this.supplierCB.Name = "supplierCB";
-            this.supplierCB.Size = new System.Drawing.Size(570, 28);
+            this.supplierCB.Size = new System.Drawing.Size(523, 28);
             this.supplierCB.Sorted = true;
-            this.supplierCB.TabIndex = 3;
+            this.supplierCB.TabIndex = 0;
             this.supplierCB.SelectedIndexChanged += new System.EventHandler(this.supplierCB_SelectedIndexChanged);
             this.supplierCB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.supplierCB_KeyPress);
             // 
             // datePaidDTP
             // 
-            this.datePaidDTP.Location = new System.Drawing.Point(122, 154);
+            this.datePaidDTP.Location = new System.Drawing.Point(141, 139);
             this.datePaidDTP.Name = "datePaidDTP";
-            this.datePaidDTP.Size = new System.Drawing.Size(570, 26);
-            this.datePaidDTP.TabIndex = 4;
+            this.datePaidDTP.Size = new System.Drawing.Size(523, 26);
+            this.datePaidDTP.TabIndex = 3;
             // 
             // amountPaidTB
             // 
-            this.amountPaidTB.Location = new System.Drawing.Point(122, 197);
+            this.amountPaidTB.Location = new System.Drawing.Point(141, 180);
             this.amountPaidTB.Name = "amountPaidTB";
-            this.amountPaidTB.Size = new System.Drawing.Size(570, 26);
-            this.amountPaidTB.TabIndex = 5;
+            this.amountPaidTB.Size = new System.Drawing.Size(523, 26);
+            this.amountPaidTB.TabIndex = 4;
             this.amountPaidTB.Text = "P 0.00";
             this.amountPaidTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.amountPaidTB_KeyPress);
             // 
             // saveB
             // 
-            this.saveB.Location = new System.Drawing.Point(455, 272);
+            this.saveB.Location = new System.Drawing.Point(427, 264);
             this.saveB.Name = "saveB";
             this.saveB.Size = new System.Drawing.Size(75, 27);
             this.saveB.TabIndex = 6;
@@ -113,20 +113,20 @@ namespace VehicleMonitoringSystem
             // 
             // clearB
             // 
-            this.clearB.Location = new System.Drawing.Point(617, 272);
+            this.clearB.Location = new System.Drawing.Point(589, 264);
             this.clearB.Name = "clearB";
             this.clearB.Size = new System.Drawing.Size(75, 27);
-            this.clearB.TabIndex = 7;
+            this.clearB.TabIndex = 8;
             this.clearB.Text = "Clear";
             this.clearB.UseVisualStyleBackColor = true;
             this.clearB.Click += new System.EventHandler(this.clearB_Click);
             // 
             // cancelB
             // 
-            this.cancelB.Location = new System.Drawing.Point(536, 272);
+            this.cancelB.Location = new System.Drawing.Point(508, 264);
             this.cancelB.Name = "cancelB";
             this.cancelB.Size = new System.Drawing.Size(75, 27);
-            this.cancelB.TabIndex = 8;
+            this.cancelB.TabIndex = 7;
             this.cancelB.Text = "Cancel";
             this.cancelB.UseVisualStyleBackColor = true;
             this.cancelB.Click += new System.EventHandler(this.cancelB_Click);
@@ -134,7 +134,7 @@ namespace VehicleMonitoringSystem
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 241);
+            this.label4.Location = new System.Drawing.Point(69, 224);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(66, 20);
             this.label4.TabIndex = 2;
@@ -143,15 +143,15 @@ namespace VehicleMonitoringSystem
             // paidByCB
             // 
             this.paidByCB.FormattingEnabled = true;
-            this.paidByCB.Location = new System.Drawing.Point(122, 238);
+            this.paidByCB.Location = new System.Drawing.Point(141, 221);
             this.paidByCB.Name = "paidByCB";
-            this.paidByCB.Size = new System.Drawing.Size(570, 28);
-            this.paidByCB.TabIndex = 3;
+            this.paidByCB.Size = new System.Drawing.Size(523, 28);
+            this.paidByCB.TabIndex = 5;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 116);
+            this.label5.Location = new System.Drawing.Point(64, 101);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(71, 20);
             this.label5.TabIndex = 2;
@@ -160,24 +160,24 @@ namespace VehicleMonitoringSystem
             // balanceTB
             // 
             this.balanceTB.Enabled = false;
-            this.balanceTB.Location = new System.Drawing.Point(122, 113);
+            this.balanceTB.Location = new System.Drawing.Point(141, 98);
             this.balanceTB.Name = "balanceTB";
-            this.balanceTB.Size = new System.Drawing.Size(570, 26);
-            this.balanceTB.TabIndex = 5;
+            this.balanceTB.Size = new System.Drawing.Size(523, 26);
+            this.balanceTB.TabIndex = 2;
             this.balanceTB.Text = "P 0.00";
             this.balanceTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.balanceTB_KeyPress);
             // 
             // invoiceNumberTB
             // 
-            this.invoiceNumberTB.Location = new System.Drawing.Point(122, 66);
+            this.invoiceNumberTB.Location = new System.Drawing.Point(141, 56);
             this.invoiceNumberTB.Name = "invoiceNumberTB";
-            this.invoiceNumberTB.Size = new System.Drawing.Size(570, 26);
-            this.invoiceNumberTB.TabIndex = 10;
+            this.invoiceNumberTB.Size = new System.Drawing.Size(523, 26);
+            this.invoiceNumberTB.TabIndex = 2;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(-7, 66);
+            this.label6.Location = new System.Drawing.Point(12, 59);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(123, 20);
             this.label6.TabIndex = 9;
@@ -188,7 +188,7 @@ namespace VehicleMonitoringSystem
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(715, 337);
+            this.ClientSize = new System.Drawing.Size(679, 304);
             this.Controls.Add(this.invoiceNumberTB);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.cancelB);
