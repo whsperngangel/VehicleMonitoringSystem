@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using VehicleMonitoringSystem.Payment;
 
 namespace VehicleMonitoringSystem
 {
@@ -12,15 +11,16 @@ namespace VehicleMonitoringSystem
                     paymentID,
                     statementID;
         private string supplierName,
+                       invoiceNumber,
                        datePaid,
                        paidBy,
                        amountPaid;
         private double balance; 
 
         private Supplier _supplier = new Supplier();
-        private Payments _payment = new Payments();
+        private Payment _payment = new Payment();
         List<Supplier> _suppliers = new List<Supplier>();
-        List<Payments> _payments = new List<Payments>();
+        List<Payment> _payments = new List<Payment>();
         #endregion
 
         #region Constructors
@@ -43,7 +43,7 @@ namespace VehicleMonitoringSystem
             }
 
             _payments = _payment.RetrievePaymentList();
-            foreach (Payments p in _payments)
+            foreach (Payment p in _payments)
             {
                 paidByCB.Items.Add(p. PaidBy);
             }
@@ -56,12 +56,13 @@ namespace VehicleMonitoringSystem
             try
             {
                 supplierName = supplierCB.Text.Trim();
+                invoiceNumber = invoiceNumberTB.Text.Trim();
                 datePaid = datePaidDTP.Value.ToString();
                 amountPaid = amountPaidTB.Text.Trim();
                 paidBy = paidByCB.Text.Trim();
 
                 _supplier = new Supplier(supplierID, supplierName);
-                _payment = new Payments(paymentID, statementID, datePaid, amountPaid, paidBy);
+                _payment = new Payment(paymentID, statementID, invoiceNumber, datePaid, amountPaid, paidBy);
             }
             catch (Exception ex)
             {
