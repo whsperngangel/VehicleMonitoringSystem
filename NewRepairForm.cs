@@ -40,7 +40,6 @@ namespace VehicleMonitoringSystem
 
         private Maintenance _maintenance = new Maintenance();
         private List<Maintenance> _maintenances = new List<Maintenance>();
-
         #endregion
 
         #region Constructors
@@ -158,6 +157,41 @@ namespace VehicleMonitoringSystem
             }
             return duplicate;
         }
+        private void payB_Click(object sender, EventArgs e)
+        {            //repair
+            repairSupplierID = _supplier.RetrieveSupplierID(repairSupplierCB.Text);
+            repairDate = repairDateDTP.Value;
+            repairInvoiceNumber = repairInvoiceNumberTB.Text;
+            repairAmount = double.Parse(repairAmountTB.Text);
+            typeOfRepair = typeOfRepairCB.Text;
+
+            try
+            {
+                foreach (RepairDetail repairDetail in _repairDetails)
+                {
+                    _repairDetail.InsertRepairDetail(repairDetail);
+                }
+                //repair
+                plateNumber = plateNumberCB.Text.Trim();
+                repairDate = repairDateDTP.Value;
+                typeOfRepair = typeOfRepairCB.Text.Trim();
+                repairSupplierID = _supplier.RetrieveSupplierID(repairSupplierCB.Text.Trim());
+                repairInvoiceNumber = repairInvoiceNumberTB.Text.Trim();
+                repairAmount = double.Parse(repairAmountTB.Text.Trim());
+                status = true;
+
+                _repair = new Repair(repairID, maintenanceID, repairDate, typeOfRepair, repairSupplierID, repairInvoiceNumber, repairAmount, paid);
+                _repair.InsertRepair(_repair);
+                _maintenance.UpdateMaintenanceStatus(status);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            NewPaymentForm newPaymentForm = new NewPaymentForm();
+            newPaymentForm.ShowDialog();
+        }
         private void doneB_Click(object sender, EventArgs e)
         {
             //repair
@@ -196,7 +230,6 @@ namespace VehicleMonitoringSystem
         {
             this.Close();
         }
-
         private void Clear()
         {
             //part
