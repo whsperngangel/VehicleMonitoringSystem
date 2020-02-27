@@ -13,39 +13,34 @@ namespace VehicleMonitoringSystem
     public partial class NewRepairForm : Form
     {
         #region Variables
-        private int repairID, 
-                    repairSupplierID,
-                    partID,
-                    partSupplierID,
-                    maintenanceID;
+        private int repairID, repairSupplierID, partID, partSupplierID,maintenanceID;
 
         private string plateNumber,
                        typeOfRepair,
                        partInvoiceNumber,
                        repairInvoiceNumber,
                        partDescription;
-      
-        private DateTime repairDate,
-                         purchasedDate,
-                         repairDueDate;
-        private double repairAmount,
-                       partAmount;
-        private bool repairPaid,
-                     partPaid;
+        private bool paid = false, status;
+        private DateTime repairDate, purchasedDate;
+        private double repairAmount, partAmount;
 
-        private Repair       _repair = new Repair();
+        //repair
+        private Repair _repair = new Repair();
         private RepairDetail _repairDetail = new RepairDetail();
-        private Vehicle      _vehicle = new Vehicle();
-        private Supplier     _supplier = new Supplier();
-        private Part         _part = new Part();
-        private Maintenance  _maintenance = new Maintenance();
-
-        private List<Repair>       _repairs = new List<Repair>();
+        private List<Repair> _repairs = new List<Repair>();
         private List<RepairDetail> _repairDetails = new List<RepairDetail>();
-        private List<Vehicle>      _vehicles = new List<Vehicle>();
-        private List<Supplier>     _suppliers = new List<Supplier>();
-        private List<Part>         _parts = new List<Part>();
-        private List<Maintenance>  _maintenances = new List<Maintenance>();
+        //part
+        private Part _part = new Part();
+        List<Part> _parts = new List<Part>();
+
+        private Vehicle _vehicle = new Vehicle();
+        private Supplier _supplier = new Supplier();
+        private List<Vehicle> _vehicles = new List<Vehicle>();
+        private List<Supplier> _suppliers = new List<Supplier>();
+
+        private Maintenance _maintenance = new Maintenance();
+        private List<Maintenance> _maintenances = new List<Maintenance>();
+
         #endregion
 
         #region Constructors
@@ -54,7 +49,6 @@ namespace VehicleMonitoringSystem
             InitializeComponent();
             ComboBoxLoad();
             repairID = _repair.CreateRepairID();
-
         }
         #endregion
 
@@ -80,6 +74,52 @@ namespace VehicleMonitoringSystem
                 partCB.Items.Add(p.Description);
             }
         }
+
+        private void addB_Click(object sender, EventArgs e)
+        {
+            DisableRepair();
+            _repairDetail = new RepairDetail(repairID, partID, purchasedDate, partAmount, partInvoiceNumber, partSupplierID,paid);
+            AddItem();
+
+            partCB.Focus();
+            if (addB.Text == "Update")
+            {
+                addB.Text = "Add";
+            }
+        }
+
+        #region Buttons
+        private void partListLV_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            addB.Text = "Update";
+            partSupplierCB.Enabled = true;
+            partDateDTP.Enabled = true;
+            partInvoiceNumberTB.Enabled = true;
+            if (partListLV.SelectedItems.Count > 0)
+            {
+                ListViewItem selectedPart = partListLV.SelectedItems[0];
+                string partItemNo = selectedPart.SubItems[0].Text;
+
+                partCB.Text = selectedPart.SubItems[4].Text;
+                partID = _part.RetrievePartID(partCB.Text);
+                purchasedDate = partDateDTP.Value = DateTime.Parse(selectedPart.SubItems[2].Text);
+                partSupplierCB.Text = selectedPart.SubItems[1].Text;
+                partSupplierID = _supplier.RetrieveSupplierID(partSupplierCB.Text);
+                partInvoiceNumber = partInvoiceNumberTB.Text = selectedPart.SubItems[3].Text;
+                partAmountTB.Text = selectedPart.SubItems[5].Text;
+                partAmount = double.Parse(partAmountTB.Text);
+                
+                _repairDetail = new RepairDetail(repairID, partID, purchasedDate,partAmount,partInvoiceNumber,partSupplierID,paid);
+                partListLV.SelectedItems[0].Remove();
+            }
+
+        }
+        
+        private void plateNumberCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _vehicle.RetrieveVehicleInfo(plateNumberCB.Text);
+            vehicleNameL.Text = _vehicle.Listing;
+        }
         private void AddItem()
         {
             ListViewItem partLVI = new ListViewItem();
@@ -90,16 +130,8 @@ namespace VehicleMonitoringSystem
             partInvoiceNumber = partInvoiceNumberTB.Text;
             partDescription = partCB.Text;
             partAmount = double.Parse(partAmountTB.Text);
-
-            _repairDetail = new RepairDetail(repairID,
-                                             partID,
-                                             partSupplierID,
-                                             purchasedDate,
-                                             partAmount, 
-                                             partInvoiceNumber,
-                                             partPaid);
+            _repairDetail = new RepairDetail(repairID, partID, purchasedDate, partAmount, partInvoiceNumber, partSupplierID,paid);
             _repairDetails.Add(_repairDetail);
-
 
             partLVI.SubItems.Add(partSupplierCB.Text);
             partLVI.SubItems.Add(partDateDTP.Value.ToShortDateString());
@@ -126,111 +158,7 @@ namespace VehicleMonitoringSystem
             }
             return duplicate;
         }
-        private void DisableRepair()
-        {
-            plateNumberCB.Enabled = false;
-            repairSupplierCB.Enabled = false;
-            repairDateDTP.Enabled = false;
-            repairInvoiceNumberTB.Enabled = false;
-            repairAmountTB.Enabled = false;
-            typeOfRepairCB.Enabled = false;
-            partSupplierCB.Enabled = false;
-            partDateDTP.Enabled = false;
-            partInvoiceNumberTB.Enabled = false;
-
-
-        }
-
-
-
-        private void partListLV_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            addB.Text = "Update";
-            partSupplierCB.Enabled = true;
-            partDateDTP.Enabled = true;
-            partInvoiceNumberTB.Enabled = true;
-            if (partListLV.SelectedItems.Count > 0)
-            {
-                ListViewItem selectedPart = partListLV.SelectedItems[0];
-                string partItemNo = selectedPart.SubItems[0].Text;
-
-                partCB.Text = selectedPart.SubItems[4].Text;
-                partID = _part.RetrievePartID(partCB.Text);
-                purchasedDate = partDateDTP.Value = DateTime.Parse(selectedPart.SubItems[2].Text);
-                partSupplierCB.Text = selectedPart.SubItems[1].Text;
-                partSupplierID = _supplier.RetrieveSupplierID(partSupplierCB.Text);
-                partInvoiceNumber = partInvoiceNumberTB.Text = selectedPart.SubItems[3].Text;
-                partAmountTB.Text = selectedPart.SubItems[5].Text;
-                partAmount = double.Parse(partAmountTB.Text);
-                
-                _repairDetail = new RepairDetail(repairID, 
-                                                 partID,
-                                                 partSupplierID,
-                                                 purchasedDate,
-                                                 partAmount,
-                                                 partInvoiceNumber,
-                                                 partPaid);
-                partListLV.SelectedItems[0].Remove();
-            }
-
-        }
-        private void plateNumberCB_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            _vehicle.RetrieveVehicleInfo(plateNumberCB.Text);
-            vehicleNameL.Text = _vehicle.Listing;
-        }
-
-
-
-        private void addB_Click(object sender, EventArgs e)
-        {
-            DisableRepair();
-            _repairDetail = new RepairDetail(repairID, partID, partSupplierID, purchasedDate, partAmount, partInvoiceNumber, partPaid);
-            AddItem();
-
-            partCB.Focus();
-            if (addB.Text == "Update")
-            {
-                addB.Text = "Add";
-            }
-        }
-        private void nextB_Click(object sender, EventArgs e)
-        {
-            repairSupplierID = _supplier.RetrieveSupplierID(repairSupplierCB.Text);
-            repairDate = repairDateDTP.Value;
-            repairInvoiceNumber = repairInvoiceNumberTB.Text;
-            repairAmount = double.Parse(repairAmountTB.Text);
-            typeOfRepair = typeOfRepairCB.Text;
-
-            try
-            {
-                foreach (RepairDetail repairDetail in _repairDetails)
-                {
-                    _repairDetail.InsertRepairDetail(repairDetail);
-                }
-
-                //repair
-                plateNumber = plateNumberCB.Text.Trim();
-                repairDate = repairDateDTP.Value;
-                typeOfRepair = typeOfRepairCB.Text.Trim();
-                repairSupplierID = _supplier.RetrieveSupplierID(repairSupplierCB.Text.Trim());
-                repairInvoiceNumber = repairInvoiceNumberTB.Text.Trim();
-                repairAmount = double.Parse(repairAmountTB.Text.Trim());
-                repairDueDate = repairDueDateDTP.Value;
-
-                _repair = new Repair(repairID, maintenanceID, repairSupplierID, repairDate, typeOfRepair,  repairInvoiceNumber, repairAmount, repairPaid);
-                _repair.InsertRepair(_repair);
-                this.Close();
-
-                NewPaymentForm newPaymentForm = new NewPaymentForm();
-                newPaymentForm.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-        private void saveB_Click(object sender, EventArgs e)
+        private void doneB_Click(object sender, EventArgs e)
         {
             //repair
             repairSupplierID = _supplier.RetrieveSupplierID(repairSupplierCB.Text);
@@ -245,7 +173,6 @@ namespace VehicleMonitoringSystem
                 {
                     _repairDetail.InsertRepairDetail(repairDetail);
                 }
-
                 //repair
                 plateNumber = plateNumberCB.Text.Trim();
                 repairDate = repairDateDTP.Value;
@@ -253,10 +180,11 @@ namespace VehicleMonitoringSystem
                 repairSupplierID = _supplier.RetrieveSupplierID(repairSupplierCB.Text.Trim());
                 repairInvoiceNumber = repairInvoiceNumberTB.Text.Trim();
                 repairAmount = double.Parse(repairAmountTB.Text.Trim());
-                repairDueDate = repairDueDateDTP.Value;
+                status = true;
 
-                _repair = new Repair(repairID,maintenanceID,repairSupplierID,repairDate,typeOfRepair,repairInvoiceNumber,repairAmount, repairPaid);
+                _repair = new Repair(repairID, maintenanceID, repairDate, typeOfRepair, repairSupplierID, repairInvoiceNumber, repairAmount, paid);
                 _repair.InsertRepair(_repair);
+                _maintenance.UpdateMaintenanceStatus(status);
                 this.Close();
             }
             catch (Exception ex)
@@ -268,12 +196,28 @@ namespace VehicleMonitoringSystem
         {
             this.Close();
         }
+
         private void Clear()
         {
             //part
             partCB.Text = "";
             partAmountTB.Text = "";
         }
+        private void DisableRepair()
+        {
+            plateNumberCB.Enabled = false;
+            repairSupplierCB.Enabled = false;
+            repairDateDTP.Enabled = false;
+            repairInvoiceNumberTB.Enabled = false;
+            repairAmountTB.Enabled = false;
+            typeOfRepairCB.Enabled = false;
+            partSupplierCB.Enabled = false;
+            partDateDTP.Enabled = false;
+            partInvoiceNumberTB.Enabled = false;
+
+
+        }
+        #endregion
         #endregion
     }
 }
