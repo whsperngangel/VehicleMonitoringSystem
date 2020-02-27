@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 
-namespace VehicleMonitoringSystem.Payment
+namespace VehicleMonitoringSystem
 {
-    class Payments
+    class Payment
     {
         #region Variables
         public int PaymentID,
-                   StatementID;
-        public string DatePaid,
+                   SupplierID;
+
+        public string InvoiceNumber,
+                      DatePaid,
                       AmountPaid,
                       PaidBy;
 
@@ -22,16 +24,17 @@ namespace VehicleMonitoringSystem.Payment
 
 
         #region Constructors
-        public Payments() { }
+        public Payment() { }
 
-        public Payments (int paymentID,
-                         int statementID,
+        public Payment (int paymentID,
+                         int supplierID,
+                         string InvoiceNumber,
                          string datePaid,
                          string amountPaid,
                          string paidBy)
         {
             PaymentID = paymentID;
-            StatementID = statementID;
+            SupplierID = supplierID;
             DatePaid = datePaid;
             AmountPaid = amountPaid;
             PaidBy = paidBy;
@@ -40,18 +43,19 @@ namespace VehicleMonitoringSystem.Payment
 
 
         #region Payment Methods
-        public void InsertPayment(Payments payments)
+        public void InsertPayment(Payment payments)
         {
             try
             {
                 _dbOp.DBConnect();
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
 
-                cmd.CommandText = @"INSERT INTO Payment(PaymentID, StatementID, DatePaid, AmountPaid, PaidBy)
-                                                  VALUE(@PaymentID, @StatementID, @DatePaid, @AmountPaid, @PaidBy)";
+                cmd.CommandText = @"INSERT INTO Payment(PaymentID, SupplierID, InvoiceNumber, DatePaid, AmountPaid, PaidBy)
+                                                  VALUE(@PaymentID, @StatementID, @InvoiceNumber, @DatePaid, @AmountPaid, @PaidBy)";
 
                 cmd.Parameters.AddWithValue("@PaymentID", payments.PaymentID);
-                cmd.Parameters.AddWithValue("@StatementID", payments.StatementID);
+                cmd.Parameters.AddWithValue("@SupplierID", payments.SupplierID);
+                cmd.Parameters.AddWithValue("@InvoiceNumber", payments.InvoiceNumber);
                 cmd.Parameters.AddWithValue("@DatePaid", payments.DatePaid);
                 cmd.Parameters.AddWithValue("@AmountPaid", payments.AmountPaid);
                 cmd.Parameters.AddWithValue("@PaidBy", payments.PaidBy);
@@ -66,9 +70,9 @@ namespace VehicleMonitoringSystem.Payment
             }
         }
 
-        public Payments RetrievePaymentInfo(int paymentID)
+        public Payment RetrievePaymentInfo(int paymentID)
         {
-            Payments temp = new Payments();
+            Payment temp = new Payment();
 
             try
             {
@@ -81,12 +85,13 @@ namespace VehicleMonitoringSystem.Payment
                 while (reader.Read())
                 {
                     PaymentID = (int)reader.GetValue(0);
-                    StatementID = (int)reader.GetValue(1);
-                    DatePaid = (string)reader.GetValue(2);
-                    AmountPaid = (string)reader.GetValue(3);
-                    PaidBy = (string)reader.GetValue(4);
+                    SupplierID = (int)reader.GetValue(1);
+                    InvoiceNumber = (string)reader.GetValue(2);
+                    DatePaid = (string)reader.GetValue(3);
+                    AmountPaid = (string)reader.GetValue(4);
+                    PaidBy = (string)reader.GetValue(5);
 
-                    temp = new Payments(PaymentID, StatementID, DatePaid, AmountPaid, PaidBy);
+                    temp = new Payment(PaymentID, SupplierID, InvoiceNumber, DatePaid, AmountPaid, PaidBy);
                 }
                 reader.Close();
                 _dbOp.DBClose();
@@ -98,26 +103,27 @@ namespace VehicleMonitoringSystem.Payment
             return temp;
         }
 
-        public List<Payments> RetrievePaymentList()
+        public List<Payment> RetrievePaymentList()
         {
-            List<Payments> paymentList = new List<Payments>();
+            List<Payment> paymentList = new List<Payment>();
             try
             {
                 _dbOp.DBConnect();
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
                 cmd.CommandText = "SELECT * FROM Payment";
                 MySqlDataReader reader = cmd.ExecuteReader();
-                Payments temp = new Payments();
+                Payment temp = new Payment();
 
                 while (reader.Read())
                 {
                     PaymentID = (int)reader.GetValue(0);
-                    StatementID = (int)reader.GetValue(1);
-                    DatePaid = (string)reader.GetValue(2);
-                    AmountPaid = (string)reader.GetValue(3);
-                    PaidBy = (string)reader.GetValue(4);
+                    SupplierID = (int)reader.GetValue(1);
+                    InvoiceNumber = (string)reader.GetValue(2);
+                    DatePaid = (string)reader.GetValue(3);
+                    AmountPaid = (string)reader.GetValue(4);
+                    PaidBy = (string)reader.GetValue(5);
 
-                    temp = new Payments(PaymentID, StatementID, DatePaid, AmountPaid, PaidBy);
+                    temp = new Payment(PaymentID, SupplierID, InvoiceNumber, DatePaid, AmountPaid, PaidBy);
                     paymentList.Add(temp);
                 }
                 reader.Close();
@@ -130,7 +136,7 @@ namespace VehicleMonitoringSystem.Payment
             return paymentList;
         }
 
-        public void UpdatePaymentInfo(Payments payments)
+        public void UpdatePaymentInfo(Payment payments)
         {
             try
             {
@@ -138,13 +144,14 @@ namespace VehicleMonitoringSystem.Payment
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
 
                 cmd.CommandText = @"UPDATE Payment SET PaymentID = @PaymentID,  
-                                                       StatementID = @StatementID,
+                                                       SupplierID = @SupplierID,
                                                        DatePaid = @DatePaid, 
                                                        AmountPaid = @AmountPaid
                                                        PaidBy = @PaidBy";
 
                 cmd.Parameters.AddWithValue("@PaymentID", payments.PaymentID);
-                cmd.Parameters.AddWithValue("@StatementID", payments.StatementID);
+                cmd.Parameters.AddWithValue("@SupplierID", payments.SupplierID);
+                cmd.Parameters.AddWithValue("@InvoiceNumber", payments.InvoiceNumber);
                 cmd.Parameters.AddWithValue("@DatePaid", payments.DatePaid);
                 cmd.Parameters.AddWithValue("@AmountPaid", payments.AmountPaid);
                 cmd.Parameters.AddWithValue("@PaidBy", payments.PaidBy);
