@@ -12,11 +12,14 @@ namespace VehicleMonitoringSystem
     {
         #region Variable
         public int      InsuranceID;
+
         public string   PlateNumber,
                         Company;
+
         public DateTime DurationFrom, 
                         DurationTo,
                         Renewal;
+
         public double   Amount;
 
         List<Insurance> _insurance = new List<Insurance>();
@@ -27,12 +30,16 @@ namespace VehicleMonitoringSystem
         #region Constructors
         public Insurance() { }
 
-        public Insurance(int insuranceID,
+        public Insurance(
+                         int insuranceID,
+
                          string plateNumber, 
                          string company,
+
                          DateTime durationFrom,
                          DateTime durationTo, 
                          DateTime renewal, 
+
                          double amount)
         {
             InsuranceID = insuranceID;
@@ -54,21 +61,8 @@ namespace VehicleMonitoringSystem
 
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
 
-                cmd.CommandText = @"INSERT INTO Insurance(InsuranceID,
-                                                          PlateNumber,
-                                                          Company,
-                                                          DurationFrom,
-                                                          DurationTo,
-                                                          Renewal,
-                                                          Amount) 
-                                    
-                                                   VALUES(@InsuranceID,
-                                                          @PlateNumber,
-                                                          @Company,
-                                                          @DurationFrom,
-                                                          @DurationTo,
-                                                          @Renewal,
-                                                          @Amount)";
+                cmd.CommandText = @"INSERT INTO Insurance(InsuranceID,PlateNumber,Company,DurationFrom,DurationTo,Renewal,Amount) 
+                                    VALUES(@InsuranceID,@PlateNumber,@Company,@DurationFrom,@DurationTo,@Renewal,@Amount)";
 
                 cmd.Parameters.AddWithValue("@InsuranceID", insurance.InsuranceID);
                 cmd.Parameters.AddWithValue("@PlateNumber", insurance.PlateNumber);
@@ -96,7 +90,7 @@ namespace VehicleMonitoringSystem
             {
                 _dbOp.DBConnect();
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
-                cmd.CommandText = @"SELECT InsuranceID, PlateNumber, Company, DurationFrom, DurationTo,Renewal,insurance.Amount FROM insurance " + "WHERE PlateNumber = @PlateNumber";
+                cmd.CommandText = @"SELECT InsuranceID, PlateNumber, Company, DurationFrom, DurationTo,Renewal,Amount FROM insurance " + "WHERE PlateNumber = @PlateNumber";
                 cmd.Parameters.AddWithValue("@PlateNumber", plateNumber);
 
                 MySqlDataReader reader = cmd.ExecuteReader();
@@ -110,13 +104,7 @@ namespace VehicleMonitoringSystem
                     Renewal = (DateTime)reader.GetValue(5);
                     Amount = (double)reader.GetValue(6);
 
-                    temp = new Insurance(InsuranceID,
-                                         PlateNumber,
-                                         Company,
-                                         DurationFrom,
-                                         DurationTo,
-                                         Renewal,
-                                         Amount);
+                    temp = new Insurance(InsuranceID,PlateNumber,Company,DurationFrom,DurationTo,Renewal,Amount);
                 }
 
                 reader.Close();
@@ -152,14 +140,7 @@ namespace VehicleMonitoringSystem
                     Renewal = (DateTime)reader.GetValue(5);
                     Amount = (double)reader.GetValue(6);
 
-                    temp = new Insurance(InsuranceID,
-                                         PlateNumber,
-                                         Company,
-                                         DurationFrom,
-                                         DurationTo,
-                                         Renewal,
-                                         Amount);
-
+                    temp = new Insurance(InsuranceID,PlateNumber,Company,DurationFrom,DurationTo,Renewal,Amount);
                     insuranceList.Add(temp);
                 }
                 reader.Close();
@@ -196,14 +177,7 @@ namespace VehicleMonitoringSystem
                     Renewal = (DateTime)reader.GetValue(5);
                     Amount = (double)reader.GetValue(6);
 
-                    temp = new Insurance(InsuranceID,
-                                         PlateNumber,
-                                         Company,
-                                         DurationFrom,
-                                         DurationTo,
-                                         Renewal,
-                                         Amount);
-
+                    temp = new Insurance(InsuranceID, PlateNumber, Company, DurationFrom, DurationTo, Renewal, Amount);
                     insuranceList.Add(temp);
                 }
                 reader.Close();
@@ -223,13 +197,7 @@ namespace VehicleMonitoringSystem
                 _dbOp.DBConnect();
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
 
-                cmd.CommandText = @"UPDATE Insurance SET InsuranceID = @InsuranceID, 
-                                                         PlateNumber = @PlateNumber, 
-                                                         Company = @Company, 
-                                                         DurationFrom = @DurationFrom, 
-                                                         DurationTo = @DurationTo, 
-                                                         Renewal = @Renewal, 
-                                                         Amount = @Amount " + "WHERE InsuranceID = @InsuranceID";
+                cmd.CommandText = @"UPDATE Insurance SET InsuranceID = @InsuranceID, PlateNumber = @PlateNumber, Company = @Company,DurationFrom = @DurationFrom,DurationTo = @DurationTo,Renewal = @Renewal,Amount = @Amount " + "WHERE InsuranceID = @InsuranceID";
 
                 cmd.Parameters.AddWithValue("@InsuranceID", insurance.InsuranceID);
                 cmd.Parameters.AddWithValue("@PlateNumber", insurance.PlateNumber);
@@ -252,6 +220,7 @@ namespace VehicleMonitoringSystem
         public int CreateInsurance()
         {
             InsuranceID = CountInsurance();
+
             return InsuranceID;
         }
 
@@ -260,8 +229,10 @@ namespace VehicleMonitoringSystem
             int count = 1;
 
             _dbOp.DBConnect();
+
             MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
             cmd.CommandText = @"SELECT * FROM insurance";
+
             MySqlDataReader reader = cmd.ExecuteReader();
 
             while (reader.Read())
