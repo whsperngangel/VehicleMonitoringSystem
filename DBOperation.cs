@@ -27,7 +27,7 @@ namespace VehicleMonitoringSystem
             Uid = "root";
             Password = "";
 
-            _connectionString = String.Format("server={0}; port={1};user id={2}; password={3}; database={4}", 
+            _connectionString = String.Format("server={0}; port={1};user id={2}; password={3}; database={4}",
                                                Server, Port, Uid, Password, Database);
             _dbConn = new MySqlConnection(_connectionString);
         }
@@ -57,9 +57,6 @@ namespace VehicleMonitoringSystem
             }
         }
         #endregion
-
-
-
 
     }
 }
