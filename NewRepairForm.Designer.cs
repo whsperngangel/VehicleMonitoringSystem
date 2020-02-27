@@ -79,14 +79,14 @@ namespace VehicleMonitoringSystem
             this.repairDateDTP.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.repairDateDTP.Location = new System.Drawing.Point(132, 48);
             this.repairDateDTP.Name = "repairDateDTP";
-            this.repairDateDTP.Size = new System.Drawing.Size(233, 26);
-            this.repairDateDTP.TabIndex = 23;
+            this.repairDateDTP.Size = new System.Drawing.Size(231, 26);
+            this.repairDateDTP.TabIndex = 2;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(70, 48);
+            this.label9.Location = new System.Drawing.Point(78, 53);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(48, 20);
             this.label9.TabIndex = 24;
@@ -96,7 +96,7 @@ namespace VehicleMonitoringSystem
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(54, 118);
+            this.label5.Location = new System.Drawing.Point(56, 120);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(69, 20);
             this.label5.TabIndex = 21;
@@ -105,10 +105,10 @@ namespace VehicleMonitoringSystem
             // repairAmountTB
             // 
             this.repairAmountTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.repairAmountTB.Location = new System.Drawing.Point(134, 115);
+            this.repairAmountTB.Location = new System.Drawing.Point(132, 117);
             this.repairAmountTB.Name = "repairAmountTB";
             this.repairAmountTB.Size = new System.Drawing.Size(231, 26);
-            this.repairAmountTB.TabIndex = 22;
+            this.repairAmountTB.TabIndex = 4;
             // 
             // repairSupplierCB
             // 
@@ -118,13 +118,13 @@ namespace VehicleMonitoringSystem
             this.repairSupplierCB.Location = new System.Drawing.Point(132, 14);
             this.repairSupplierCB.Name = "repairSupplierCB";
             this.repairSupplierCB.Size = new System.Drawing.Size(231, 28);
-            this.repairSupplierCB.TabIndex = 12;
+            this.repairSupplierCB.TabIndex = 1;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(23, 17);
+            this.label4.Location = new System.Drawing.Point(24, 17);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(102, 20);
             this.label4.TabIndex = 10;
@@ -140,7 +140,7 @@ namespace VehicleMonitoringSystem
             this.typeOfRepairCB.Location = new System.Drawing.Point(132, 151);
             this.typeOfRepairCB.Name = "typeOfRepairCB";
             this.typeOfRepairCB.Size = new System.Drawing.Size(231, 28);
-            this.typeOfRepairCB.TabIndex = 12;
+            this.typeOfRepairCB.TabIndex = 5;
             // 
             // label3
             // 
@@ -180,7 +180,7 @@ namespace VehicleMonitoringSystem
             this.partCB.Location = new System.Drawing.Point(132, 154);
             this.partCB.Name = "partCB";
             this.partCB.Size = new System.Drawing.Size(184, 28);
-            this.partCB.TabIndex = 27;
+            this.partCB.TabIndex = 9;
             // 
             // addB
             // 
@@ -188,7 +188,7 @@ namespace VehicleMonitoringSystem
             this.addB.Location = new System.Drawing.Point(230, 250);
             this.addB.Name = "addB";
             this.addB.Size = new System.Drawing.Size(86, 28);
-            this.addB.TabIndex = 26;
+            this.addB.TabIndex = 11;
             this.addB.Text = "Add";
             this.addB.UseVisualStyleBackColor = true;
             this.addB.Click += new System.EventHandler(this.addB_Click);
@@ -200,7 +200,7 @@ namespace VehicleMonitoringSystem
             this.partDateDTP.Location = new System.Drawing.Point(133, 70);
             this.partDateDTP.Name = "partDateDTP";
             this.partDateDTP.Size = new System.Drawing.Size(184, 26);
-            this.partDateDTP.TabIndex = 24;
+            this.partDateDTP.TabIndex = 7;
             // 
             // label2
             // 
@@ -218,7 +218,7 @@ namespace VehicleMonitoringSystem
             this.partAmountTB.Location = new System.Drawing.Point(133, 187);
             this.partAmountTB.Name = "partAmountTB";
             this.partAmountTB.Size = new System.Drawing.Size(184, 26);
-            this.partAmountTB.TabIndex = 23;
+            this.partAmountTB.TabIndex = 10;
             // 
             // label7
             // 
@@ -236,7 +236,7 @@ namespace VehicleMonitoringSystem
             this.partInvoiceNumberTB.Location = new System.Drawing.Point(133, 105);
             this.partInvoiceNumberTB.Name = "partInvoiceNumberTB";
             this.partInvoiceNumberTB.Size = new System.Drawing.Size(184, 26);
-            this.partInvoiceNumberTB.TabIndex = 22;
+            this.partInvoiceNumberTB.TabIndex = 8;
             // 
             // label14
             // 
@@ -266,7 +266,7 @@ namespace VehicleMonitoringSystem
             this.partSupplierCB.Location = new System.Drawing.Point(133, 36);
             this.partSupplierCB.Name = "partSupplierCB";
             this.partSupplierCB.Size = new System.Drawing.Size(184, 28);
-            this.partSupplierCB.TabIndex = 12;
+            this.partSupplierCB.TabIndex = 6;
             // 
             // label13
             // 
@@ -281,10 +281,10 @@ namespace VehicleMonitoringSystem
             // repairInvoiceNumberTB
             // 
             this.repairInvoiceNumberTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.repairInvoiceNumberTB.Location = new System.Drawing.Point(133, 83);
+            this.repairInvoiceNumberTB.Location = new System.Drawing.Point(132, 83);
             this.repairInvoiceNumberTB.Name = "repairInvoiceNumberTB";
             this.repairInvoiceNumberTB.Size = new System.Drawing.Size(231, 26);
-            this.repairInvoiceNumberTB.TabIndex = 14;
+            this.repairInvoiceNumberTB.TabIndex = 3;
             // 
             // vehicleNameL
             // 
@@ -308,7 +308,7 @@ namespace VehicleMonitoringSystem
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(10, 78);
+            this.label11.Location = new System.Drawing.Point(11, 73);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(115, 20);
             this.label11.TabIndex = 14;
@@ -321,14 +321,14 @@ namespace VehicleMonitoringSystem
             this.plateNumberCB.FormattingEnabled = true;
             this.plateNumberCB.Location = new System.Drawing.Point(132, 39);
             this.plateNumberCB.Name = "plateNumberCB";
-            this.plateNumberCB.Size = new System.Drawing.Size(186, 28);
-            this.plateNumberCB.TabIndex = 12;
+            this.plateNumberCB.Size = new System.Drawing.Size(231, 28);
+            this.plateNumberCB.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(10, 42);
+            this.label1.Location = new System.Drawing.Point(17, 42);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(109, 20);
             this.label1.TabIndex = 7;
@@ -338,7 +338,7 @@ namespace VehicleMonitoringSystem
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(4, 86);
+            this.label8.Location = new System.Drawing.Point(3, 83);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(123, 20);
             this.label8.TabIndex = 13;
@@ -418,7 +418,7 @@ namespace VehicleMonitoringSystem
             this.doneB.Location = new System.Drawing.Point(711, 597);
             this.doneB.Name = "doneB";
             this.doneB.Size = new System.Drawing.Size(69, 28);
-            this.doneB.TabIndex = 34;
+            this.doneB.TabIndex = 14;
             this.doneB.Text = "Done";
             this.doneB.UseVisualStyleBackColor = true;
             this.doneB.Click += new System.EventHandler(this.doneB_Click);
@@ -443,7 +443,7 @@ namespace VehicleMonitoringSystem
             this.cancelB.Location = new System.Drawing.Point(636, 597);
             this.cancelB.Name = "cancelB";
             this.cancelB.Size = new System.Drawing.Size(69, 28);
-            this.cancelB.TabIndex = 35;
+            this.cancelB.TabIndex = 13;
             this.cancelB.Text = "Cancel";
             this.cancelB.UseVisualStyleBackColor = true;
             this.cancelB.Click += new System.EventHandler(this.cancelB_Click_1);
@@ -454,9 +454,10 @@ namespace VehicleMonitoringSystem
             this.payB.Location = new System.Drawing.Point(561, 597);
             this.payB.Name = "payB";
             this.payB.Size = new System.Drawing.Size(69, 28);
-            this.payB.TabIndex = 34;
+            this.payB.TabIndex = 12;
             this.payB.Text = "Pay";
             this.payB.UseVisualStyleBackColor = true;
+            this.payB.Click += new System.EventHandler(this.payB_Click);
             // 
             // NewRepairForm
             // 
