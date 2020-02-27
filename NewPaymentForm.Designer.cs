@@ -42,8 +42,8 @@ namespace VehicleMonitoringSystem
             this.paidByCB = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.balanceTB = new System.Windows.Forms.TextBox();
-            this.invoiceNumberTB = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.invoiceNumberCB = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -76,13 +76,13 @@ namespace VehicleMonitoringSystem
             // supplierCB
             // 
             this.supplierCB.AllowDrop = true;
+            this.supplierCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.supplierCB.FormattingEnabled = true;
             this.supplierCB.Location = new System.Drawing.Point(141, 12);
             this.supplierCB.Name = "supplierCB";
             this.supplierCB.Size = new System.Drawing.Size(523, 28);
             this.supplierCB.Sorted = true;
             this.supplierCB.TabIndex = 0;
-            this.supplierCB.SelectedIndexChanged += new System.EventHandler(this.supplierCB_SelectedIndexChanged);
             this.supplierCB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.supplierCB_KeyPress);
             // 
             // datePaidDTP
@@ -167,13 +167,6 @@ namespace VehicleMonitoringSystem
             this.balanceTB.Text = "P 0.00";
             this.balanceTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.balanceTB_KeyPress);
             // 
-            // invoiceNumberTB
-            // 
-            this.invoiceNumberTB.Location = new System.Drawing.Point(141, 56);
-            this.invoiceNumberTB.Name = "invoiceNumberTB";
-            this.invoiceNumberTB.Size = new System.Drawing.Size(523, 26);
-            this.invoiceNumberTB.TabIndex = 2;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -183,13 +176,24 @@ namespace VehicleMonitoringSystem
             this.label6.TabIndex = 9;
             this.label6.Text = "Invoice Number:";
             // 
+            // invoiceNumberCB
+            // 
+            this.invoiceNumberCB.AllowDrop = true;
+            this.invoiceNumberCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.invoiceNumberCB.FormattingEnabled = true;
+            this.invoiceNumberCB.Location = new System.Drawing.Point(141, 56);
+            this.invoiceNumberCB.Name = "invoiceNumberCB";
+            this.invoiceNumberCB.Size = new System.Drawing.Size(523, 28);
+            this.invoiceNumberCB.Sorted = true;
+            this.invoiceNumberCB.TabIndex = 1;
+            this.invoiceNumberCB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.supplierCB_KeyPress);
+            // 
             // NewPaymentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(679, 304);
-            this.Controls.Add(this.invoiceNumberTB);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.cancelB);
             this.Controls.Add(this.clearB);
@@ -200,6 +204,7 @@ namespace VehicleMonitoringSystem
             this.Controls.Add(this.label4);
             this.Controls.Add(this.paidByCB);
             this.Controls.Add(this.label5);
+            this.Controls.Add(this.invoiceNumberCB);
             this.Controls.Add(this.supplierCB);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -230,7 +235,7 @@ namespace VehicleMonitoringSystem
         private System.Windows.Forms.ComboBox paidByCB;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox balanceTB;
-        private System.Windows.Forms.TextBox invoiceNumberTB;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox invoiceNumberCB;
     }
 }
