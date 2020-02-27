@@ -36,8 +36,6 @@ namespace VehicleMonitoringSystem
         }
         #endregion
 
-
-
         #region Vehicle Methods
         public void InsertVehicle(Vehicle vehicle)
         {
@@ -46,21 +44,8 @@ namespace VehicleMonitoringSystem
                 _dbOp.DBConnect();
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
 
-                cmd.CommandText = @"INSERT INTO Vehicle(PlateNumber,
-                                                        Listing,
-                                                        Brand,
-                                                        Category,
-                                                        CRNumber,
-                                                        CRDate,
-                                                        IssuedTo)
-                                                        
-                                                 VALUES(@PlateNumber,
-                                                        @Listing,
-                                                        @Brand, 
-                                                        @Category,
-                                                        @CRNumber, 
-                                                        @CRDate, 
-                                                        @IssuedTo)";
+                cmd.CommandText = @"INSERT INTO Vehicle(PlateNumber, Listing, Brand, Category, CRNumber, CRDate, IssuedTo)
+                                    VALUES(@PlateNumber, @Listing, @Brand, @Category, @CRNumber, @CRDate, @IssuedTo)";
         
                 cmd.Parameters.AddWithValue("@PlateNumber", vehicle.PlateNumber);
                 cmd.Parameters.AddWithValue("@Listing", vehicle.Listing);
@@ -102,13 +87,7 @@ namespace VehicleMonitoringSystem
                     CRDate = (DateTime)reader.GetValue(5);
                     IssuedTo = (string)reader.GetValue(6);
 
-                    temp = new Vehicle(PlateNumber,
-                                       Listing, 
-                                       Brand,
-                                       Category, 
-                                       CRNumber, 
-                                       CRDate, 
-                                       IssuedTo);
+                    temp = new Vehicle(PlateNumber, Listing, Brand, Category, CRNumber, CRDate, IssuedTo);
                 }
                 reader.Close();
                 _dbOp.DBClose();
@@ -142,14 +121,7 @@ namespace VehicleMonitoringSystem
                     CRDate = (DateTime)reader.GetValue(5);
                     IssuedTo = (string)reader.GetValue(6);
 
-                    temp = new Vehicle(PlateNumber,
-                                       Listing,
-                                       Brand,
-                                       Category,
-                                       CRNumber,
-                                       CRDate,
-                                       IssuedTo);
-
+                    temp = new Vehicle(PlateNumber, Listing, Brand, Category, CRNumber, CRDate, IssuedTo);
                     vehicleList.Add(temp);
                 }
 
@@ -174,13 +146,7 @@ namespace VehicleMonitoringSystem
 
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
 
-                cmd.CommandText = @"UPDATE Vehicle SET PlateNumber = @PlateNumber,
-                                                       Listing = @Listing,
-                                                       Brand = @Brand,
-                                                       Category = @Category,
-                                                       CRNumber = @CRNumber,
-                                                       CRDate = @CRDate,
-                                                       IssuedTo = @IssuedTo " + "WHERE PlateNumber = @PlateNumber";
+                cmd.CommandText = @"UPDATE Vehicle SET PlateNumber = @PlateNumber,Listing = @Listing,Brand = @Brand,Category = @Category,CRNumber = @CRNumber,CRDate = @CRDate,IssuedTo = @IssuedTo " + "WHERE PlateNumber = @PlateNumber";
 
                 cmd.Parameters.AddWithValue("@PlateNumber", vehicle.PlateNumber);
                 cmd.Parameters.AddWithValue("@Listing", vehicle.Listing);
