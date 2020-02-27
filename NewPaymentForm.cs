@@ -15,10 +15,17 @@ namespace VehicleMonitoringSystem
                        datePaid,
                        paidBy,
                        amountPaid;
-        private double balance; 
+        private double balance;
 
+        private Fuel _fuel = new Fuel();
+        private Repair _repair = new Repair();
+        private RepairDetail _repairDetail = new RepairDetail();
         private Supplier _supplier = new Supplier();
         private Payment _payment = new Payment();
+
+        List<Fuel> _fuels = new List<Fuel>();
+        List<Repair> _repairs = new List<Repair>();
+        List<RepairDetail> _repairDetails = new List<RepairDetail>();
         List<Supplier> _suppliers = new List<Supplier>();
         List<Payment> _payments = new List<Payment>();
         #endregion
@@ -45,10 +52,27 @@ namespace VehicleMonitoringSystem
             _payments = _payment.RetrievePaymentList();
             foreach (Payment p in _payments)
             {
-                paidByCB.Items.Add(p. PaidBy);
+                paidByCB.Items.Add(p.PaidBy);
+            }
+
+            _fuels = _fuel.RetrieveFuelList();
+            foreach (Fuel f in _fuels)
+            {
+                invoiceNumberCB.Items.Add(f.InvoiceNumber);
+            }
+
+            _repairs = _repair.RetrieveRepairList();
+            foreach (Repair r in _repairs)
+            {
+                invoiceNumberCB.Items.Add(r.InvoiceNumber);
+            }
+
+            _repairDetails = _repairDetail.RetrieveRepairDetailList();
+            foreach (RepairDetail rd in _repairDetails)
+            {
+                invoiceNumberCB.Items.Add(rd.InvoiceNumber);
             }
         }
-
 
 
         private void saveB_Click(object sender, EventArgs e)
@@ -56,7 +80,7 @@ namespace VehicleMonitoringSystem
             try
             {
                 supplierName = supplierCB.Text.Trim();
-                invoiceNumber = invoiceNumberTB.Text.Trim();
+                invoiceNumber = invoiceNumberCB.Text.Trim();
                 datePaid = datePaidDTP.Value.ToString();
                 amountPaid = amountPaidTB.Text.Trim();
                 paidBy = paidByCB.Text.Trim();
@@ -69,12 +93,6 @@ namespace VehicleMonitoringSystem
                 MessageBox.Show(ex.ToString());
             }
         }
-
-        private void supplierCB_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         private void clearB_Click(object sender, EventArgs e)
         {
             supplierCB.Text = "";
@@ -87,13 +105,6 @@ namespace VehicleMonitoringSystem
         {
             Close();
         }
-
-
-
-
-
-
-
 
 
         private void supplierCB_KeyPress(object sender, KeyPressEventArgs e)
@@ -124,8 +135,6 @@ namespace VehicleMonitoringSystem
                 e.Handled = true;
             }
         }
-
-
         #endregion
     }
 }
