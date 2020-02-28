@@ -95,7 +95,6 @@ namespace VehicleMonitoringSystem
         }
         #endregion
 
-        #region UI Methods
         #region Populate ListViews
         public void ListViewLoad()
         {
@@ -342,6 +341,8 @@ namespace VehicleMonitoringSystem
         }
         //doon
         #endregion
+
+        #region ShowData Add Compute
         private void ShowData(string plateNumber)
         {
             LoadRegistration(_plateNumber);
@@ -403,6 +404,7 @@ namespace VehicleMonitoringSystem
         }
         #endregion
 
+        #region Selected Index Changed
         private void SupplierSortCB_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (supplierSortCB.SelectedIndex > -1)
@@ -472,6 +474,8 @@ namespace VehicleMonitoringSystem
                 }
             }
         }
+        #endregion
+
         #region Tool Strip Menu
         private void reportsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -718,7 +722,6 @@ namespace VehicleMonitoringSystem
             NewMaintenanceForm newMaintenanceForm = new NewMaintenanceForm();
             newMaintenanceForm.ShowDialog();
         }
-        //dito
         private void viewRepairDetailB_Click(object sender, EventArgs e)
         {
             RepairDetailsForm repairDetailsForm = new RepairDetailsForm(this);
@@ -726,7 +729,6 @@ namespace VehicleMonitoringSystem
             repairDetailsForm._getID = _getID;
             repairDetailsForm.ShowDialog();
         }
-        //doon
         private void PaymentTSM_Click(object sender, EventArgs e)
         {
             NewPaymentForm newPaymentForm = new NewPaymentForm();
@@ -752,7 +754,6 @@ namespace VehicleMonitoringSystem
         }
         #endregion
 
-        #region Other Methods
         #region Edit Cancel Clear
         private void editB_Click(object sender, EventArgs e)
         {
@@ -1184,7 +1185,6 @@ namespace VehicleMonitoringSystem
             partCB.Enabled = false;
             maintenanceCancelB.Visible = false;
         }
-        #endregion
         #endregion
     }
 }
