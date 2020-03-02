@@ -55,7 +55,7 @@ namespace VehicleMonitoringSystem
         }
         #endregion
 
-        #region UI Method
+        #region Repair Method
         //ate dito
         private void plateNumberCB_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -70,6 +70,31 @@ namespace VehicleMonitoringSystem
                 _part = _part.RetrievePartInfo(m.PartID);
                 partCB.Items.Add(_part.Description);
             }
+        }
+        private void PartListLV_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            addB.Text = "Update";
+            partSupplierCB.Enabled = true;
+            partDateDTP.Enabled = true;
+            partInvoiceNumberTB.Enabled = true;
+            if (partListLV.SelectedItems.Count > 0)
+            {
+                ListViewItem selectedPart = partListLV.SelectedItems[0];
+                string partItemNo = selectedPart.SubItems[0].Text;
+
+                partCB.Text = selectedPart.SubItems[4].Text;
+                partID = _part.RetrievePartID(partCB.Text);
+                purchasedDate = partDateDTP.Value = DateTime.Parse(selectedPart.SubItems[2].Text);
+                partSupplierCB.Text = selectedPart.SubItems[1].Text;
+                partSupplierID = _supplier.RetrieveSupplierID(partSupplierCB.Text);
+                partInvoiceNumber = partInvoiceNumberTB.Text = selectedPart.SubItems[3].Text;
+                partAmountTB.Text = selectedPart.SubItems[5].Text;
+                partAmount = double.Parse(partAmountTB.Text);
+                
+                _repairDetail = new RepairDetail(repairID, partID, purchasedDate,partAmount,partInvoiceNumber,partSupplierID);
+                partListLV.SelectedItems[0].Remove();
+            }
+
         }
         //anne dito
         private void ComboBoxLoad()
@@ -103,31 +128,6 @@ namespace VehicleMonitoringSystem
         }
        
         #region Buttons
-        private void PartListLV_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            addB.Text = "Update";
-            partSupplierCB.Enabled = true;
-            partDateDTP.Enabled = true;
-            partInvoiceNumberTB.Enabled = true;
-            if (partListLV.SelectedItems.Count > 0)
-            {
-                ListViewItem selectedPart = partListLV.SelectedItems[0];
-                string partItemNo = selectedPart.SubItems[0].Text;
-
-                partCB.Text = selectedPart.SubItems[4].Text;
-                partID = _part.RetrievePartID(partCB.Text);
-                purchasedDate = partDateDTP.Value = DateTime.Parse(selectedPart.SubItems[2].Text);
-                partSupplierCB.Text = selectedPart.SubItems[1].Text;
-                partSupplierID = _supplier.RetrieveSupplierID(partSupplierCB.Text);
-                partInvoiceNumber = partInvoiceNumberTB.Text = selectedPart.SubItems[3].Text;
-                partAmountTB.Text = selectedPart.SubItems[5].Text;
-                partAmount = double.Parse(partAmountTB.Text);
-                
-                _repairDetail = new RepairDetail(repairID, partID, purchasedDate,partAmount,partInvoiceNumber,partSupplierID);
-                partListLV.SelectedItems[0].Remove();
-            }
-
-        }
         
         private void AddItem()
         {
@@ -236,7 +236,7 @@ namespace VehicleMonitoringSystem
             newPaymentForm.ShowDialog();
         }
         //anne =)
-        private void cancelB_Click_1(object sender, EventArgs e)
+        private void cancelB_Click(object sender, EventArgs e)
         {
             this.Close();
         }
