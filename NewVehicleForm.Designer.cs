@@ -217,6 +217,9 @@ namespace VehicleMonitoringSystem
             this.amountTB.Name = "amountTB";
             this.amountTB.Size = new System.Drawing.Size(608, 26);
             this.amountTB.TabIndex = 10;
+            this.amountTB.Text = "PHP 0.00";
+            this.amountTB.Click += new System.EventHandler(this.amountTB_Click);
+            this.amountTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.amountTB_KeyPress);
             // 
             // saveB
             // 
