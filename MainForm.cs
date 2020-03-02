@@ -20,7 +20,6 @@ namespace VehicleMonitoringSystem
                     _partID,
                     _supplierID,
                     _maintenanceID;
-
         private string _plateNumber = "",
                        _registeredName = "",
                        _orNumber = "",
@@ -62,22 +61,22 @@ namespace VehicleMonitoringSystem
                         _datedue = DateTime.Now,
                         _repairDueDate = DateTime.Now;
 
-        private Vehicle      _vehicle = new Vehicle();
-        private Part _part = new Part();
+        private Vehicle _vehicle = new Vehicle();
         private Registration _registration = new Registration();
-        private Insurance    _insurance = new Insurance();
-        private Repair       _repair = new Repair();
-        private Fuel         _fuel = new Fuel();
+        private Insurance _insurance = new Insurance();
         private Maintenance _maintenance = new Maintenance();
+        private Repair _repair = new Repair();
+        private Fuel _fuel = new Fuel();
         private Supplier _supplier = new Supplier();
         private Statement _statement = new Statement();
-        List<Vehicle>      _vehicles = new List<Vehicle>();
+        private Part _part = new Part();
+        List<Vehicle> _vehicles = new List<Vehicle>();
         List<Registration> _registrations = new List<Registration>();
-        List<Insurance>    _insurances = new List<Insurance>();
+        List<Insurance> _insurances = new List<Insurance>();
         List<Maintenance> _maintenances = new List<Maintenance>();
-        List<Repair>       _repairs = new List<Repair>();
+        List<Repair> _repairs = new List<Repair>();
         List<RepairDetail> _repairDetails = new List<RepairDetail>();
-        List<Fuel>         _fuels = new List<Fuel>();
+        List<Fuel> _fuels = new List<Fuel>();
         List<Supplier> _Supplier = new List<Supplier>();
         List<Statement> _statements = new List<Statement>();
         List<Part> _parts = new List<Part>();
@@ -121,6 +120,16 @@ namespace VehicleMonitoringSystem
            foreach (Vehicle v in _vehicles)
             {
                 plateNumberCB.Items.Add(v.PlateNumber);
+            }
+            _repairs = _repair.RetrieveRepairList();
+            foreach (Repair r in _repairs)
+            {
+                repairInvoiceNumberCB.Items.Add(r.InvoiceNumber);
+            }
+            _fuels = _fuel.RetrieveFuelList();
+            foreach (Fuel f in _fuels)
+            {
+                fuelInvoiceNumberCB.Items.Add(f.InvoiceNumber);
             }
         }
         private void MaintenanceListLoad(string plateNumber)
@@ -272,6 +281,7 @@ namespace VehicleMonitoringSystem
 
             }
         }
+
         /*public void LoadRepairStatement()
         {
             _statements = _statement.RetrieveRepairStatement(_conditionString1);
