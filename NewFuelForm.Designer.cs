@@ -49,10 +49,10 @@ namespace VehicleMonitoringSystem
             // saveB
             // 
             this.saveB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveB.Location = new System.Drawing.Point(500, 261);
+            this.saveB.Location = new System.Drawing.Point(505, 273);
             this.saveB.Name = "saveB";
             this.saveB.Size = new System.Drawing.Size(75, 29);
-            this.saveB.TabIndex = 0;
+            this.saveB.TabIndex = 6;
             this.saveB.Text = "Save";
             this.saveB.UseVisualStyleBackColor = true;
             this.saveB.Click += new System.EventHandler(this.saveB_Click);
@@ -60,10 +60,10 @@ namespace VehicleMonitoringSystem
             // cancelB
             // 
             this.cancelB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelB.Location = new System.Drawing.Point(581, 261);
+            this.cancelB.Location = new System.Drawing.Point(586, 273);
             this.cancelB.Name = "cancelB";
             this.cancelB.Size = new System.Drawing.Size(75, 29);
-            this.cancelB.TabIndex = 1;
+            this.cancelB.TabIndex = 7;
             this.cancelB.Text = "Cancel";
             this.cancelB.UseVisualStyleBackColor = true;
             this.cancelB.Click += new System.EventHandler(this.cancelB_Click);
@@ -71,10 +71,10 @@ namespace VehicleMonitoringSystem
             // clearB
             // 
             this.clearB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clearB.Location = new System.Drawing.Point(662, 261);
+            this.clearB.Location = new System.Drawing.Point(667, 273);
             this.clearB.Name = "clearB";
             this.clearB.Size = new System.Drawing.Size(75, 29);
-            this.clearB.TabIndex = 2;
+            this.clearB.TabIndex = 8;
             this.clearB.Text = "Clear";
             this.clearB.UseVisualStyleBackColor = true;
             // 
@@ -82,7 +82,7 @@ namespace VehicleMonitoringSystem
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 12);
+            this.label1.Location = new System.Drawing.Point(12, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(109, 20);
             this.label1.TabIndex = 3;
@@ -92,7 +92,7 @@ namespace VehicleMonitoringSystem
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 57);
+            this.label2.Location = new System.Drawing.Point(12, 69);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(48, 20);
             this.label2.TabIndex = 4;
@@ -102,7 +102,7 @@ namespace VehicleMonitoringSystem
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(12, 181);
+            this.label3.Location = new System.Drawing.Point(12, 192);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 20);
             this.label3.TabIndex = 5;
@@ -112,7 +112,7 @@ namespace VehicleMonitoringSystem
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(12, 224);
+            this.label4.Location = new System.Drawing.Point(12, 235);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(69, 20);
             this.label4.TabIndex = 6;
@@ -121,27 +121,28 @@ namespace VehicleMonitoringSystem
             // amountTB
             // 
             this.amountTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.amountTB.Location = new System.Drawing.Point(141, 221);
+            this.amountTB.Location = new System.Drawing.Point(146, 232);
             this.amountTB.Name = "amountTB";
             this.amountTB.Size = new System.Drawing.Size(596, 26);
-            this.amountTB.TabIndex = 10;
+            this.amountTB.TabIndex = 5;
             this.amountTB.Text = "PHP 0.00";
+            this.amountTB.Click += new System.EventHandler(this.amountTB_Click);
             this.amountTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.amountTB_KeyPress);
             // 
             // dateDTP
             // 
             this.dateDTP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateDTP.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateDTP.Location = new System.Drawing.Point(141, 52);
+            this.dateDTP.Location = new System.Drawing.Point(146, 64);
             this.dateDTP.Name = "dateDTP";
             this.dateDTP.Size = new System.Drawing.Size(596, 26);
-            this.dateDTP.TabIndex = 11;
+            this.dateDTP.TabIndex = 1;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(12, 97);
+            this.label6.Location = new System.Drawing.Point(12, 108);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(100, 20);
             this.label6.TabIndex = 5;
@@ -152,10 +153,10 @@ namespace VehicleMonitoringSystem
             this.plateNumberCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.plateNumberCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.plateNumberCB.FormattingEnabled = true;
-            this.plateNumberCB.Location = new System.Drawing.Point(141, 9);
+            this.plateNumberCB.Location = new System.Drawing.Point(146, 21);
             this.plateNumberCB.Name = "plateNumberCB";
             this.plateNumberCB.Size = new System.Drawing.Size(596, 28);
-            this.plateNumberCB.TabIndex = 12;
+            this.plateNumberCB.TabIndex = 0;
             // 
             // typeOfFuelCB
             // 
@@ -165,34 +166,34 @@ namespace VehicleMonitoringSystem
             "Diesel",
             "Unleaded",
             "LPG"});
-            this.typeOfFuelCB.Location = new System.Drawing.Point(141, 94);
+            this.typeOfFuelCB.Location = new System.Drawing.Point(146, 105);
             this.typeOfFuelCB.Name = "typeOfFuelCB";
             this.typeOfFuelCB.Size = new System.Drawing.Size(596, 28);
-            this.typeOfFuelCB.TabIndex = 12;
+            this.typeOfFuelCB.TabIndex = 2;
             // 
             // supplierCB
             // 
             this.supplierCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.supplierCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.supplierCB.FormattingEnabled = true;
-            this.supplierCB.Location = new System.Drawing.Point(141, 178);
+            this.supplierCB.Location = new System.Drawing.Point(146, 189);
             this.supplierCB.Name = "supplierCB";
             this.supplierCB.Size = new System.Drawing.Size(596, 28);
-            this.supplierCB.TabIndex = 12;
+            this.supplierCB.TabIndex = 4;
             // 
             // invoiceNumberTB
             // 
             this.invoiceNumberTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.invoiceNumberTB.Location = new System.Drawing.Point(141, 137);
+            this.invoiceNumberTB.Location = new System.Drawing.Point(146, 148);
             this.invoiceNumberTB.Name = "invoiceNumberTB";
             this.invoiceNumberTB.Size = new System.Drawing.Size(596, 26);
-            this.invoiceNumberTB.TabIndex = 15;
+            this.invoiceNumberTB.TabIndex = 3;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(12, 140);
+            this.label7.Location = new System.Drawing.Point(12, 151);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(123, 20);
             this.label7.TabIndex = 14;
@@ -205,7 +206,7 @@ namespace VehicleMonitoringSystem
             this.AutoScroll = true;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(754, 302);
+            this.ClientSize = new System.Drawing.Size(754, 316);
             this.Controls.Add(this.invoiceNumberTB);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.supplierCB);
