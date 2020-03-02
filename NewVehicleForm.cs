@@ -61,6 +61,22 @@ namespace VehicleMonitoringSystem
                 categoryCB.Items.Add(v.Category);
             }
         }
+        private void amountTB_Click(object sender, EventArgs e)
+        {
+            amountTB.Text = "";
+        }
+        private void amountTB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+            (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
 
         private void saveB_Click(object sender, EventArgs e)
         {
@@ -125,12 +141,13 @@ namespace VehicleMonitoringSystem
                     _registration.InsertRegistration(_registration);
 
                     this.Close();
-                    _mainForm.ListViewLoad();
+
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString());
                 }
+                _mainForm.ListViewLoad();
             }
         }
         private void cancelB_Click(object sender, EventArgs e)
