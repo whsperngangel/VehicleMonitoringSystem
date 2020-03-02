@@ -153,10 +153,6 @@ namespace VehicleMonitoringSystem
             renewal = renewalDTP.Value = DateTime.Now;
         }
         #endregion
-
-
-
-        
         }
     }
 }
