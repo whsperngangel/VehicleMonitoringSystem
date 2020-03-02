@@ -31,8 +31,7 @@ namespace VehicleMonitoringSystem
                     string typeOfFuel,
                     string invoiceNumber,
                     int supplierID,
-                    double amount, 
-                    bool paid)
+                    double amount)
         {
             FuelID = fuelID;
             PlateNumber = plateNumber;
@@ -41,7 +40,6 @@ namespace VehicleMonitoringSystem
             InvoiceNumber = invoiceNumber;
             SupplierID = supplierID;
             Amount = amount;
-            Paid = paid;
         }
         #endregion
 
@@ -53,7 +51,7 @@ namespace VehicleMonitoringSystem
                 _dbOp.DBConnect();
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
 
-                cmd.CommandText = @"INSERT INTO Fuel(FuelID,PlateNumber,FuelDate,TypeOfFuel,InvoiceNumber,SupplierID,Amount,PaidBy)VALUE(@FuelID,@PlateNumber,@FuelDate,@TypeOfFuel,@InvoiceNumber,@SupplierID,@Amount,@PaidBy)";
+                cmd.CommandText = @"INSERT INTO Fuel(FuelID,PlateNumber,FuelDate,TypeOfFuel,InvoiceNumber,SupplierID,Amount,Paid)VALUE(@FuelID,@PlateNumber,@FuelDate,@TypeOfFuel,@InvoiceNumber,@SupplierID,@Amount)";
 
                 cmd.Parameters.AddWithValue("@FuelID", fuel.FuelID);
                 cmd.Parameters.AddWithValue("@PlateNumber", fuel.PlateNumber);
@@ -62,7 +60,6 @@ namespace VehicleMonitoringSystem
                 cmd.Parameters.AddWithValue("@InvoiceNumber", fuel.InvoiceNumber);
                 cmd.Parameters.AddWithValue("@SupplierID", fuel.SupplierID);
                 cmd.Parameters.AddWithValue("@Amount", fuel.Amount);
-                cmd.Parameters.AddWithValue("@PaidBy", fuel.Paid);
 
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("New Fuel Record has been saved!");
@@ -96,9 +93,8 @@ namespace VehicleMonitoringSystem
                     InvoiceNumber = (string)reader.GetValue(4);
                     SupplierID = (int)reader.GetValue(5);
                     Amount = (double)reader.GetValue(6);
-                    Paid = (bool)reader.GetValue(7);
 
-                    temp = new Fuel(FuelID, PlateNumber, FuelDate, TypeOfFuel, InvoiceNumber, SupplierID, Amount, Paid);
+                    temp = new Fuel(FuelID, PlateNumber, FuelDate, TypeOfFuel, InvoiceNumber, SupplierID, Amount);
                 }
                 reader.Close();
                 _dbOp.DBClose();
@@ -130,9 +126,8 @@ namespace VehicleMonitoringSystem
                     InvoiceNumber = (string)reader.GetValue(4);
                     SupplierID = (int)reader.GetValue(5);
                     Amount = (double)reader.GetValue(6);
-                    Paid = (bool)reader.GetValue(7);
 
-                    temp = new Fuel(FuelID, PlateNumber, FuelDate, TypeOfFuel, InvoiceNumber, SupplierID, Amount, Paid);
+                    temp = new Fuel(FuelID, PlateNumber, FuelDate, TypeOfFuel, InvoiceNumber, SupplierID, Amount);
                 }
                 reader.Close();
                 _dbOp.DBClose();
@@ -164,9 +159,8 @@ namespace VehicleMonitoringSystem
                     InvoiceNumber = (string)reader.GetValue(4);
                     SupplierID = (int)reader.GetValue(5);
                     Amount = (double)reader.GetValue(6);
-                    Paid = (bool)reader.GetValue(7);
 
-                    temp = new Fuel(FuelID, PlateNumber, FuelDate, TypeOfFuel, InvoiceNumber, SupplierID, Amount, Paid);
+                    temp = new Fuel(FuelID, PlateNumber, FuelDate, TypeOfFuel, InvoiceNumber, SupplierID, Amount);
 
                     fuelList.Add(temp);
                 }
@@ -201,9 +195,8 @@ namespace VehicleMonitoringSystem
                     InvoiceNumber = (string)reader.GetValue(4);
                     SupplierID = (int)reader.GetValue(5);
                     Amount = (double)reader.GetValue(6);
-                    Paid = (bool)reader.GetValue(7);
 
-                    temp = new Fuel(FuelID, PlateNumber, FuelDate, TypeOfFuel, InvoiceNumber, SupplierID, Amount, Paid);
+                    temp = new Fuel(FuelID, PlateNumber, FuelDate, TypeOfFuel, InvoiceNumber, SupplierID, Amount);
 
                     fuelList.Add(temp);
                 }
@@ -224,7 +217,7 @@ namespace VehicleMonitoringSystem
                 _dbOp.DBConnect();
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
 
-                cmd.CommandText = @"UPDATE Fuel SET FuelID = @FuelID, PlateNumber = @PlateNumber,FuelDate = @FuelDate,TypeOfFuel = @TypeOfFuel, InvoiceNumber = @InvoiceNumber, SupplierID = @SupplierID,Amount = @Amount,Paid = @Paid " + "WHERE FuelID = @FuelID";
+                cmd.CommandText = @"UPDATE Fuel SET FuelID = @FuelID, PlateNumber = @PlateNumber,FuelDate = @FuelDate,TypeOfFuel = @TypeOfFuel, InvoiceNumber = @InvoiceNumber, SupplierID = @SupplierID,Amount = @Amount " + "WHERE FuelID = @FuelID";
 
                 cmd.Parameters.AddWithValue("@FuelID", fuel.FuelID);
                 cmd.Parameters.AddWithValue("@PlateNumber", fuel.PlateNumber);
@@ -233,7 +226,6 @@ namespace VehicleMonitoringSystem
                 cmd.Parameters.AddWithValue("@InvoiceNumber", fuel.InvoiceNumber);
                 cmd.Parameters.AddWithValue("@SupplierID", fuel.SupplierID);
                 cmd.Parameters.AddWithValue("@Amount", fuel.Amount);
-                cmd.Parameters.AddWithValue("@PaidBy", fuel.Paid);
 
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Fuel Record has been updated!");
@@ -245,7 +237,7 @@ namespace VehicleMonitoringSystem
             }
         }
 
-        public int CreateFuel()
+        public int CreateFuelID()
         {
             FuelID = CountFuel();
 
