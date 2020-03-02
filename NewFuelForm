@@ -43,7 +43,6 @@ namespace VehicleMonitoringSystem
         #endregion
 
         #region Gas Methods
-        
         private void ShowData(string plateNumber)
         {
             _fuel = _fuel.RetrieveFuelInfo(plateNumber);
