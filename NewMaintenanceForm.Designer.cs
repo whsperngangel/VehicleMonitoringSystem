@@ -48,16 +48,19 @@ namespace VehicleMonitoringSystem
             "For Repair",
             "For Replacement",
             "On Going Repair"});
-            this.statusCB.Location = new System.Drawing.Point(105, 79);
+            this.statusCB.Location = new System.Drawing.Point(130, 119);
+            this.statusCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.statusCB.Name = "statusCB";
-            this.statusCB.Size = new System.Drawing.Size(285, 28);
+            this.statusCB.Size = new System.Drawing.Size(454, 28);
             this.statusCB.TabIndex = 32;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(24, 82);
+            this.label14.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label14.Location = new System.Drawing.Point(13, 122);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(60, 20);
             this.label14.TabIndex = 31;
@@ -66,9 +69,10 @@ namespace VehicleMonitoringSystem
             // newB
             // 
             this.newB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newB.Location = new System.Drawing.Point(105, 127);
+            this.newB.Location = new System.Drawing.Point(13, 167);
+            this.newB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.newB.Name = "newB";
-            this.newB.Size = new System.Drawing.Size(78, 28);
+            this.newB.Size = new System.Drawing.Size(117, 43);
             this.newB.TabIndex = 37;
             this.newB.Text = "New Part";
             this.newB.UseVisualStyleBackColor = true;
@@ -77,9 +81,10 @@ namespace VehicleMonitoringSystem
             // repairB
             // 
             this.repairB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.repairB.Location = new System.Drawing.Point(256, 127);
+            this.repairB.Location = new System.Drawing.Point(338, 167);
+            this.repairB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.repairB.Name = "repairB";
-            this.repairB.Size = new System.Drawing.Size(78, 28);
+            this.repairB.Size = new System.Drawing.Size(117, 43);
             this.repairB.TabIndex = 38;
             this.repairB.Text = "Repair";
             this.repairB.UseVisualStyleBackColor = true;
@@ -88,9 +93,10 @@ namespace VehicleMonitoringSystem
             // DoneB
             // 
             this.DoneB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DoneB.Location = new System.Drawing.Point(342, 127);
+            this.DoneB.Location = new System.Drawing.Point(467, 167);
+            this.DoneB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.DoneB.Name = "DoneB";
-            this.DoneB.Size = new System.Drawing.Size(78, 28);
+            this.DoneB.Size = new System.Drawing.Size(117, 43);
             this.DoneB.TabIndex = 39;
             this.DoneB.Text = "Done";
             this.DoneB.UseVisualStyleBackColor = true;
@@ -100,9 +106,10 @@ namespace VehicleMonitoringSystem
             this.partCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.partCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.partCB.FormattingEnabled = true;
-            this.partCB.Location = new System.Drawing.Point(105, 45);
+            this.partCB.Location = new System.Drawing.Point(130, 71);
+            this.partCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.partCB.Name = "partCB";
-            this.partCB.Size = new System.Drawing.Size(285, 28);
+            this.partCB.Size = new System.Drawing.Size(454, 28);
             this.partCB.TabIndex = 35;
             // 
             // plateNumberCB
@@ -110,36 +117,41 @@ namespace VehicleMonitoringSystem
             this.plateNumberCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.plateNumberCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.plateNumberCB.FormattingEnabled = true;
-            this.plateNumberCB.Location = new System.Drawing.Point(105, 12);
+            this.plateNumberCB.Location = new System.Drawing.Point(130, 24);
+            this.plateNumberCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.plateNumberCB.Name = "plateNumberCB";
-            this.plateNumberCB.Size = new System.Drawing.Size(285, 28);
+            this.plateNumberCB.Size = new System.Drawing.Size(454, 28);
             this.plateNumberCB.TabIndex = 33;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 51);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label2.Location = new System.Drawing.Point(13, 74);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(88, 17);
+            this.label2.Size = new System.Drawing.Size(98, 20);
             this.label2.TabIndex = 36;
             this.label2.Text = "Vehicle Part:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 18);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label1.Location = new System.Drawing.Point(13, 27);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 17);
+            this.label1.Size = new System.Drawing.Size(109, 20);
             this.label1.TabIndex = 34;
             this.label1.Text = "Plate Number:";
             // 
             // NewMaintenanceForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(444, 191);
+            this.ClientSize = new System.Drawing.Size(599, 226);
             this.Controls.Add(this.newB);
             this.Controls.Add(this.repairB);
             this.Controls.Add(this.DoneB);
@@ -149,6 +161,8 @@ namespace VehicleMonitoringSystem
             this.Controls.Add(this.label1);
             this.Controls.Add(this.statusCB);
             this.Controls.Add(this.label14);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "NewMaintenanceForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NewMaintenanceForm";
