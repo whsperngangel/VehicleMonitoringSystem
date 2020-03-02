@@ -53,8 +53,6 @@ namespace VehicleMonitoringSystem
            // supplierCB.Text = _fuel.SupplierID;
             amountTB.Text = _fuel.Amount.ToString("N2");
         }
-
-        //here din =)
         private void ComboBoxLoad()
         {
             _fuels = _fuel.RetrieveFuelList();
@@ -73,7 +71,7 @@ namespace VehicleMonitoringSystem
                 supplierCB.Items.Add(s.SupplierName);
             }
         }
-        //Entry Buttons
+
         private void saveB_Click(object sender, EventArgs e)
         {
             if (plateNumberCB.Text == "")
@@ -133,7 +131,6 @@ namespace VehicleMonitoringSystem
         {
             Close();
         }
-        //here
         private void clearB_Click(object sender, EventArgs e)
         {
             plateNumberCB.Text = "";
@@ -145,5 +142,4 @@ namespace VehicleMonitoringSystem
         }
         #endregion
     }
-    //end
 }
