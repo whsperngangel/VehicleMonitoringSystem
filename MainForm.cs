@@ -94,7 +94,6 @@ namespace VehicleMonitoringSystem
         }
         #endregion
 
-        #region UI Methods
         #region Populate ListViews
         public void ListViewLoad()
         {
@@ -124,7 +123,6 @@ namespace VehicleMonitoringSystem
                 plateNumberCB.Items.Add(v.PlateNumber);
             }
         }
-        //dito
         private void MaintenanceListLoad(string plateNumber)
         {
             maintenanceLV.Items.Clear();
@@ -143,7 +141,6 @@ namespace VehicleMonitoringSystem
                 maintenanceLV.Items.Add(maintenanceList);
             }
         }
-        //doon
         public void LoadRegistration(string plateNumber)
         {
             _registrations = _registration.RetrieveRegistrationList(plateNumber);
@@ -199,7 +196,6 @@ namespace VehicleMonitoringSystem
                 insuranceLV.Items.Add(searchInsurance);
             }
         }
-        //dito
         public void LoadRepair(string plateNumber)
         {
             _repairs = _repair.RetrieveRepairList(plateNumber);
@@ -226,7 +222,6 @@ namespace VehicleMonitoringSystem
             }
 
         }
-        //doon
         public void Loadfuel(string plateNumber)
         {
             _fuels = _fuel.RetrieveFuelList(plateNumber);
@@ -252,7 +247,6 @@ namespace VehicleMonitoringSystem
                 fuelLV.Items.Add(searchfuel);
             }
         }
-        //dito
         public void LoadALLStatement()
         {
             _statements = _statement.RetrieveStatementList(_conditionString1);
@@ -278,53 +272,53 @@ namespace VehicleMonitoringSystem
 
             }
         }
-        //public void LoadRepairStatement()
-        //{
-        //    _statements = _statement.RetrieveRepairStatement(_conditionString1);
-        //    _totalRepair = 0;
-        //    foreach (Statement statement in _statements)
-        //    {
-        //        _supplierID = statement.SupplierID;
-        //        _repairID = statement.ID;
-        //        _invoiceNumber = statement.InvoiceNumber;
-        //        _type = statement.Type;
-        //        _repairAmount = statement.AmountDue;
-        //        _totalRepair += statement.AmountDue;
+        /*public void LoadRepairStatement()
+        {
+            _statements = _statement.RetrieveRepairStatement(_conditionString1);
+            _totalRepair = 0;
+            foreach (Statement statement in _statements)
+            {
+                _supplierID = statement.SupplierID;
+                _repairID = statement.ID;
+                _invoiceNumber = statement.InvoiceNumber;
+                _type = statement.Type;
+                _repairAmount = statement.AmountDue;
+                _totalRepair += statement.AmountDue;
 
-        //        ListViewItem searchStatement = new ListViewItem(_supplierID.ToString());
-        //        searchStatement.SubItems.Add(_repairID.ToString());
-        //        searchStatement.SubItems.Add(_invoiceNumber);
-        //        searchStatement.SubItems.Add(_type);
-        //        searchStatement.SubItems.Add(_repairAmount.ToString("N2"));
+                ListViewItem searchStatement = new ListViewItem(_supplierID.ToString());
+                searchStatement.SubItems.Add(_repairID.ToString());
+                searchStatement.SubItems.Add(_invoiceNumber);
+                searchStatement.SubItems.Add(_type);
+                searchStatement.SubItems.Add(_repairAmount.ToString("N2"));
 
-        //        statementLV.Items.Add(searchStatement);
-        //    }
-        //}
-        //public void LoadRepairDetailStatement()
-        //{
-        //    _statements = _statement.RetrieveRepairDetailStatement(_conditionString1);
-        //    _totalPart = 0;
-        //    foreach (Statement statement in _statements)
-        //    {
-        //        _supplierID = statement.SupplierID;
-        //        _partID = statement.ID;
-        //        _invoiceNumber = statement.InvoiceNumber;
-        //        _type = statement.Type;
-        //        _repairAmount = statement.AmountDue;
-        //        _totalPart += statement.AmountDue;
+                statementLV.Items.Add(searchStatement);
+            }
+        }
+        public void LoadRepairDetailStatement()
+        {
+            _statements = _statement.RetrieveRepairDetailStatement(_conditionString1);
+            _totalPart = 0;
+            foreach (Statement statement in _statements)
+            {
+                _supplierID = statement.SupplierID;
+                _partID = statement.ID;
+                _invoiceNumber = statement.InvoiceNumber;
+                _type = statement.Type;
+                _repairAmount = statement.AmountDue;
+                _totalPart += statement.AmountDue;
 
-        //        ListViewItem searchStatement = new ListViewItem(_supplierID.ToString());
-        //        searchStatement.SubItems.Add(_partID.ToString());
-        //        searchStatement.SubItems.Add(_invoiceNumber);
-        //        searchStatement.SubItems.Add(_type);
-        //        searchStatement.SubItems.Add(_repairAmount.ToString("N2"));
+                ListViewItem searchStatement = new ListViewItem(_supplierID.ToString());
+                searchStatement.SubItems.Add(_partID.ToString());
+                searchStatement.SubItems.Add(_invoiceNumber);
+                searchStatement.SubItems.Add(_type);
+                searchStatement.SubItems.Add(_repairAmount.ToString("N2"));
 
-        //        statementLV.Items.Add(searchStatement);
-        //    }
-        //}
-        //doon
+                statementLV.Items.Add(searchStatement);
+            }
+        }*/
         #endregion
-        //dito
+
+        #region Other Methods
         private void ShowData(string plateNumber)
         {
             LoadRegistration(plateNumber);
@@ -394,6 +388,7 @@ namespace VehicleMonitoringSystem
         }
         #endregion
 
+        #region Selected Index Changed
         private void SupplierSortCB_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (supplierSortCB.SelectedIndex > -1)
@@ -486,12 +481,34 @@ namespace VehicleMonitoringSystem
                 }
             }
         }
-        #region Tool Strip Menu
-       /* private void reportsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void vehicleListLV_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ReportsForm reportsForm = new ReportsForm();
-            reportsForm.Show();
-        }*/
+            if (vehicleListLV.SelectedItems.Count > 0)
+            {
+                _plateNumber = vehicleListLV.SelectedItems[0].Text;
+                ShowData(_plateNumber);
+            }
+        }
+        private void maintenanceLV_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (maintenanceLV.SelectedItems.Count > 0)
+            {
+                _maintenanceID = int.Parse(maintenanceLV.SelectedItems[0].Text);
+                _maintenance.RetrieveMaintenanceInfo(_maintenanceID);
+
+                plateNumberCB.Text = _plateNumber;
+                partCB.Text = _part.RetrievePartInfo(_maintenance.PartID).Description;
+                statusCB.Text = _maintenance.Status;
+            }
+        }
+        #endregion
+
+        #region Tool Strip Menu
+        /* private void reportsToolStripMenuItem_Click(object sender, EventArgs e)
+         {
+             ReportsForm reportsForm = new ReportsForm();
+             reportsForm.Show();
+         }*/
         private void newVehicleTSM_Click(object sender, EventArgs e)
         {
             NewVehicleForm newVehicleForm = new NewVehicleForm(this);
@@ -571,14 +588,12 @@ namespace VehicleMonitoringSystem
                 MaintenanceListLoad(_plateNumber);
             }
         }
-
         private void sortClearB_Click(object sender, EventArgs e)
         {
             supplierSortCB.SelectedIndex = -1;
             LoadALLStatement();
             Compute();
         }
-
         private void editInsuranceTSM_Click(object sender, EventArgs e)
         {
             if (insuranceEditB.Text == "Edit")
@@ -615,12 +630,10 @@ namespace VehicleMonitoringSystem
                 MaintenanceListLoad(_plateNumber);
             }
         }
-
         private void aboutTSM_Click(object sender, EventArgs e)
         {
             MessageBox.Show("DEVELOPERS:\nAlma Anne Angel Salipot\nIvan Roi Lomahan\nLheamour Pasing\n\nTG Home Builders\n© 2020 All Rights Reserved.", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
         private void editFuelTSM_Click(object sender, EventArgs e)
         {
             switch (fuelEditB.Text)
@@ -687,33 +700,11 @@ namespace VehicleMonitoringSystem
                     break;
             }
         }
-        private void vehicleListLV_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (vehicleListLV.SelectedItems.Count > 0)
-            {
-                _plateNumber = vehicleListLV.SelectedItems[0].Text;
-                ShowData(_plateNumber);
-            }
-        }
-        private void maintenanceLV_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (maintenanceLV.SelectedItems.Count > 0)
-            {
-                _maintenanceID = int.Parse(maintenanceLV.SelectedItems[0].Text);
-                _maintenance.RetrieveMaintenanceInfo(_maintenanceID);
-
-                plateNumberCB.Text = _plateNumber;
-                partCB.Text = _part.RetrievePartInfo(_maintenance.PartID).Description;
-                statusCB.Text = _maintenance.Status;
-            }
-        }
-
         private void MaintenanceTSM_Click(object sender, EventArgs e)
         {
             NewMaintenanceForm newMaintenanceForm = new NewMaintenanceForm();
             newMaintenanceForm.ShowDialog();
         }
-        //dito
         private void viewRepairDetailB_Click(object sender, EventArgs e)
         {
             RepairDetailsForm repairDetailsForm = new RepairDetailsForm(this);
@@ -723,7 +714,6 @@ namespace VehicleMonitoringSystem
             repairDetailsForm._plateNumber = _getPlateNumber;
             repairDetailsForm.ShowDialog();
         }
-        //doon
         private void PaymentTSM_Click(object sender, EventArgs e)
         {
             NewPaymentForm newPaymentForm = new NewPaymentForm();
@@ -746,7 +736,6 @@ namespace VehicleMonitoringSystem
         }
         #endregion
 
-        #region Other Methods
         #region Edit Cancel Clear
         //HERE all contents of load()
         private void editB_Click(object sender, EventArgs e)
@@ -1167,7 +1156,7 @@ namespace VehicleMonitoringSystem
             repairCancelB.Visible = false;
             repairClearB.Visible = false;
         }
-        //here
+
         private void ClearMaintenance()
         {
             plateNumberCB.Text = "";
@@ -1181,15 +1170,12 @@ namespace VehicleMonitoringSystem
             maintenanceCancelB.Visible = true;
 
         }
-        
         private void DisableMaintenance()
         {
             partCB.Enabled = false;
             statusCB.Enabled = false;
             maintenanceCancelB.Visible = false;
         }
-        //end
-        #endregion
         #endregion
     }
 }
