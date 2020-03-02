@@ -44,6 +44,7 @@ namespace VehicleMonitoringSystem
 
         private List<Maintenance> _maintenances = new List<Maintenance>();
 
+
         #endregion
 
         #region Constructors
@@ -53,10 +54,10 @@ namespace VehicleMonitoringSystem
             ComboBoxLoad();
             repairID = _repair.CreateRepairID();
         }
+
         #endregion
 
         #region Repair Method
-        //ate dito
         private void plateNumberCB_SelectedIndexChanged(object sender, EventArgs e)
         {
             plateNumber = plateNumberCB.Text.Trim();
@@ -96,7 +97,44 @@ namespace VehicleMonitoringSystem
             }
 
         }
-        //anne dito
+
+        private void partAmountTB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+            (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+        private void repairAmountTB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+            (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void repairAmountTB_Click(object sender, EventArgs e)
+        {
+            repairAmountTB.Text = "";
+        }
+        private void partAmountTB_Click(object sender, EventArgs e)
+        {
+            partAmountTB.Text = "";
+        }
+        #endregion
+
+        #region Others
         private void ComboBoxLoad()
         {
             _maintenances = _maintenance.RetrieveMaintenanceUniquePlateNumber();
@@ -113,22 +151,6 @@ namespace VehicleMonitoringSystem
                 repairSupplierCB.Items.Add(s.SupplierName);
             }
         }
-
-        private void AddB_Click(object sender, EventArgs e)
-        {
-            DisableRepair();
-            _repairDetail = new RepairDetail(repairID, partID, purchasedDate, partAmount, partInvoiceNumber, partSupplierID);
-            AddItem();
-
-            partCB.Focus();
-            if (addB.Text == "Update")
-            {
-                addB.Text = "Add";
-            }
-        }
-       
-        #region Buttons
-        
         private void AddItem()
         {
             ListViewItem partLVI = new ListViewItem();
@@ -154,7 +176,39 @@ namespace VehicleMonitoringSystem
 
             this.Clear();
         }
-        //ate pati po ung UI
+        private void Clear()
+        {
+            partCB.Text = "";
+            partAmountTB.Text = "";
+        }
+        private void DisableRepair()
+        {
+            plateNumberCB.Enabled = false;
+            repairSupplierCB.Enabled = false;
+            repairDateDTP.Enabled = false;
+            repairInvoiceNumberTB.Enabled = false;
+            repairAmountTB.Enabled = false;
+            typeOfRepairCB.Enabled = false;
+            partSupplierCB.Enabled = false;
+            partDateDTP.Enabled = false;
+            partInvoiceNumberTB.Enabled = false;
+
+        }
+        #endregion
+
+        #region Buttons
+        private void AddB_Click(object sender, EventArgs e)
+        {
+            DisableRepair();
+            _repairDetail = new RepairDetail(repairID, partID, purchasedDate, partAmount, partInvoiceNumber, partSupplierID);
+            AddItem();
+
+            partCB.Focus();
+            if (addB.Text == "Update")
+            {
+                addB.Text = "Add";
+            }
+        }
         private void doneB_Click(object sender, EventArgs e)
         {
             //repair
@@ -196,7 +250,6 @@ namespace VehicleMonitoringSystem
         }
         private void payB_Click(object sender, EventArgs e)
         {
-            //repair
             repairSupplierID = _supplier.RetrieveSupplierID(repairSupplierCB.Text);
             repairDate = repairDateDTP.Value;
             repairInvoiceNumber = repairInvoiceNumberTB.Text;
@@ -209,7 +262,6 @@ namespace VehicleMonitoringSystem
                 {
                     _repairDetail.InsertRepairDetail(repairDetail);
                 }
-                //repair
                 plateNumber = plateNumberCB.Text.Trim();
                 repairDate = repairDateDTP.Value;
                 typeOfRepair = typeOfRepairCB.Text.Trim();
@@ -235,32 +287,10 @@ namespace VehicleMonitoringSystem
             NewPaymentForm newPaymentForm = new NewPaymentForm();
             newPaymentForm.ShowDialog();
         }
-        //anne =)
         private void cancelB_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
-        private void Clear()
-        {
-            //part
-            partCB.Text = "";
-            partAmountTB.Text = "";
-        }
-        private void DisableRepair()
-        {
-            plateNumberCB.Enabled = false;
-            repairSupplierCB.Enabled = false;
-            repairDateDTP.Enabled = false;
-            repairInvoiceNumberTB.Enabled = false;
-            repairAmountTB.Enabled = false;
-            typeOfRepairCB.Enabled = false;
-            partSupplierCB.Enabled = false;
-            partDateDTP.Enabled = false;
-            partInvoiceNumberTB.Enabled = false; //HERE
-
-        }
-        #endregion
         #endregion
     }
 }
