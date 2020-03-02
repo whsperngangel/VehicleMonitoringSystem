@@ -113,7 +113,7 @@ namespace VehicleMonitoringSystem
             this.saveB.Location = new System.Drawing.Point(369, 320);
             this.saveB.Name = "saveB";
             this.saveB.Size = new System.Drawing.Size(75, 27);
-            this.saveB.TabIndex = 6;
+            this.saveB.TabIndex = 7;
             this.saveB.Text = "Save";
             this.saveB.UseVisualStyleBackColor = true;
             this.saveB.Click += new System.EventHandler(this.saveB_Click);
@@ -124,7 +124,7 @@ namespace VehicleMonitoringSystem
             this.clearB.Location = new System.Drawing.Point(531, 320);
             this.clearB.Name = "clearB";
             this.clearB.Size = new System.Drawing.Size(75, 27);
-            this.clearB.TabIndex = 7;
+            this.clearB.TabIndex = 9;
             this.clearB.Text = "Clear";
             this.clearB.UseVisualStyleBackColor = true;
             this.clearB.Click += new System.EventHandler(this.clearB_Click);
@@ -156,7 +156,7 @@ namespace VehicleMonitoringSystem
             this.paidByCB.Location = new System.Drawing.Point(144, 276);
             this.paidByCB.Name = "paidByCB";
             this.paidByCB.Size = new System.Drawing.Size(462, 28);
-            this.paidByCB.TabIndex = 3;
+            this.paidByCB.TabIndex = 6;
             // 
             // label5
             // 
@@ -173,7 +173,7 @@ namespace VehicleMonitoringSystem
             this.balanceTB.Location = new System.Drawing.Point(144, 152);
             this.balanceTB.Name = "balanceTB";
             this.balanceTB.Size = new System.Drawing.Size(462, 26);
-            this.balanceTB.TabIndex = 5;
+            this.balanceTB.TabIndex = 3;
             this.balanceTB.Text = "PHP 0.00";
             this.balanceTB.Click += new System.EventHandler(this.balanceTB_Click);
             this.balanceTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.balanceTB_KeyPress);
@@ -197,7 +197,7 @@ namespace VehicleMonitoringSystem
             this.invoiceNumberCB.Name = "invoiceNumberCB";
             this.invoiceNumberCB.Size = new System.Drawing.Size(462, 28);
             this.invoiceNumberCB.Sorted = true;
-            this.invoiceNumberCB.TabIndex = 10;
+            this.invoiceNumberCB.TabIndex = 2;
             // 
             // typeCB
             // 
@@ -212,7 +212,7 @@ namespace VehicleMonitoringSystem
             this.typeCB.Name = "typeCB";
             this.typeCB.Size = new System.Drawing.Size(462, 28);
             this.typeCB.Sorted = true;
-            this.typeCB.TabIndex = 12;
+            this.typeCB.TabIndex = 1;
             // 
             // label7
             // 
