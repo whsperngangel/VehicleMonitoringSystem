@@ -10,10 +10,10 @@ namespace VehicleMonitoringSystem
 {
     class Maintenance
     {
+        //changed bool to string status
         #region Variable
-        public int MaintenanceID;
-        public string PlateNumber; //removed
-        public bool Status = false;
+        public int MaintenanceID, SupplierID;
+        public string PlateNumber, Status; //removed
         public int PartID;
 
         DBOperation _dbOp = new DBOperation();
@@ -21,7 +21,7 @@ namespace VehicleMonitoringSystem
 
         #region Constructor
         public Maintenance() { }
-        public Maintenance(int maintenanceID, string plateNumber, int partID, bool status) //added
+        public Maintenance(int maintenanceID, string plateNumber, int partID, string status) //added
         {
             MaintenanceID = maintenanceID;
             PlateNumber = plateNumber;
@@ -77,7 +77,7 @@ namespace VehicleMonitoringSystem
                     MaintenanceID = (int)reader.GetValue(0);
                     PlateNumber = (string)reader.GetValue(1);
                     PartID = (int)reader.GetValue(2);
-                    Status = (bool)reader.GetValue(3);
+                    Status = (string)reader.GetValue(3);
 
                     _maintenance = new Maintenance(MaintenanceID, PlateNumber, PartID, Status);
                 }
@@ -91,7 +91,7 @@ namespace VehicleMonitoringSystem
             }
             return _maintenance;
         }
-        public List<Maintenance> RetrieveMaintenanceList()
+        public List<Maintenance> RetrieveMaintenanceUniquePlateNumber()
         {
             List<Maintenance> _maintenances = new List<Maintenance>();
             
@@ -99,7 +99,7 @@ namespace VehicleMonitoringSystem
             {
                 _dbOp.DBConnect();
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
-                cmd.CommandText = "SELECT * FROM Maintenance";
+                cmd.CommandText = "SELECT * FROM Maintenance " + "GROUP BY PlateNumber";
                 MySqlDataReader reader = cmd.ExecuteReader();
                 Maintenance _maintenance = new Maintenance();
                 while (reader.Read())
@@ -107,7 +107,7 @@ namespace VehicleMonitoringSystem
                     MaintenanceID = (int)reader.GetValue(0);
                     PlateNumber = (string)reader.GetValue(1);
                     PartID = (int)reader.GetValue(2);
-                    Status = (bool)reader.GetValue(3);
+                    Status = (string)reader.GetValue(3);
 
                     _maintenance = new Maintenance(MaintenanceID, PlateNumber, PartID, Status);
                     _maintenances.Add(_maintenance);
@@ -129,7 +129,7 @@ namespace VehicleMonitoringSystem
             {
                 _dbOp.DBConnect();
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
-                cmd.CommandText = "SELECT * FROM Maintenance " + "WHERE PlateNumber = @PlateNumber";
+                cmd.CommandText = "SELECT * FROM Maintenance " + "WHERE PlateNumber = @PlateNumber AND Status != 'Replaced' AND Status != 'Repaired' ";
                 cmd.Parameters.AddWithValue("@PlateNumber", plateNumber);
                 MySqlDataReader reader = cmd.ExecuteReader();
                 Maintenance temp = new Maintenance();
@@ -139,7 +139,7 @@ namespace VehicleMonitoringSystem
                     MaintenanceID = (int)reader.GetValue(0);
                     PlateNumber = (string)reader.GetValue(1);
                     PartID = (int)reader.GetValue(2);
-                    Status = (bool)reader.GetValue(3);
+                    Status = (string)reader.GetValue(3);
 
                     temp = new Maintenance(MaintenanceID, PlateNumber, PartID, Status);
                     maintenancePartList.Add(temp);
@@ -154,6 +154,7 @@ namespace VehicleMonitoringSystem
             }
             return maintenancePartList;
         }
+        //ate
         public int RetrieveMaintenanceID(string plateNumber, int partID)
         {
             try
@@ -172,7 +173,7 @@ namespace VehicleMonitoringSystem
                     MaintenanceID = (int)reader.GetValue(0);
                     PlateNumber = (string)reader.GetValue(1);
                     PartID = (int)reader.GetValue(2);
-                    Status = (bool)reader.GetValue(3);
+                    Status = (string)reader.GetValue(3);
 
                     _maintenance = new Maintenance(MaintenanceID, PlateNumber, PartID, Status);
                 }
@@ -184,26 +185,9 @@ namespace VehicleMonitoringSystem
             {
                 MessageBox.Show(ex.ToString());
             }
-            return PartID;
-        }
-        public void UpdateMaintenanceStatus(bool status)
-        {
-            try
-            {
-                _dbOp.DBConnect();
-                MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
-
-                cmd.CommandText = @"UPDATE Maintenance SET Status = @Status" + " WHERE MaintenanceID = @MaintenanceID";
-                cmd.Parameters.AddWithValue("@Status", status);
-
-                cmd.ExecuteNonQuery();
-                _dbOp.DBClose();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
+            return MaintenanceID;
+        } 
+        
         public void UpdateMaintenanceInfo(Maintenance maintenance)
         {
             try
@@ -211,10 +195,11 @@ namespace VehicleMonitoringSystem
                 _dbOp.DBConnect();
                 MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
 
-                cmd.CommandText = @"UPDATE Maintenance SET MaintenanceID = @MaintenanceID,PlateNumber = @PlateNumber, PartID = @PartID" + " WHERE MaintenanceID = @MaintenanceID";
+                cmd.CommandText = @"UPDATE Maintenance SET MaintenanceID = @MaintenanceID,PlateNumber = @PlateNumber, PartID = @PartID, Status = @Status " + "WHERE MaintenanceID = @MaintenanceID";
                 cmd.Parameters.AddWithValue("@MaintenanceID", maintenance.MaintenanceID);
                 cmd.Parameters.AddWithValue("@PlateNumber", maintenance.PlateNumber);
                 cmd.Parameters.AddWithValue("@PartID", maintenance.PartID);
+                cmd.Parameters.AddWithValue("@Status", maintenance.Status);
 
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Maintenance Record has been updated!");
@@ -225,12 +210,12 @@ namespace VehicleMonitoringSystem
                 MessageBox.Show(ex.ToString());
             }
         }
+        //anne
         public int CreateMaintenanceID()
         {
             PartID = CountMaintenance();
             return PartID;
         }
-
         public int CountMaintenance()
         {
             int count = 1;
