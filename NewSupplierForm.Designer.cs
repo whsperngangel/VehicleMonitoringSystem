@@ -48,14 +48,14 @@ namespace VehicleMonitoringSystem
             this.supplierTB.Location = new System.Drawing.Point(89, 22);
             this.supplierTB.Name = "supplierTB";
             this.supplierTB.Size = new System.Drawing.Size(284, 26);
-            this.supplierTB.TabIndex = 1;
+            this.supplierTB.TabIndex = 0;
             // 
             // saveB
             // 
             this.saveB.Location = new System.Drawing.Point(289, 64);
             this.saveB.Name = "saveB";
             this.saveB.Size = new System.Drawing.Size(84, 37);
-            this.saveB.TabIndex = 3;
+            this.saveB.TabIndex = 1;
             this.saveB.Text = "Save";
             this.saveB.UseVisualStyleBackColor = true;
             this.saveB.Click += new System.EventHandler(this.SaveB_Click);
