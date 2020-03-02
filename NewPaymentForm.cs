@@ -1,386 +1,194 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 
 namespace VehicleMonitoringSystem
 {
-    class Payment
+    public partial class NewPaymentForm : Form
     {
         #region Variables
-        public int PaymentID, StatementID;
+        private int supplierID,
+                    paymentID,
+                    statementID, ID;
+        private string supplierName,
+                       invoiceNumber,
+                       datePaid,
+                       paidBy,
+                       amountPaid, type;
+        private double balance; 
 
-        public string DatePaid,
-                      AmountPaid,
-                      PaidBy;
-
-        DBOperation _dbOp = new DBOperation();
+        private Supplier _supplier = new Supplier();
+        private Part _part = new Part();
+        private Payment _payment = new Payment();
+        private Maintenance _maintenance = new Maintenance();
+        List<Supplier> _suppliers = new List<Supplier>();
+        List<Payment> _payments = new List<Payment>();
+        List<Maintenance> _maintenances = new List<Maintenance>();
+        List<Part> _parts = new List<Part>();
         #endregion
-
 
         #region Constructors
-        public Payment(){ }
-        //public Payment(int id, string inv, int sid) 
-        //{
-        //    ID = id;
-        //    InvoiceNumber = inv;
-        //    SupplierID = sid;
-        //}
-        //public Payment(string invoice)
-        //{
-        //    InvoiceNumber = invoice;
-        //}
-        //public Payment(int id)
-        //{
-        //    SupplierID = id;
-        //}
-
-        public Payment (int paymentID,
-                         int statementID,
-                         string datePaid,
-                         string amountPaid,
-                         string paidBy)
+        public NewPaymentForm()
         {
-            PaymentID = paymentID;
-            StatementID = statementID;
-            DatePaid = datePaid;
-            AmountPaid = amountPaid;
-            PaidBy = paidBy;
+            InitializeComponent();
+            ComboBoxLoad();
         }
         #endregion
 
-
         #region Payment Methods
-        public void InsertPayment(Payment Payment)
-        {
-            try
-            {
-                _dbOp.DBConnect();
-                MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
-
-                cmd.CommandText = @"INSERT INTO Payment(PaymentID, StatementID, DatePaid, AmountPaid, PaidBy)
-                                                  VALUE(@PaymentID, @StatementID, @InvoiceNumber, @DatePaid, @AmountPaid, @PaidBy)";
-
-                cmd.Parameters.AddWithValue("@PaymentID", Payment.PaymentID);
-                cmd.Parameters.AddWithValue("@StatementID", Payment.StatementID);
-                cmd.Parameters.AddWithValue("@DatePaid", Payment.DatePaid);
-                cmd.Parameters.AddWithValue("@AmountPaid", Payment.AmountPaid);
-                cmd.Parameters.AddWithValue("@PaidBy", Payment.PaidBy);
-
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("New Payment Record has been saved!");
-                _dbOp.DBClose();
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-        public Payment RetrievePaymentInfo(int paymentID)
-        {
-            Payment temp = new Payment();
-
-            try
-            {
-                _dbOp.DBConnect();
-                MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
-                cmd.CommandText = @"SELECT * FROM Payment " + "WHERE PaymentID = @PaymentID";
-                cmd.Parameters.AddWithValue("@PaymentID", paymentID);
-                MySqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    PaymentID = (int)reader.GetValue(0);
-                    StatementID = (int)reader.GetValue(1);
-                    DatePaid = (string)reader.GetValue(2);
-                    AmountPaid = (string)reader.GetValue(3);
-                    PaidBy = (string)reader.GetValue(4);
-
-                    temp = new Payment(PaymentID, StatementID, DatePaid, AmountPaid, PaidBy);
-                }
-                reader.Close();
-                _dbOp.DBClose();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            return temp;
-        }
-        //public List<Payment> RetrievePaymentSupplierList()
+        #region Selected Index
+        //private void supplierCB_SelectedIndexChanged(object sender, EventArgs e)
         //{
-        //    List<Payment> paymentSuppliers = new List<Payment>();
-        //    try
-        //    {
-        //        _dbOp.DBConnect();
-        //        MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
-        //        cmd.CommandText = "SELECT FuelID, SupplierID, InvoiceNumber FROM fuel " + "WHERE paid = false " + "UNION SELECT RepairID, SupplierID, InvoiceNumber FROM repair " + "WHERE paid = false " + "UNION SELECT PartID, SupplierID, InvoiceNumber FROM repairdetail " + "WHERE paid = false " + "GROUP BY SupplierID";
-        //        MySqlDataReader reader = cmd.ExecuteReader();
-        //        Payment temp = new Payment();
+        //    supplierName = supplierCB.Text.Trim();
+        //    supplierID = _supplier.RetrieveSupplierID(supplierName);
+        //    invoiceNumberCB.Items.Clear();
 
-        //        while (reader.Read())
-        //        {
-        //            ID = (int)reader.GetValue(0);
-        //            SupplierID = (int)reader.GetValue(1);
-
-        //            temp = new Payment(ID, SupplierID, InvoiceNumber);
-        //            paymentSuppliers.Add(temp);
-        //        }
-        //        reader.Close();
-        //        _dbOp.DBClose();
-        //    }
-        //    catch (Exception ex)
+        //    _payments = _payment.RetrievePaymentInvoiceNumber(supplierID);
+        //    foreach (Payment p in _payments)
         //    {
-        //        MessageBox.Show(ex.ToString());
+        //        invoiceNumberCB.Items.Add(p.InvoiceNumber);
         //    }
-        //    return paymentSuppliers;
         //}
-        //public List<Payment> RetrieveAllTypeList(string type)
+
+        //private void typeCB_SelectedIndexChanged(object sender, EventArgs e)
         //{
-        //    List<Payment> typeData = new List<Payment>();
-        //    try
+        //    type = typeCB.Text.Trim();
+        //    supplierCB.Items.Clear();
+        //    invoiceNumberCB.Items.Clear();
+        //    EnablePayment();
+        //    if(type == "Part")
         //    {
-        //        _dbOp.DBConnect();
-        //        MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
-        //        if ()
-        //        {
-
-        //        }
-        //        cmd.CommandText = @"SELECT * FROM @Type";
-        //        cmd.Parameters.AddWithValue("@Type", type);
-        //        MySqlDataReader reader = cmd.ExecuteReader();
-        //        Payment temp = new Payment();
-
-        //        while (reader.Read())
-        //        {
-        //            ID = (int)reader.GetValue(0);
-        //            InvoiceNumber = (string)reader.GetValue(4);
-        //            SupplierID = (int)reader.GetValue(5);
-
-        //            temp = new Payment(PaymentID, InvoiceNumber, SupplierID);
-        //            typeData.Add(temp);
-        //        }
-        //        reader.Close();
-        //        _dbOp.DBClose();
+        //        type = "repairdetail";
         //    }
-        //    catch (Exception ex)
+        //    _payments = _payment.RetrieveAllTypeList(type);
+
+        //    foreach (Payment p in _payments)
         //    {
-        //        MessageBox.Show(ex.ToString());
-        //    }
-        //    return typeData;
-        //}
-        //public Payment RetrievePaymentUpdateStatus(int supplierID, string invoiceNumber)
-        //{
-        //    Payment temp = new Payment();
-        //    try
-        //    {
-        //        _dbOp.DBConnect();
-        //        MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
-        //        cmd.CommandText = @"SELECT FuelID FROM fuel " + "WHERE SupplierID = @SupplierID AND InvoiceNumber = @InvoiceNumber";
-        //        cmd.Parameters.AddWithValue("@SupplierID", supplierID);
-        //        cmd.Parameters.AddWithValue("@InvoiceNumber", invoiceNumber);
-        //        MySqlDataReader reader = cmd.ExecuteReader();
-
-        //        if (reader.Read())
+        //        _payments = _payment.RetireveSupplierIDList(type);
+        //        foreach (Payment sid in _payments)
         //        {
-        //            ID = (int)reader.GetValue(0);
-        //            Type = "fuel";
-
-        //            temp = new Payment(ID, Type);
-        //        }
-        //        else
-        //        {
-        //            cmd.CommandText = @"SELECT RepairID FROM repair " + "WHERE SupplierID = @SID AND InvoiceNumber = @INV";
-        //            cmd.Parameters.AddWithValue("@SID", supplierID);
-        //            cmd.Parameters.AddWithValue("@INV", invoiceNumber);
-        //        }
-        //        if (reader.Read())
-        //        {
-        //            ID = (int)reader.GetValue(0);
-        //            Type = "repair";
-
-        //            temp = new Payment(ID, Type);
-        //        }
-        //        else 
-        //        { 
-        //            cmd.CommandText = @"SELECT RepairID FROM repairdetail " + "WHERE SupplierID = @SUP AND InvoiceNumber = @INUM";
-        //            cmd.Parameters.AddWithValue("@SUP", supplierID);
-        //            cmd.Parameters.AddWithValue("@INUM", invoiceNumber);
-
-        //            if (reader.Read())
+        //            supplierCB.Items.Add(sid.SupplierID);
+        //            _payments = _payment.RetrievePaymentInvoiceNumber(sid.SupplierID);
+        //            foreach (Payment inid in _payments)
         //            {
-        //                ID = (int)reader.GetValue(0);
-        //                Type = "repairdetail";
-
-        //                temp = new Payment(ID, Type);
+        //                invoiceNumberCB.Items.Add(inid.SupplierID);
         //            }
         //        }
-        //        reader.Close();
-        //        _dbOp.DBClose();
+
         //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.ToString());
-        //    }
-        //    return temp;
         //}
-        public List<Payment> RetrievePaymentList()
+        #endregion
+
+        private void amountPaidTB_Click(object sender, EventArgs e)
         {
-            List<Payment> paymentList = new List<Payment>();
+            amountPaidTB.Text = "";
+        }
+        private void ComboBoxLoad()
+        {
+            //_payments = _payment.RetrievePaymentSupplierList();
+            //foreach (Payment p in _payments)
+            //{
+            //    supplierCB.Items.Add(_supplier.RetrieveSupplierInfo(p.SupplierID).SupplierName);
+            //}
+
+            _payments = _payment.RetrievePaymentList();
+            foreach (Payment p in _payments)
+            {
+                paidByCB.Items.Add(p.PaidBy);
+            }
+        }
+
+        private void balanceTB_Click(object sender, EventArgs e)
+        {
+            balanceTB.Text = "";
+        }
+
+        private void saveB_Click(object sender, EventArgs e)
+        {
             try
             {
-                _dbOp.DBConnect();
-                MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
-                cmd.CommandText = "SELECT * FROM Payment";
-                MySqlDataReader reader = cmd.ExecuteReader();
-                Payment temp = new Payment();
+                supplierName = supplierCB.Text.Trim();
+                invoiceNumber = invoiceNumberCB.Text.Trim();
+                datePaid = datePaidDTP.Value.ToString();
+                amountPaid = amountPaidTB.Text.Trim();
+                paidBy = paidByCB.Text.Trim();
 
-                while (reader.Read())
-                {
-                    PaymentID = (int)reader.GetValue(0);
-                    StatementID = (int)reader.GetValue(1);
-                    DatePaid = (string)reader.GetValue(2);
-                    AmountPaid = (string)reader.GetValue(3);
-                    PaidBy = (string)reader.GetValue(4);
+                //_payment = new Payment(paymentID, _supplier.RetrieveSupplierID(supplierName), invoiceNumber, datePaid, amountPaid, paidBy);
+                //_payment.InsertPayment(_payment);
 
-                    temp = new Payment(PaymentID, StatementID, DatePaid, AmountPaid, PaidBy);
-                    paymentList.Add(temp);
-                }
-                reader.Close();
-                _dbOp.DBClose();
+                //ID = _payment.RetrievePaymentUpdateStatus(_supplier.RetrieveSupplierID(supplierName), invoiceNumber).ID;
+                //type = _payment.RetrievePaymentUpdateStatus(_supplier.RetrieveSupplierID(supplierName), invoiceNumber).Type;
+
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
-            return paymentList;
+            this.Close();
         }
-        //public List<Payment> RetireveSupplierIDList(string type)
-        //{
-        //    List<Payment> supplierIDList = new List<Payment>();
-        //    try
-        //    {
-        //        _dbOp.DBConnect();
-
-        //        MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
-
-        //        cmd.CommandText = @"SELECT SupplierID FROM @Type GROUP BY SupplierID";
-        //        cmd.Parameters.AddWithValue("@Type", type);
-
-
-        //        MySqlDataReader reader = cmd.ExecuteReader();
-
-        //        Payment temp = new Payment();
-
-        //        while (reader.Read())
-        //        {
-        //            SupplierID = (int)reader.GetValue(0);
-
-        //            temp = new Payment(SupplierID);
-        //            supplierIDList.Add(temp);
-        //        }
-        //        reader.Close();
-
-        //        _dbOp.DBClose();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.ToString());
-        //    }
-        //    return supplierIDList;
-        //}
-        //public List<Payment> RetrievePaymentInvoiceNumber(int supplierID)
-        //{
-        //    List<Payment> paymentList = new List<Payment>();
-        //    try
-        //    {
-        //        _dbOp.DBConnect();
-
-        //        MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
-
-        //        cmd.CommandText = "SELECT InvoiceNumber FROM fuel " + "WHERE paid = false " + "UNION SELECT InvoiceNumber FROM repair " + "WHERE paid = false " + "UNION SELECT InvoiceNumber FROM repairdetail " + "WHERE paid = false AND SupplierID = @SupplierID ";
-        //        cmd.Parameters.AddWithValue("@SupplierID", supplierID);
-
-        //        MySqlDataReader reader = cmd.ExecuteReader();
-
-        //        Payment temp = new Payment();
-
-        //        while (reader.Read())
-        //        {
-        //           InvoiceNumber = (string)reader.GetValue(0);
-
-        //            temp = new Payment(InvoiceNumber);
-        //            paymentList.Add(temp);
-        //        }
-        //        reader.Close();
-
-        //        _dbOp.DBClose();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.ToString());
-        //    }
-        //    return paymentList;
-        //}
-        public void UpdatePaymentInfo(Payment Payment)
+        private void clearB_Click(object sender, EventArgs e)
         {
-            try
+            supplierCB.Text = "";
+            balanceTB.Text = "P 0.00";
+            datePaidDTP.Value = DateTime.Now;
+            amountPaidTB.Text = "P 0.00";
+            paidByCB.Text = "";
+        }
+        private void cancelB_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void supplierCB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+        private void balanceTB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
             {
-                _dbOp.DBConnect();
-                MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
-
-                cmd.CommandText = @"UPDATE Payment SET PaymentID = @PaymentID,  
-                                                       StatementID = @StatementID,
-                                                       DatePaid = @DatePaid, 
-                                                       AmountPaid = @AmountPaid
-                                                       PaidBy = @PaidBy";
-
-                cmd.Parameters.AddWithValue("@PaymentID", Payment.PaymentID);
-                cmd.Parameters.AddWithValue("@StatementID", Payment.StatementID);
-                cmd.Parameters.AddWithValue("@DatePaid", Payment.DatePaid);
-                cmd.Parameters.AddWithValue("@AmountPaid", Payment.AmountPaid);
-                cmd.Parameters.AddWithValue("@PaidBy", Payment.PaidBy);
-
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Payment Record has been updated!");
-                _dbOp.DBClose();
+                e.Handled = true;
             }
-            catch (Exception ex)
+
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
             {
-                MessageBox.Show(ex.ToString());
+                e.Handled = true;
+            }
+        }
+        private void amountPaidTB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
             }
         }
 
-        public int CreatePayment()
+        /*private void EnablePayment()
         {
-            PaymentID = CountPayment();
-
-            return PaymentID;
+            supplierCB.Enabled = true;
+            invoiceNumberCB.Enabled = true;
+            datePaidDTP.Enabled = true;
+            amountPaidTB.Enabled = true;
+            saveB.Enabled = true;
+            cancelB.Enabled = true;
+            clearB.Enabled = true;
         }
-
-        public int CountPayment()
+        private void DisablePayment()
         {
-            int count = 1;
-
-            _dbOp.DBConnect();
-
-            MySqlCommand cmd = _dbOp._dbConn.CreateCommand();
-            cmd.CommandText = @"SELECT * FROM Payment";
-
-            MySqlDataReader reader = cmd.ExecuteReader();
-
-            while (reader.Read())
-            {
-                count++;
-            }
-            reader.Close();
-            _dbOp.DBClose();
-
-            return count;
-        }
+            supplierCB.Enabled = true;
+            invoiceNumberCB.Enabled = true;
+            datePaidDTP.Enabled = true;
+            amountPaidTB.Enabled = true;
+            saveB.Enabled = true;
+            cancelB.Enabled = true;
+            clearB.Enabled = true;
+        }*/
         #endregion
     }
 }
