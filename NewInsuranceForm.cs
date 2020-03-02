@@ -32,7 +32,6 @@ namespace VehicleMonitoringSystem
         List<Insurance> _insurances = new List<Insurance>();
         List<Vehicle> _vehicles = new List<Vehicle>();
         #endregion
-
         #region Constructors
         public NewInsuranceForm()
         {
@@ -70,6 +69,22 @@ namespace VehicleMonitoringSystem
             }
         }
 
+        private void amountTB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+            (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+        private void amountTB_Click(object sender, EventArgs e)
+        {
+            amountTB.Text = "";
+        }
 
         private void saveB_Click(object sender, EventArgs e)
         {
@@ -114,10 +129,7 @@ namespace VehicleMonitoringSystem
                                               renewal,
                                               amount);
 
-                    //    _registration = new Registration(platenumber,registeredName);
-
                     _insurance.InsertInsurance(_insurance);
-                    _registration.InsertRegistration(_registration);
                     Close();
                 }
                 catch (Exception ex)
@@ -126,12 +138,10 @@ namespace VehicleMonitoringSystem
                 }
             }
         }
-
         private void cancelB_Click(object sender, EventArgs e)
         {
             Close();
         }
-
         private void clearB_Click(object sender, EventArgs e)
         {
             plateNumber = plateNumberCB.Text = "";
@@ -143,5 +153,10 @@ namespace VehicleMonitoringSystem
             renewal = renewalDTP.Value = DateTime.Now;
         }
         #endregion
+
+
+
+        
+        }
     }
 }
