@@ -260,7 +260,7 @@ namespace VehicleMonitoringSystem
             foreach (Statement statement in _statements)
             {
 
-                _statementID = statement.StatementID;
+             //   _statementID = statement.StatementID;
                 _supplierID = statement.SupplierID;
                 _type = statement.Type;
                 _invoiceNumber = statement.InvoiceNumber;
@@ -487,11 +487,11 @@ namespace VehicleMonitoringSystem
             }
         }
         #region Tool Strip Menu
-        private void reportsToolStripMenuItem_Click(object sender, EventArgs e)
+       /* private void reportsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ReportsForm reportsForm = new ReportsForm();
             reportsForm.Show();
-        }
+        }*/
         private void newVehicleTSM_Click(object sender, EventArgs e)
         {
             NewVehicleForm newVehicleForm = new NewVehicleForm(this);
