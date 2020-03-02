@@ -129,7 +129,7 @@ namespace VehicleMonitoringSystem
             this.registeredNameTB.Location = new System.Drawing.Point(155, 57);
             this.registeredNameTB.Name = "registeredNameTB";
             this.registeredNameTB.Size = new System.Drawing.Size(592, 26);
-            this.registeredNameTB.TabIndex = 7;
+            this.registeredNameTB.TabIndex = 1;
             // 
             // amountTB
             // 
@@ -137,7 +137,7 @@ namespace VehicleMonitoringSystem
             this.amountTB.Location = new System.Drawing.Point(155, 183);
             this.amountTB.Name = "amountTB";
             this.amountTB.Size = new System.Drawing.Size(592, 26);
-            this.amountTB.TabIndex = 11;
+            this.amountTB.TabIndex = 5;
             this.amountTB.Text = "PHP 0.00";
             this.amountTB.Click += new System.EventHandler(this.amountTB_Click);
             this.amountTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.amountTB_KeyPress);
@@ -148,7 +148,7 @@ namespace VehicleMonitoringSystem
             this.durationFromDTP.Location = new System.Drawing.Point(155, 142);
             this.durationFromDTP.Name = "durationFromDTP";
             this.durationFromDTP.Size = new System.Drawing.Size(275, 26);
-            this.durationFromDTP.TabIndex = 12;
+            this.durationFromDTP.TabIndex = 4;
             // 
             // saveB
             // 
@@ -156,7 +156,7 @@ namespace VehicleMonitoringSystem
             this.saveB.Location = new System.Drawing.Point(510, 264);
             this.saveB.Name = "saveB";
             this.saveB.Size = new System.Drawing.Size(75, 29);
-            this.saveB.TabIndex = 13;
+            this.saveB.TabIndex = 8;
             this.saveB.Text = "Save";
             this.saveB.UseVisualStyleBackColor = true;
             this.saveB.Click += new System.EventHandler(this.saveB_Click);
@@ -177,7 +177,7 @@ namespace VehicleMonitoringSystem
             this.clearB.Location = new System.Drawing.Point(672, 264);
             this.clearB.Name = "clearB";
             this.clearB.Size = new System.Drawing.Size(75, 29);
-            this.clearB.TabIndex = 15;
+            this.clearB.TabIndex = 9;
             this.clearB.Text = "Clear";
             this.clearB.UseVisualStyleBackColor = true;
             // 
@@ -188,7 +188,7 @@ namespace VehicleMonitoringSystem
             this.renewalDTP.Location = new System.Drawing.Point(155, 224);
             this.renewalDTP.Name = "renewalDTP";
             this.renewalDTP.Size = new System.Drawing.Size(592, 26);
-            this.renewalDTP.TabIndex = 12;
+            this.renewalDTP.TabIndex = 6;
             // 
             // durationToDTP
             // 
@@ -235,7 +235,7 @@ namespace VehicleMonitoringSystem
             this.plateNumberCB.Location = new System.Drawing.Point(155, 14);
             this.plateNumberCB.Name = "plateNumberCB";
             this.plateNumberCB.Size = new System.Drawing.Size(592, 28);
-            this.plateNumberCB.TabIndex = 12;
+            this.plateNumberCB.TabIndex = 0;
             // 
             // companyCB
             // 
@@ -244,7 +244,7 @@ namespace VehicleMonitoringSystem
             this.companyCB.Location = new System.Drawing.Point(155, 99);
             this.companyCB.Name = "companyCB";
             this.companyCB.Size = new System.Drawing.Size(592, 28);
-            this.companyCB.TabIndex = 12;
+            this.companyCB.TabIndex = 3;
             // 
             // insuranceIDTB
             // 
@@ -283,6 +283,7 @@ namespace VehicleMonitoringSystem
             this.Name = "NewInsuranceForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "New Insurance Form";
+            this.Load += new System.EventHandler(this.NewInsuranceForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
