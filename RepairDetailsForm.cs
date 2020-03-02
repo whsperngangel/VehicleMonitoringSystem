@@ -26,6 +26,7 @@ namespace VehicleMonitoringSystem
         List<Part> _parts = new List<Part>();
         List<Supplier> _Supplier = new List<Supplier>();
         #endregion
+
         #region Constructor
         public RepairDetailsForm()
         {
@@ -43,7 +44,6 @@ namespace VehicleMonitoringSystem
         #endregion
 
         #region Other Method
-        //dito
         public void LoadDetails()
         {
             detailListLV.Items.Clear();
@@ -72,6 +72,19 @@ namespace VehicleMonitoringSystem
             }
             this.Compute();
         }
+        private void ComboBoxLoad()
+        {
+            _Supplier = _supplier.RetrieveSupplierList();
+            foreach (Supplier s in _Supplier)
+            {
+                supplierCB.Items.Add(s.SupplierName);
+            }
+            _parts = _part.RetrievePartList();
+            foreach (Part p in _parts)
+            {
+                partCB.Items.Add(p.Description);
+            }
+        }
         public void LoadStatementRepair(int partID, string invoiceNumber)
         {
             detailListLV.Items.Clear();
@@ -99,7 +112,7 @@ namespace VehicleMonitoringSystem
             }
             this.Compute();
         }
-        //maam 
+
         private void DetailListLV_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (detailListLV.SelectedItems.Count > 0)
@@ -111,21 +124,26 @@ namespace VehicleMonitoringSystem
               //  purchaseDateDTP.Value = Date.Parse(detailListLV.SelectedItems[2].Text);
             }
         }
-        //anne =)
-        private void ComboBoxLoad()
+
+        private void amountTB_KeyPress(object sender, KeyPressEventArgs e)
         {
-            _Supplier = _supplier.RetrieveSupplierList();
-            foreach (Supplier s in _Supplier)
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+            (e.KeyChar != '.'))
             {
-                supplierCB.Items.Add(s.SupplierName);
+                e.Handled = true;
             }
-            _parts = _part.RetrievePartList();
-            foreach (Part p in _parts)
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
             {
-                partCB.Items.Add(p.Description);
+                e.Handled = true;
             }
         }
-        //ate
+        private void amountTB_Click(object sender, EventArgs e)
+        {
+            amountTB.Text = "";
+        }
+        #endregion
+
         #region Edit Cancel Clear
         private void RepairEditB_Click(object sender, EventArgs e)
         {
@@ -154,7 +172,6 @@ namespace VehicleMonitoringSystem
                     break;
             }
         }
-        //anne =)
         private void RepairCancelB_Click(object sender, EventArgs e)
         {
             DisableRepair();
@@ -170,6 +187,7 @@ namespace VehicleMonitoringSystem
             partTotalTB.Text = "P " + _totalAmt.ToString("N2");
         }
         #endregion
+
         #region Enable Disabled Button
         private void DisableRepair()
         {
@@ -192,8 +210,6 @@ namespace VehicleMonitoringSystem
 
             repairCancelB.Visible = true;
         }
-        //doon
-        #endregion
         #endregion
 
 
