@@ -101,11 +101,10 @@ namespace VehicleMonitoringSystem
                     PartID = (int)reader.GetValue(0);
                     Description = (string)reader.GetValue(1);
 
-                    temp = new Part(PartID,Description);
+                    temp = new Part(PartID, Description);
                     partList.Add(temp);
                 }
                 reader.Close();
-
                 _dbOp.DBClose();
             }
             catch (Exception ex)
