@@ -43,7 +43,7 @@ namespace VehicleMonitoringSystem
             this.addPartB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.addPartB.Name = "addPartB";
             this.addPartB.Size = new System.Drawing.Size(112, 35);
-            this.addPartB.TabIndex = 80;
+            this.addPartB.TabIndex = 1;
             this.addPartB.Text = "Add";
             this.addPartB.UseVisualStyleBackColor = true;
             this.addPartB.Click += new System.EventHandler(this.addPartB_Click);
@@ -92,7 +92,7 @@ namespace VehicleMonitoringSystem
             this.partDescriptionTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.partDescriptionTB.Name = "partDescriptionTB";
             this.partDescriptionTB.Size = new System.Drawing.Size(358, 26);
-            this.partDescriptionTB.TabIndex = 66;
+            this.partDescriptionTB.TabIndex = 0;
             // 
             // partIDTB
             // 
