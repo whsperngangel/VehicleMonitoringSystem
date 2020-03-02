@@ -36,9 +36,9 @@ namespace VehicleMonitoringSystem
             this.newRepairTSM = new System.Windows.Forms.ToolStripMenuItem();
             this.newFuelTSM = new System.Windows.Forms.ToolStripMenuItem();
             this.partsForRepairTSM = new System.Windows.Forms.ToolStripMenuItem();
-            this.maintenanceTSM = new System.Windows.Forms.ToolStripMenuItem();
-            this.paymentTSM = new System.Windows.Forms.ToolStripMenuItem();
-            this.supplierTSM = new System.Windows.Forms.ToolStripMenuItem();
+            this.newMaintenanceTSM = new System.Windows.Forms.ToolStripMenuItem();
+            this.newPaymentTSM = new System.Windows.Forms.ToolStripMenuItem();
+            this.newSupplierTSM = new System.Windows.Forms.ToolStripMenuItem();
             this.optionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editInformationTSM = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,7 +54,7 @@ namespace VehicleMonitoringSystem
             this.fuelToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutTSM = new System.Windows.Forms.ToolStripMenuItem();
             this.vehicleListLV = new System.Windows.Forms.ListView();
             this.mainPlateNumberHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fuelTP = new System.Windows.Forms.TabPage();
@@ -66,6 +66,7 @@ namespace VehicleMonitoringSystem
             this.label6 = new System.Windows.Forms.Label();
             this.fuelDateDTP = new System.Windows.Forms.DateTimePicker();
             this.label40 = new System.Windows.Forms.Label();
+            this.fuelInvoiceNumberCB = new System.Windows.Forms.ComboBox();
             this.fuelTypeOfFuelCB = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -89,6 +90,7 @@ namespace VehicleMonitoringSystem
             this.repairDueDateDTP = new System.Windows.Forms.DateTimePicker();
             this.repairDueDateL = new System.Windows.Forms.Label();
             this.viewRepairDetailB = new System.Windows.Forms.Button();
+            this.repairInvoiceNumberCB = new System.Windows.Forms.ComboBox();
             this.repairSupplierCB = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
             this.repairClearB = new System.Windows.Forms.Button();
@@ -219,8 +221,6 @@ namespace VehicleMonitoringSystem
             this.label26 = new System.Windows.Forms.Label();
             this.supplierSortCB = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.repairInvoiceNumberCB = new System.Windows.Forms.ComboBox();
-            this.fuelInvoiceNumberCB = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.fuelTP.SuspendLayout();
             this.repairTP.SuspendLayout();
@@ -235,17 +235,19 @@ namespace VehicleMonitoringSystem
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.DimGray;
+            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem,
             this.optionToolStripMenuItem,
             this.helpToolStripMenuItem,
             this.reportsToolStripMenuItem,
-            this.aboutToolStripMenuItem});
+            this.aboutTSM});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1350, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 3, 0, 3);
+            this.menuStrip1.Size = new System.Drawing.Size(326, 31);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -257,72 +259,75 @@ namespace VehicleMonitoringSystem
             this.newRepairTSM,
             this.newFuelTSM,
             this.partsForRepairTSM,
-            this.maintenanceTSM,
-            this.paymentTSM,
-            this.supplierTSM});
+            this.newMaintenanceTSM,
+            this.newPaymentTSM,
+            this.newSupplierTSM});
             this.newToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(54, 25);
             this.newToolStripMenuItem.Text = "New";
             // 
             // newVehicleTSM
             // 
-            this.newVehicleTSM.ForeColor = System.Drawing.Color.Red;
+            this.newVehicleTSM.ForeColor = System.Drawing.SystemColors.ControlText;
             this.newVehicleTSM.Name = "newVehicleTSM";
-            this.newVehicleTSM.Size = new System.Drawing.Size(152, 22);
+            this.newVehicleTSM.Size = new System.Drawing.Size(185, 26);
             this.newVehicleTSM.Text = "Vehicle";
             this.newVehicleTSM.Click += new System.EventHandler(this.newVehicleTSM_Click);
             // 
             // insuranceToolStripMenuItem
             // 
-            this.insuranceToolStripMenuItem.ForeColor = System.Drawing.Color.Red;
+            this.insuranceToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
             this.insuranceToolStripMenuItem.Name = "insuranceToolStripMenuItem";
-            this.insuranceToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.insuranceToolStripMenuItem.Size = new System.Drawing.Size(185, 26);
             this.insuranceToolStripMenuItem.Text = "Insurance";
             this.insuranceToolStripMenuItem.Click += new System.EventHandler(this.newInsuranceTSM_Click);
             // 
             // newRepairTSM
             // 
-            this.newRepairTSM.ForeColor = System.Drawing.Color.Red;
+            this.newRepairTSM.ForeColor = System.Drawing.SystemColors.ControlText;
             this.newRepairTSM.Name = "newRepairTSM";
-            this.newRepairTSM.Size = new System.Drawing.Size(152, 22);
+            this.newRepairTSM.Size = new System.Drawing.Size(185, 26);
             this.newRepairTSM.Text = "Repair Records";
             this.newRepairTSM.Click += new System.EventHandler(this.newRepairTSM_Click);
             // 
             // newFuelTSM
             // 
+            this.newFuelTSM.ForeColor = System.Drawing.SystemColors.ControlText;
             this.newFuelTSM.Name = "newFuelTSM";
-            this.newFuelTSM.Size = new System.Drawing.Size(152, 22);
+            this.newFuelTSM.Size = new System.Drawing.Size(185, 26);
             this.newFuelTSM.Text = "Fuel Records";
             this.newFuelTSM.Click += new System.EventHandler(this.newFuelTSM_Click);
             // 
             // partsForRepairTSM
             // 
+            this.partsForRepairTSM.ForeColor = System.Drawing.SystemColors.ControlText;
             this.partsForRepairTSM.Name = "partsForRepairTSM";
-            this.partsForRepairTSM.Size = new System.Drawing.Size(152, 22);
+            this.partsForRepairTSM.Size = new System.Drawing.Size(185, 26);
             this.partsForRepairTSM.Text = "Part";
             this.partsForRepairTSM.Click += new System.EventHandler(this.PartsForRepairTSM_Click);
             // 
-            // maintenanceTSM
+            // newMaintenanceTSM
             // 
-            this.maintenanceTSM.Name = "maintenanceTSM";
-            this.maintenanceTSM.Size = new System.Drawing.Size(152, 22);
-            this.maintenanceTSM.Text = "Maintenance";
-            this.maintenanceTSM.Click += new System.EventHandler(this.MaintenanceTSM_Click);
+            this.newMaintenanceTSM.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.newMaintenanceTSM.Name = "newMaintenanceTSM";
+            this.newMaintenanceTSM.Size = new System.Drawing.Size(185, 26);
+            this.newMaintenanceTSM.Text = "Maintenance";
+            this.newMaintenanceTSM.Click += new System.EventHandler(this.newMaintenanceTSM_Click);
             // 
-            // paymentTSM
+            // newPaymentTSM
             // 
-            this.paymentTSM.Name = "paymentTSM";
-            this.paymentTSM.Size = new System.Drawing.Size(152, 22);
-            this.paymentTSM.Text = "Payment";
-            this.paymentTSM.Click += new System.EventHandler(this.PaymentTSM_Click);
+            this.newPaymentTSM.Name = "newPaymentTSM";
+            this.newPaymentTSM.Size = new System.Drawing.Size(185, 26);
+            this.newPaymentTSM.Text = "Payment";
+            this.newPaymentTSM.Click += new System.EventHandler(this.newPaymentTSM_Click);
             // 
-            // supplierTSM
+            // newSupplierTSM
             // 
-            this.supplierTSM.Name = "supplierTSM";
-            this.supplierTSM.Size = new System.Drawing.Size(152, 22);
-            this.supplierTSM.Text = "Supplier";
-            this.supplierTSM.Click += new System.EventHandler(this.SupplierTSM_Click);
+            this.newSupplierTSM.Name = "newSupplierTSM";
+            this.newSupplierTSM.Size = new System.Drawing.Size(185, 26);
+            this.newSupplierTSM.Text = "Supplier";
+            this.newSupplierTSM.Click += new System.EventHandler(this.newSupplierTSM_Click);
             // 
             // optionToolStripMenuItem
             // 
@@ -331,7 +336,7 @@ namespace VehicleMonitoringSystem
             this.printToolStripMenuItem});
             this.optionToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.optionToolStripMenuItem.Name = "optionToolStripMenuItem";
-            this.optionToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.optionToolStripMenuItem.Size = new System.Drawing.Size(70, 25);
             this.optionToolStripMenuItem.Text = "Option";
             // 
             // editToolStripMenuItem
@@ -343,40 +348,40 @@ namespace VehicleMonitoringSystem
             this.editRepairTSM,
             this.editFuelTSM});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(113, 26);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // editInformationTSM
             // 
             this.editInformationTSM.Name = "editInformationTSM";
-            this.editInformationTSM.Size = new System.Drawing.Size(137, 22);
+            this.editInformationTSM.Size = new System.Drawing.Size(164, 26);
             this.editInformationTSM.Text = "Information";
             this.editInformationTSM.Click += new System.EventHandler(this.editInformationTSM_Click);
             // 
             // editRegistrationTSM
             // 
             this.editRegistrationTSM.Name = "editRegistrationTSM";
-            this.editRegistrationTSM.Size = new System.Drawing.Size(137, 22);
+            this.editRegistrationTSM.Size = new System.Drawing.Size(164, 26);
             this.editRegistrationTSM.Text = "Registration";
             this.editRegistrationTSM.Click += new System.EventHandler(this.editRegistrationTSM_Click);
             // 
             // editInsuranceTSM
             // 
             this.editInsuranceTSM.Name = "editInsuranceTSM";
-            this.editInsuranceTSM.Size = new System.Drawing.Size(137, 22);
+            this.editInsuranceTSM.Size = new System.Drawing.Size(164, 26);
             this.editInsuranceTSM.Text = "Insurance";
             this.editInsuranceTSM.Click += new System.EventHandler(this.editInsuranceTSM_Click);
             // 
             // editRepairTSM
             // 
             this.editRepairTSM.Name = "editRepairTSM";
-            this.editRepairTSM.Size = new System.Drawing.Size(137, 22);
+            this.editRepairTSM.Size = new System.Drawing.Size(164, 26);
             this.editRepairTSM.Text = "Repair";
             // 
             // editFuelTSM
             // 
             this.editFuelTSM.Name = "editFuelTSM";
-            this.editFuelTSM.Size = new System.Drawing.Size(137, 22);
+            this.editFuelTSM.Size = new System.Drawing.Size(164, 26);
             this.editFuelTSM.Text = "Fuel";
             // 
             // printToolStripMenuItem
@@ -388,73 +393,75 @@ namespace VehicleMonitoringSystem
             this.repairToolStripMenuItem2,
             this.fuelToolStripMenuItem2});
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(113, 26);
             this.printToolStripMenuItem.Text = "Print";
             // 
             // vehicleInfoToolStripMenuItem
             // 
             this.vehicleInfoToolStripMenuItem.Name = "vehicleInfoToolStripMenuItem";
-            this.vehicleInfoToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.vehicleInfoToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
             this.vehicleInfoToolStripMenuItem.Text = "Complete Vehicle";
             // 
             // registrationToolStripMenuItem2
             // 
             this.registrationToolStripMenuItem2.Name = "registrationToolStripMenuItem2";
-            this.registrationToolStripMenuItem2.Size = new System.Drawing.Size(166, 22);
+            this.registrationToolStripMenuItem2.Size = new System.Drawing.Size(200, 26);
             this.registrationToolStripMenuItem2.Text = "Registration";
             // 
             // insuranceToolStripMenuItem2
             // 
             this.insuranceToolStripMenuItem2.Name = "insuranceToolStripMenuItem2";
-            this.insuranceToolStripMenuItem2.Size = new System.Drawing.Size(166, 22);
+            this.insuranceToolStripMenuItem2.Size = new System.Drawing.Size(200, 26);
             this.insuranceToolStripMenuItem2.Text = "Insurance";
             // 
             // repairToolStripMenuItem2
             // 
             this.repairToolStripMenuItem2.Name = "repairToolStripMenuItem2";
-            this.repairToolStripMenuItem2.Size = new System.Drawing.Size(166, 22);
+            this.repairToolStripMenuItem2.Size = new System.Drawing.Size(200, 26);
             this.repairToolStripMenuItem2.Text = "Repair";
             // 
             // fuelToolStripMenuItem2
             // 
             this.fuelToolStripMenuItem2.Name = "fuelToolStripMenuItem2";
-            this.fuelToolStripMenuItem2.Size = new System.Drawing.Size(166, 22);
+            this.fuelToolStripMenuItem2.Size = new System.Drawing.Size(200, 26);
             this.fuelToolStripMenuItem2.Text = "Fuel";
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(54, 25);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // reportsToolStripMenuItem
             // 
             this.reportsToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
-            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(76, 25);
             this.reportsToolStripMenuItem.Text = "Reports";
             // 
-            // aboutToolStripMenuItem
+            // aboutTSM
             // 
-            this.aboutToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutTSM.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.aboutTSM.Name = "aboutTSM";
+            this.aboutTSM.Size = new System.Drawing.Size(64, 25);
+            this.aboutTSM.Text = "About";
+            this.aboutTSM.Click += new System.EventHandler(this.aboutTSM_Click);
             // 
             // vehicleListLV
             // 
             this.vehicleListLV.BackColor = System.Drawing.Color.DimGray;
             this.vehicleListLV.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.mainPlateNumberHeader});
-            this.vehicleListLV.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.vehicleListLV.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.vehicleListLV.ForeColor = System.Drawing.SystemColors.ActiveBorder;
             this.vehicleListLV.FullRowSelect = true;
             this.vehicleListLV.HideSelection = false;
-            this.vehicleListLV.Location = new System.Drawing.Point(0, 27);
+            this.vehicleListLV.Location = new System.Drawing.Point(13, 36);
+            this.vehicleListLV.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.vehicleListLV.Name = "vehicleListLV";
-            this.vehicleListLV.Size = new System.Drawing.Size(265, 693);
-            this.vehicleListLV.TabIndex = 8;
+            this.vehicleListLV.Size = new System.Drawing.Size(383, 686);
+            this.vehicleListLV.TabIndex = 0;
             this.vehicleListLV.UseCompatibleStateImageBehavior = false;
             this.vehicleListLV.View = System.Windows.Forms.View.Details;
             this.vehicleListLV.SelectedIndexChanged += new System.EventHandler(this.VehicleListLV_SelectedIndexChanged);
@@ -487,8 +494,9 @@ namespace VehicleMonitoringSystem
             this.fuelTP.Controls.Add(this.fuelPlateNumberTB);
             this.fuelTP.Controls.Add(this.fuelLV);
             this.fuelTP.Location = new System.Drawing.Point(4, 27);
+            this.fuelTP.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.fuelTP.Name = "fuelTP";
-            this.fuelTP.Size = new System.Drawing.Size(1071, 668);
+            this.fuelTP.Size = new System.Drawing.Size(923, 649);
             this.fuelTP.TabIndex = 3;
             this.fuelTP.Text = "Fuel";
             this.fuelTP.UseVisualStyleBackColor = true;
@@ -496,20 +504,22 @@ namespace VehicleMonitoringSystem
             // label39
             // 
             this.label39.AutoSize = true;
-            this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label39.Location = new System.Drawing.Point(35, 159);
+            this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label39.Location = new System.Drawing.Point(4, 201);
+            this.label39.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(115, 18);
+            this.label39.Size = new System.Drawing.Size(123, 20);
             this.label39.TabIndex = 38;
             this.label39.Text = "Invoice Number:";
             // 
             // fuelClearB
             // 
             this.fuelClearB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.fuelClearB.Location = new System.Drawing.Point(487, 83);
+            this.fuelClearB.Location = new System.Drawing.Point(807, 107);
+            this.fuelClearB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.fuelClearB.Name = "fuelClearB";
-            this.fuelClearB.Size = new System.Drawing.Size(75, 27);
-            this.fuelClearB.TabIndex = 34;
+            this.fuelClearB.Size = new System.Drawing.Size(112, 42);
+            this.fuelClearB.TabIndex = 57;
             this.fuelClearB.Text = "Clear";
             this.fuelClearB.UseVisualStyleBackColor = true;
             this.fuelClearB.Visible = false;
@@ -518,10 +528,11 @@ namespace VehicleMonitoringSystem
             // fuelCancelB
             // 
             this.fuelCancelB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.fuelCancelB.Location = new System.Drawing.Point(487, 50);
+            this.fuelCancelB.Location = new System.Drawing.Point(807, 56);
+            this.fuelCancelB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.fuelCancelB.Name = "fuelCancelB";
-            this.fuelCancelB.Size = new System.Drawing.Size(75, 27);
-            this.fuelCancelB.TabIndex = 35;
+            this.fuelCancelB.Size = new System.Drawing.Size(112, 42);
+            this.fuelCancelB.TabIndex = 56;
             this.fuelCancelB.Text = "Cancel";
             this.fuelCancelB.UseVisualStyleBackColor = true;
             this.fuelCancelB.Visible = false;
@@ -530,10 +541,11 @@ namespace VehicleMonitoringSystem
             // fuelEditB
             // 
             this.fuelEditB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.fuelEditB.Location = new System.Drawing.Point(487, 17);
+            this.fuelEditB.Location = new System.Drawing.Point(807, 5);
+            this.fuelEditB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.fuelEditB.Name = "fuelEditB";
-            this.fuelEditB.Size = new System.Drawing.Size(75, 27);
-            this.fuelEditB.TabIndex = 36;
+            this.fuelEditB.Size = new System.Drawing.Size(112, 42);
+            this.fuelEditB.TabIndex = 55;
             this.fuelEditB.Text = "Edit";
             this.fuelEditB.UseVisualStyleBackColor = true;
             this.fuelEditB.Click += new System.EventHandler(this.fuelEditB_Click);
@@ -541,20 +553,22 @@ namespace VehicleMonitoringSystem
             // label41
             // 
             this.label41.AutoSize = true;
-            this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label41.Location = new System.Drawing.Point(85, 261);
+            this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label41.Location = new System.Drawing.Point(4, 340);
+            this.label41.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(62, 18);
+            this.label41.Size = new System.Drawing.Size(66, 20);
             this.label41.TabIndex = 30;
             this.label41.Text = "Paid By:";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label6.Location = new System.Drawing.Point(85, 226);
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(4, 294);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(63, 18);
+            this.label6.Size = new System.Drawing.Size(69, 20);
             this.label6.TabIndex = 30;
             this.label6.Text = "Amount:";
             // 
@@ -563,68 +577,86 @@ namespace VehicleMonitoringSystem
             this.fuelDateDTP.Enabled = false;
             this.fuelDateDTP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fuelDateDTP.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.fuelDateDTP.Location = new System.Drawing.Point(163, 86);
+            this.fuelDateDTP.Location = new System.Drawing.Point(135, 106);
+            this.fuelDateDTP.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.fuelDateDTP.Name = "fuelDateDTP";
-            this.fuelDateDTP.Size = new System.Drawing.Size(294, 26);
-            this.fuelDateDTP.TabIndex = 4;
+            this.fuelDateDTP.Size = new System.Drawing.Size(664, 26);
+            this.fuelDateDTP.TabIndex = 49;
             // 
             // label40
             // 
             this.label40.AutoSize = true;
-            this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label40.Location = new System.Drawing.Point(85, 191);
+            this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label40.Location = new System.Drawing.Point(4, 248);
+            this.label40.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(65, 18);
+            this.label40.Size = new System.Drawing.Size(71, 20);
             this.label40.TabIndex = 31;
             this.label40.Text = "Supplier:";
+            // 
+            // fuelInvoiceNumberCB
+            // 
+            this.fuelInvoiceNumberCB.Enabled = false;
+            this.fuelInvoiceNumberCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fuelInvoiceNumberCB.FormattingEnabled = true;
+            this.fuelInvoiceNumberCB.Location = new System.Drawing.Point(135, 198);
+            this.fuelInvoiceNumberCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.fuelInvoiceNumberCB.Name = "fuelInvoiceNumberCB";
+            this.fuelInvoiceNumberCB.Size = new System.Drawing.Size(664, 28);
+            this.fuelInvoiceNumberCB.TabIndex = 51;
             // 
             // fuelTypeOfFuelCB
             // 
             this.fuelTypeOfFuelCB.Enabled = false;
             this.fuelTypeOfFuelCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fuelTypeOfFuelCB.FormattingEnabled = true;
-            this.fuelTypeOfFuelCB.Location = new System.Drawing.Point(163, 121);
+            this.fuelTypeOfFuelCB.Location = new System.Drawing.Point(135, 151);
+            this.fuelTypeOfFuelCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.fuelTypeOfFuelCB.Name = "fuelTypeOfFuelCB";
-            this.fuelTypeOfFuelCB.Size = new System.Drawing.Size(294, 28);
-            this.fuelTypeOfFuelCB.TabIndex = 3;
+            this.fuelTypeOfFuelCB.Size = new System.Drawing.Size(664, 28);
+            this.fuelTypeOfFuelCB.TabIndex = 50;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label4.Location = new System.Drawing.Point(57, 125);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(4, 154);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(93, 18);
+            this.label4.Size = new System.Drawing.Size(100, 20);
             this.label4.TabIndex = 31;
             this.label4.Text = "Type of Fuel:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label3.Location = new System.Drawing.Point(107, 92);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(4, 111);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(43, 18);
+            this.label3.Size = new System.Drawing.Size(48, 20);
             this.label3.TabIndex = 32;
             this.label3.Text = "Date:";
             // 
             // label43
             // 
             this.label43.AutoSize = true;
-            this.label43.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label43.Location = new System.Drawing.Point(91, 55);
+            this.label43.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label43.Location = new System.Drawing.Point(4, 64);
+            this.label43.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(59, 18);
+            this.label43.Size = new System.Drawing.Size(65, 20);
             this.label43.TabIndex = 33;
             this.label43.Text = "Vehicle:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label1.Location = new System.Drawing.Point(48, 19);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(4, 18);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 18);
+            this.label1.Size = new System.Drawing.Size(109, 20);
             this.label1.TabIndex = 33;
             this.label1.Text = "Plate Number:";
             // 
@@ -632,48 +664,53 @@ namespace VehicleMonitoringSystem
             // 
             this.fuelPaidByTB.Enabled = false;
             this.fuelPaidByTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fuelPaidByTB.Location = new System.Drawing.Point(163, 257);
+            this.fuelPaidByTB.Location = new System.Drawing.Point(135, 337);
+            this.fuelPaidByTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.fuelPaidByTB.Name = "fuelPaidByTB";
-            this.fuelPaidByTB.Size = new System.Drawing.Size(294, 26);
-            this.fuelPaidByTB.TabIndex = 26;
+            this.fuelPaidByTB.Size = new System.Drawing.Size(664, 26);
+            this.fuelPaidByTB.TabIndex = 54;
             // 
             // fuelAmountTB
             // 
             this.fuelAmountTB.Enabled = false;
             this.fuelAmountTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fuelAmountTB.Location = new System.Drawing.Point(163, 222);
+            this.fuelAmountTB.Location = new System.Drawing.Point(135, 291);
+            this.fuelAmountTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.fuelAmountTB.Name = "fuelAmountTB";
-            this.fuelAmountTB.Size = new System.Drawing.Size(294, 26);
-            this.fuelAmountTB.TabIndex = 26;
+            this.fuelAmountTB.Size = new System.Drawing.Size(664, 26);
+            this.fuelAmountTB.TabIndex = 53;
             this.fuelAmountTB.Text = "0.00";
             // 
             // fuelSupplierTB
             // 
             this.fuelSupplierTB.Enabled = false;
             this.fuelSupplierTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fuelSupplierTB.Location = new System.Drawing.Point(163, 187);
+            this.fuelSupplierTB.Location = new System.Drawing.Point(135, 245);
+            this.fuelSupplierTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.fuelSupplierTB.Name = "fuelSupplierTB";
-            this.fuelSupplierTB.Size = new System.Drawing.Size(294, 26);
-            this.fuelSupplierTB.TabIndex = 27;
+            this.fuelSupplierTB.Size = new System.Drawing.Size(664, 26);
+            this.fuelSupplierTB.TabIndex = 52;
             // 
             // fuelVehicleTB
             // 
             this.fuelVehicleTB.Enabled = false;
             this.fuelVehicleTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fuelVehicleTB.Location = new System.Drawing.Point(163, 51);
+            this.fuelVehicleTB.Location = new System.Drawing.Point(135, 61);
+            this.fuelVehicleTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.fuelVehicleTB.Name = "fuelVehicleTB";
-            this.fuelVehicleTB.Size = new System.Drawing.Size(294, 26);
-            this.fuelVehicleTB.TabIndex = 29;
+            this.fuelVehicleTB.Size = new System.Drawing.Size(664, 26);
+            this.fuelVehicleTB.TabIndex = 48;
             // 
             // fuelPlateNumberTB
             // 
             this.fuelPlateNumberTB.Enabled = false;
             this.fuelPlateNumberTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fuelPlateNumberTB.Location = new System.Drawing.Point(163, 16);
+            this.fuelPlateNumberTB.Location = new System.Drawing.Point(135, 15);
+            this.fuelPlateNumberTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.fuelPlateNumberTB.MaxLength = 8;
             this.fuelPlateNumberTB.Name = "fuelPlateNumberTB";
-            this.fuelPlateNumberTB.Size = new System.Drawing.Size(294, 26);
-            this.fuelPlateNumberTB.TabIndex = 29;
+            this.fuelPlateNumberTB.Size = new System.Drawing.Size(664, 26);
+            this.fuelPlateNumberTB.TabIndex = 47;
             // 
             // fuelLV
             // 
@@ -690,9 +727,10 @@ namespace VehicleMonitoringSystem
             this.fuelLV.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.fuelLV.GridLines = true;
             this.fuelLV.HideSelection = false;
-            this.fuelLV.Location = new System.Drawing.Point(6, 304);
+            this.fuelLV.Location = new System.Drawing.Point(4, 373);
+            this.fuelLV.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.fuelLV.Name = "fuelLV";
-            this.fuelLV.Size = new System.Drawing.Size(1065, 361);
+            this.fuelLV.Size = new System.Drawing.Size(915, 271);
             this.fuelLV.TabIndex = 2;
             this.fuelLV.UseCompatibleStateImageBehavior = false;
             this.fuelLV.View = System.Windows.Forms.View.Details;
@@ -705,12 +743,12 @@ namespace VehicleMonitoringSystem
             // gasPlateNumberHeader
             // 
             this.gasPlateNumberHeader.Text = "Plate Number";
-            this.gasPlateNumberHeader.Width = 111;
+            this.gasPlateNumberHeader.Width = 127;
             // 
             // gasVehicleHeader
             // 
             this.gasVehicleHeader.Text = "Vehicle";
-            this.gasVehicleHeader.Width = 158;
+            this.gasVehicleHeader.Width = 124;
             // 
             // gasDateHeader
             // 
@@ -720,7 +758,7 @@ namespace VehicleMonitoringSystem
             // gasTypeOfFuelHeader
             // 
             this.gasTypeOfFuelHeader.Text = "Type of Fuel";
-            this.gasTypeOfFuelHeader.Width = 200;
+            this.gasTypeOfFuelHeader.Width = 145;
             // 
             // gasSupplierHeader
             // 
@@ -730,7 +768,7 @@ namespace VehicleMonitoringSystem
             // gasAmountHeader
             // 
             this.gasAmountHeader.Text = "Amount";
-            this.gasAmountHeader.Width = 100;
+            this.gasAmountHeader.Width = 108;
             // 
             // gadPaidBy
             // 
@@ -760,9 +798,10 @@ namespace VehicleMonitoringSystem
             this.repairTP.Controls.Add(this.repairLV);
             this.repairTP.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.repairTP.Location = new System.Drawing.Point(4, 27);
+            this.repairTP.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.repairTP.Name = "repairTP";
-            this.repairTP.Padding = new System.Windows.Forms.Padding(3);
-            this.repairTP.Size = new System.Drawing.Size(1071, 668);
+            this.repairTP.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.repairTP.Size = new System.Drawing.Size(923, 649);
             this.repairTP.TabIndex = 2;
             this.repairTP.Text = "Repair";
             this.repairTP.UseVisualStyleBackColor = true;
@@ -771,17 +810,18 @@ namespace VehicleMonitoringSystem
             // 
             this.repairDueDateDTP.Enabled = false;
             this.repairDueDateDTP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.repairDueDateDTP.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.repairDueDateDTP.Location = new System.Drawing.Point(162, 229);
+            this.repairDueDateDTP.Location = new System.Drawing.Point(131, 294);
+            this.repairDueDateDTP.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.repairDueDateDTP.Name = "repairDueDateDTP";
-            this.repairDueDateDTP.Size = new System.Drawing.Size(304, 26);
-            this.repairDueDateDTP.TabIndex = 64;
+            this.repairDueDateDTP.Size = new System.Drawing.Size(664, 26);
+            this.repairDueDateDTP.TabIndex = 42;
             // 
             // repairDueDateL
             // 
             this.repairDueDateL.AutoSize = true;
             this.repairDueDateL.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.repairDueDateL.Location = new System.Drawing.Point(98, 235);
+            this.repairDueDateL.Location = new System.Drawing.Point(8, 300);
+            this.repairDueDateL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.repairDueDateL.Name = "repairDueDateL";
             this.repairDueDateL.Size = new System.Drawing.Size(43, 18);
             this.repairDueDateL.TabIndex = 63;
@@ -791,13 +831,35 @@ namespace VehicleMonitoringSystem
             // 
             this.viewRepairDetailB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold);
             this.viewRepairDetailB.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.viewRepairDetailB.Location = new System.Drawing.Point(222, 266);
+            this.viewRepairDetailB.Location = new System.Drawing.Point(346, 330);
+            this.viewRepairDetailB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.viewRepairDetailB.Name = "viewRepairDetailB";
-            this.viewRepairDetailB.Size = new System.Drawing.Size(185, 34);
-            this.viewRepairDetailB.TabIndex = 62;
+            this.viewRepairDetailB.Size = new System.Drawing.Size(278, 26);
+            this.viewRepairDetailB.TabIndex = 43;
             this.viewRepairDetailB.Text = "Repair Details";
             this.viewRepairDetailB.UseVisualStyleBackColor = true;
             this.viewRepairDetailB.Click += new System.EventHandler(this.viewRepairDetailB_Click);
+            // 
+            // repairInvoiceNumberCB
+            // 
+            this.repairInvoiceNumberCB.Enabled = false;
+            this.repairInvoiceNumberCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.repairInvoiceNumberCB.FormattingEnabled = true;
+            this.repairInvoiceNumberCB.Items.AddRange(new object[] {
+            "BMW",
+            "GMC",
+            "Ford",
+            "Mitsubishi",
+            "Fuso",
+            "Isuzu",
+            "Toyota",
+            "Subaru",
+            "Kia"});
+            this.repairInvoiceNumberCB.Location = new System.Drawing.Point(131, 202);
+            this.repairInvoiceNumberCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.repairInvoiceNumberCB.Name = "repairInvoiceNumberCB";
+            this.repairInvoiceNumberCB.Size = new System.Drawing.Size(664, 28);
+            this.repairInvoiceNumberCB.TabIndex = 40;
             // 
             // repairSupplierCB
             // 
@@ -814,16 +876,18 @@ namespace VehicleMonitoringSystem
             "Toyota",
             "Subaru",
             "Kia"});
-            this.repairSupplierCB.Location = new System.Drawing.Point(162, 115);
+            this.repairSupplierCB.Location = new System.Drawing.Point(131, 155);
+            this.repairSupplierCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.repairSupplierCB.Name = "repairSupplierCB";
-            this.repairSupplierCB.Size = new System.Drawing.Size(304, 28);
-            this.repairSupplierCB.TabIndex = 61;
+            this.repairSupplierCB.Size = new System.Drawing.Size(664, 28);
+            this.repairSupplierCB.TabIndex = 39;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label19.Location = new System.Drawing.Point(26, 152);
+            this.label19.Location = new System.Drawing.Point(8, 206);
+            this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(115, 18);
             this.label19.TabIndex = 59;
@@ -832,10 +896,11 @@ namespace VehicleMonitoringSystem
             // repairClearB
             // 
             this.repairClearB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.repairClearB.Location = new System.Drawing.Point(491, 85);
+            this.repairClearB.Location = new System.Drawing.Point(803, 110);
+            this.repairClearB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.repairClearB.Name = "repairClearB";
-            this.repairClearB.Size = new System.Drawing.Size(75, 28);
-            this.repairClearB.TabIndex = 56;
+            this.repairClearB.Size = new System.Drawing.Size(112, 43);
+            this.repairClearB.TabIndex = 46;
             this.repairClearB.Text = "Clear";
             this.repairClearB.UseVisualStyleBackColor = true;
             this.repairClearB.Visible = false;
@@ -844,10 +909,11 @@ namespace VehicleMonitoringSystem
             // repairCancelB
             // 
             this.repairCancelB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.repairCancelB.Location = new System.Drawing.Point(491, 51);
+            this.repairCancelB.Location = new System.Drawing.Point(803, 57);
+            this.repairCancelB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.repairCancelB.Name = "repairCancelB";
-            this.repairCancelB.Size = new System.Drawing.Size(75, 28);
-            this.repairCancelB.TabIndex = 57;
+            this.repairCancelB.Size = new System.Drawing.Size(112, 43);
+            this.repairCancelB.TabIndex = 45;
             this.repairCancelB.Text = "Cancel";
             this.repairCancelB.UseVisualStyleBackColor = true;
             this.repairCancelB.Visible = false;
@@ -856,10 +922,11 @@ namespace VehicleMonitoringSystem
             // repairEditB
             // 
             this.repairEditB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.repairEditB.Location = new System.Drawing.Point(491, 17);
+            this.repairEditB.Location = new System.Drawing.Point(803, 5);
+            this.repairEditB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.repairEditB.Name = "repairEditB";
-            this.repairEditB.Size = new System.Drawing.Size(75, 28);
-            this.repairEditB.TabIndex = 58;
+            this.repairEditB.Size = new System.Drawing.Size(112, 43);
+            this.repairEditB.TabIndex = 44;
             this.repairEditB.Text = "Edit";
             this.repairEditB.UseVisualStyleBackColor = true;
             this.repairEditB.Click += new System.EventHandler(this.repairEditB_Click);
@@ -869,16 +936,18 @@ namespace VehicleMonitoringSystem
             this.repairDateDTP.Enabled = false;
             this.repairDateDTP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.repairDateDTP.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.repairDateDTP.Location = new System.Drawing.Point(162, 48);
+            this.repairDateDTP.Location = new System.Drawing.Point(131, 65);
+            this.repairDateDTP.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.repairDateDTP.Name = "repairDateDTP";
-            this.repairDateDTP.Size = new System.Drawing.Size(304, 26);
-            this.repairDateDTP.TabIndex = 55;
+            this.repairDateDTP.Size = new System.Drawing.Size(664, 26);
+            this.repairDateDTP.TabIndex = 37;
             // 
             // label36
             // 
             this.label36.AutoSize = true;
             this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label36.Location = new System.Drawing.Point(78, 190);
+            this.label36.Location = new System.Drawing.Point(8, 253);
+            this.label36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(63, 18);
             this.label36.TabIndex = 49;
@@ -888,7 +957,8 @@ namespace VehicleMonitoringSystem
             // 
             this.label38.AutoSize = true;
             this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label38.Location = new System.Drawing.Point(76, 119);
+            this.label38.Location = new System.Drawing.Point(8, 159);
+            this.label38.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(65, 18);
             this.label38.TabIndex = 52;
@@ -898,7 +968,8 @@ namespace VehicleMonitoringSystem
             // 
             this.label35.AutoSize = true;
             this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label35.Location = new System.Drawing.Point(36, 87);
+            this.label35.Location = new System.Drawing.Point(8, 114);
+            this.label35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(108, 18);
             this.label35.TabIndex = 51;
@@ -908,7 +979,8 @@ namespace VehicleMonitoringSystem
             // 
             this.label34.AutoSize = true;
             this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label34.Location = new System.Drawing.Point(101, 54);
+            this.label34.Location = new System.Drawing.Point(8, 71);
+            this.label34.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(43, 18);
             this.label34.TabIndex = 53;
@@ -918,7 +990,8 @@ namespace VehicleMonitoringSystem
             // 
             this.label33.AutoSize = true;
             this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label33.Location = new System.Drawing.Point(46, 17);
+            this.label33.Location = new System.Drawing.Point(8, 23);
+            this.label33.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(102, 18);
             this.label33.TabIndex = 54;
@@ -928,30 +1001,33 @@ namespace VehicleMonitoringSystem
             // 
             this.repairAmountTB.Enabled = false;
             this.repairAmountTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.repairAmountTB.Location = new System.Drawing.Point(162, 186);
+            this.repairAmountTB.Location = new System.Drawing.Point(131, 249);
+            this.repairAmountTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.repairAmountTB.Name = "repairAmountTB";
-            this.repairAmountTB.Size = new System.Drawing.Size(304, 26);
-            this.repairAmountTB.TabIndex = 46;
-            this.repairAmountTB.Text = "0.00";
+            this.repairAmountTB.Size = new System.Drawing.Size(664, 26);
+            this.repairAmountTB.TabIndex = 41;
+            this.repairAmountTB.Text = "PHP 0.00";
             // 
             // repairTypeOfRepairTB
             // 
             this.repairTypeOfRepairTB.Enabled = false;
             this.repairTypeOfRepairTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.repairTypeOfRepairTB.Location = new System.Drawing.Point(162, 83);
+            this.repairTypeOfRepairTB.Location = new System.Drawing.Point(131, 110);
+            this.repairTypeOfRepairTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.repairTypeOfRepairTB.Name = "repairTypeOfRepairTB";
-            this.repairTypeOfRepairTB.Size = new System.Drawing.Size(304, 26);
-            this.repairTypeOfRepairTB.TabIndex = 47;
+            this.repairTypeOfRepairTB.Size = new System.Drawing.Size(664, 26);
+            this.repairTypeOfRepairTB.TabIndex = 38;
             // 
             // repairPlateNumberTB
             // 
             this.repairPlateNumberTB.Enabled = false;
             this.repairPlateNumberTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.repairPlateNumberTB.Location = new System.Drawing.Point(162, 13);
+            this.repairPlateNumberTB.Location = new System.Drawing.Point(131, 19);
+            this.repairPlateNumberTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.repairPlateNumberTB.MaxLength = 8;
             this.repairPlateNumberTB.Name = "repairPlateNumberTB";
-            this.repairPlateNumberTB.Size = new System.Drawing.Size(304, 26);
-            this.repairPlateNumberTB.TabIndex = 48;
+            this.repairPlateNumberTB.Size = new System.Drawing.Size(664, 26);
+            this.repairPlateNumberTB.TabIndex = 36;
             // 
             // repairLV
             // 
@@ -966,9 +1042,10 @@ namespace VehicleMonitoringSystem
             this.repairLV.FullRowSelect = true;
             this.repairLV.GridLines = true;
             this.repairLV.HideSelection = false;
-            this.repairLV.Location = new System.Drawing.Point(3, 318);
+            this.repairLV.Location = new System.Drawing.Point(4, 366);
+            this.repairLV.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.repairLV.Name = "repairLV";
-            this.repairLV.Size = new System.Drawing.Size(1065, 326);
+            this.repairLV.Size = new System.Drawing.Size(915, 278);
             this.repairLV.TabIndex = 45;
             this.repairLV.UseCompatibleStateImageBehavior = false;
             this.repairLV.View = System.Windows.Forms.View.Details;
@@ -987,17 +1064,17 @@ namespace VehicleMonitoringSystem
             // repairTypeOfRepairHeader
             // 
             this.repairTypeOfRepairHeader.Text = "Types of Repair";
-            this.repairTypeOfRepairHeader.Width = 256;
+            this.repairTypeOfRepairHeader.Width = 221;
             // 
             // repairSupplierHeader
             // 
             this.repairSupplierHeader.Text = "Supplier";
-            this.repairSupplierHeader.Width = 259;
+            this.repairSupplierHeader.Width = 230;
             // 
             // repairInvoiceNumberSupplier
             // 
             this.repairInvoiceNumberSupplier.Text = "Invoice Number";
-            this.repairInvoiceNumberSupplier.Width = 215;
+            this.repairInvoiceNumberSupplier.Width = 203;
             // 
             // repairAmountHeader
             // 
@@ -1026,9 +1103,10 @@ namespace VehicleMonitoringSystem
             this.insuranceTP.Controls.Add(this.insurancePlateNumberTB);
             this.insuranceTP.Controls.Add(this.insuranceLV);
             this.insuranceTP.Location = new System.Drawing.Point(4, 27);
+            this.insuranceTP.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.insuranceTP.Name = "insuranceTP";
-            this.insuranceTP.Padding = new System.Windows.Forms.Padding(3);
-            this.insuranceTP.Size = new System.Drawing.Size(1071, 668);
+            this.insuranceTP.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.insuranceTP.Size = new System.Drawing.Size(923, 649);
             this.insuranceTP.TabIndex = 1;
             this.insuranceTP.Text = "Insurance";
             this.insuranceTP.UseVisualStyleBackColor = true;
@@ -1036,9 +1114,10 @@ namespace VehicleMonitoringSystem
             // insuranceClearB
             // 
             this.insuranceClearB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.insuranceClearB.Location = new System.Drawing.Point(497, 80);
+            this.insuranceClearB.Location = new System.Drawing.Point(803, 99);
+            this.insuranceClearB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.insuranceClearB.Name = "insuranceClearB";
-            this.insuranceClearB.Size = new System.Drawing.Size(75, 30);
+            this.insuranceClearB.Size = new System.Drawing.Size(112, 46);
             this.insuranceClearB.TabIndex = 14;
             this.insuranceClearB.Text = "Clear";
             this.insuranceClearB.UseVisualStyleBackColor = true;
@@ -1048,10 +1127,11 @@ namespace VehicleMonitoringSystem
             // insuranceCancelB
             // 
             this.insuranceCancelB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.insuranceCancelB.Location = new System.Drawing.Point(497, 50);
+            this.insuranceCancelB.Location = new System.Drawing.Point(803, 53);
+            this.insuranceCancelB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.insuranceCancelB.Name = "insuranceCancelB";
-            this.insuranceCancelB.Size = new System.Drawing.Size(75, 30);
-            this.insuranceCancelB.TabIndex = 15;
+            this.insuranceCancelB.Size = new System.Drawing.Size(112, 46);
+            this.insuranceCancelB.TabIndex = 34;
             this.insuranceCancelB.Text = "Cancel";
             this.insuranceCancelB.UseVisualStyleBackColor = true;
             this.insuranceCancelB.Visible = false;
@@ -1060,10 +1140,11 @@ namespace VehicleMonitoringSystem
             // insuranceEditB
             // 
             this.insuranceEditB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.insuranceEditB.Location = new System.Drawing.Point(497, 19);
+            this.insuranceEditB.Location = new System.Drawing.Point(803, 5);
+            this.insuranceEditB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.insuranceEditB.Name = "insuranceEditB";
-            this.insuranceEditB.Size = new System.Drawing.Size(75, 30);
-            this.insuranceEditB.TabIndex = 16;
+            this.insuranceEditB.Size = new System.Drawing.Size(112, 46);
+            this.insuranceEditB.TabIndex = 32;
             this.insuranceEditB.Text = "Edit";
             this.insuranceEditB.UseVisualStyleBackColor = true;
             this.insuranceEditB.Click += new System.EventHandler(this.insuranceEditB_Click);
@@ -1072,7 +1153,8 @@ namespace VehicleMonitoringSystem
             // 
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label32.Location = new System.Drawing.Point(77, 229);
+            this.label32.Location = new System.Drawing.Point(8, 295);
+            this.label32.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(63, 18);
             this.label32.TabIndex = 9;
@@ -1083,36 +1165,40 @@ namespace VehicleMonitoringSystem
             this.insuranceRenewalDTP.Enabled = false;
             this.insuranceRenewalDTP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.insuranceRenewalDTP.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.insuranceRenewalDTP.Location = new System.Drawing.Point(156, 190);
+            this.insuranceRenewalDTP.Location = new System.Drawing.Point(143, 245);
+            this.insuranceRenewalDTP.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.insuranceRenewalDTP.Name = "insuranceRenewalDTP";
-            this.insuranceRenewalDTP.Size = new System.Drawing.Size(317, 26);
-            this.insuranceRenewalDTP.TabIndex = 4;
+            this.insuranceRenewalDTP.Size = new System.Drawing.Size(652, 26);
+            this.insuranceRenewalDTP.TabIndex = 30;
             // 
             // insuranceDurationToDTP
             // 
             this.insuranceDurationToDTP.Enabled = false;
             this.insuranceDurationToDTP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.insuranceDurationToDTP.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.insuranceDurationToDTP.Location = new System.Drawing.Point(156, 155);
+            this.insuranceDurationToDTP.Location = new System.Drawing.Point(143, 200);
+            this.insuranceDurationToDTP.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.insuranceDurationToDTP.Name = "insuranceDurationToDTP";
-            this.insuranceDurationToDTP.Size = new System.Drawing.Size(317, 26);
-            this.insuranceDurationToDTP.TabIndex = 4;
+            this.insuranceDurationToDTP.Size = new System.Drawing.Size(652, 26);
+            this.insuranceDurationToDTP.TabIndex = 29;
             // 
             // insuranceDurationFromDTP
             // 
             this.insuranceDurationFromDTP.Enabled = false;
             this.insuranceDurationFromDTP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.insuranceDurationFromDTP.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.insuranceDurationFromDTP.Location = new System.Drawing.Point(156, 120);
+            this.insuranceDurationFromDTP.Location = new System.Drawing.Point(143, 154);
+            this.insuranceDurationFromDTP.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.insuranceDurationFromDTP.Name = "insuranceDurationFromDTP";
-            this.insuranceDurationFromDTP.Size = new System.Drawing.Size(317, 26);
-            this.insuranceDurationFromDTP.TabIndex = 4;
+            this.insuranceDurationFromDTP.Size = new System.Drawing.Size(652, 26);
+            this.insuranceDurationFromDTP.TabIndex = 28;
             // 
             // label31
             // 
             this.label31.AutoSize = true;
             this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label31.Location = new System.Drawing.Point(71, 196);
+            this.label31.Location = new System.Drawing.Point(8, 251);
+            this.label31.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(69, 18);
             this.label31.TabIndex = 10;
@@ -1122,7 +1208,8 @@ namespace VehicleMonitoringSystem
             // 
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label23.Location = new System.Drawing.Point(110, 161);
+            this.label23.Location = new System.Drawing.Point(105, 206);
+            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(30, 18);
             this.label23.TabIndex = 11;
@@ -1132,7 +1219,8 @@ namespace VehicleMonitoringSystem
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label8.Location = new System.Drawing.Point(92, 126);
+            this.label8.Location = new System.Drawing.Point(87, 160);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(48, 18);
             this.label8.TabIndex = 11;
@@ -1142,7 +1230,8 @@ namespace VehicleMonitoringSystem
             // 
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label30.Location = new System.Drawing.Point(13, 124);
+            this.label30.Location = new System.Drawing.Point(8, 160);
+            this.label30.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(68, 18);
             this.label30.TabIndex = 11;
@@ -1152,7 +1241,8 @@ namespace VehicleMonitoringSystem
             // 
             this.label29.AutoSize = true;
             this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label29.Location = new System.Drawing.Point(64, 89);
+            this.label29.Location = new System.Drawing.Point(8, 113);
+            this.label29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(76, 18);
             this.label29.TabIndex = 11;
@@ -1162,7 +1252,8 @@ namespace VehicleMonitoringSystem
             // 
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label28.Location = new System.Drawing.Point(13, 53);
+            this.label28.Location = new System.Drawing.Point(8, 68);
+            this.label28.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(127, 18);
             this.label28.TabIndex = 12;
@@ -1172,7 +1263,8 @@ namespace VehicleMonitoringSystem
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label11.Location = new System.Drawing.Point(38, 19);
+            this.label11.Location = new System.Drawing.Point(8, 23);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(102, 18);
             this.label11.TabIndex = 13;
@@ -1182,38 +1274,42 @@ namespace VehicleMonitoringSystem
             // 
             this.insuranceAmountTB.Enabled = false;
             this.insuranceAmountTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.insuranceAmountTB.Location = new System.Drawing.Point(156, 225);
+            this.insuranceAmountTB.Location = new System.Drawing.Point(143, 291);
+            this.insuranceAmountTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.insuranceAmountTB.Name = "insuranceAmountTB";
-            this.insuranceAmountTB.Size = new System.Drawing.Size(317, 26);
-            this.insuranceAmountTB.TabIndex = 4;
-            this.insuranceAmountTB.Text = "0.00";
+            this.insuranceAmountTB.Size = new System.Drawing.Size(652, 26);
+            this.insuranceAmountTB.TabIndex = 31;
+            this.insuranceAmountTB.Text = "PHP 0.00";
             // 
             // insuranceCompanyTB
             // 
             this.insuranceCompanyTB.Enabled = false;
             this.insuranceCompanyTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.insuranceCompanyTB.Location = new System.Drawing.Point(156, 85);
+            this.insuranceCompanyTB.Location = new System.Drawing.Point(143, 109);
+            this.insuranceCompanyTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.insuranceCompanyTB.Name = "insuranceCompanyTB";
-            this.insuranceCompanyTB.Size = new System.Drawing.Size(317, 26);
-            this.insuranceCompanyTB.TabIndex = 6;
+            this.insuranceCompanyTB.Size = new System.Drawing.Size(652, 26);
+            this.insuranceCompanyTB.TabIndex = 27;
             // 
             // insuranceRegisteredNameTB
             // 
             this.insuranceRegisteredNameTB.Enabled = false;
             this.insuranceRegisteredNameTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.insuranceRegisteredNameTB.Location = new System.Drawing.Point(156, 50);
+            this.insuranceRegisteredNameTB.Location = new System.Drawing.Point(143, 64);
+            this.insuranceRegisteredNameTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.insuranceRegisteredNameTB.Name = "insuranceRegisteredNameTB";
-            this.insuranceRegisteredNameTB.Size = new System.Drawing.Size(317, 26);
-            this.insuranceRegisteredNameTB.TabIndex = 7;
+            this.insuranceRegisteredNameTB.Size = new System.Drawing.Size(652, 26);
+            this.insuranceRegisteredNameTB.TabIndex = 26;
             // 
             // insurancePlateNumberTB
             // 
             this.insurancePlateNumberTB.Enabled = false;
             this.insurancePlateNumberTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.insurancePlateNumberTB.Location = new System.Drawing.Point(156, 15);
+            this.insurancePlateNumberTB.Location = new System.Drawing.Point(143, 19);
+            this.insurancePlateNumberTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.insurancePlateNumberTB.Name = "insurancePlateNumberTB";
-            this.insurancePlateNumberTB.Size = new System.Drawing.Size(317, 26);
-            this.insurancePlateNumberTB.TabIndex = 8;
+            this.insurancePlateNumberTB.Size = new System.Drawing.Size(652, 26);
+            this.insurancePlateNumberTB.TabIndex = 25;
             // 
             // insuranceLV
             // 
@@ -1229,9 +1325,10 @@ namespace VehicleMonitoringSystem
             this.insuranceLV.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.insuranceLV.GridLines = true;
             this.insuranceLV.HideSelection = false;
-            this.insuranceLV.Location = new System.Drawing.Point(6, 256);
+            this.insuranceLV.Location = new System.Drawing.Point(4, 327);
+            this.insuranceLV.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.insuranceLV.Name = "insuranceLV";
-            this.insuranceLV.Size = new System.Drawing.Size(1065, 411);
+            this.insuranceLV.Size = new System.Drawing.Size(915, 317);
             this.insuranceLV.TabIndex = 0;
             this.insuranceLV.UseCompatibleStateImageBehavior = false;
             this.insuranceLV.View = System.Windows.Forms.View.Details;
@@ -1254,7 +1351,7 @@ namespace VehicleMonitoringSystem
             // insuranceCompanyHeader
             // 
             this.insuranceCompanyHeader.Text = "Company";
-            this.insuranceCompanyHeader.Width = 200;
+            this.insuranceCompanyHeader.Width = 148;
             // 
             // insuranceDurationFromHeader
             // 
@@ -1297,9 +1394,10 @@ namespace VehicleMonitoringSystem
             this.registrationTP.Controls.Add(this.label21);
             this.registrationTP.Controls.Add(this.label20);
             this.registrationTP.Location = new System.Drawing.Point(4, 27);
+            this.registrationTP.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.registrationTP.Name = "registrationTP";
-            this.registrationTP.Padding = new System.Windows.Forms.Padding(3);
-            this.registrationTP.Size = new System.Drawing.Size(1071, 668);
+            this.registrationTP.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.registrationTP.Size = new System.Drawing.Size(923, 649);
             this.registrationTP.TabIndex = 0;
             this.registrationTP.Text = "Registration";
             this.registrationTP.UseVisualStyleBackColor = true;
@@ -1308,17 +1406,19 @@ namespace VehicleMonitoringSystem
             // 
             this.remarksRTB.Enabled = false;
             this.remarksRTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.remarksRTB.Location = new System.Drawing.Point(156, 230);
+            this.remarksRTB.Location = new System.Drawing.Point(143, 294);
+            this.remarksRTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.remarksRTB.Name = "remarksRTB";
-            this.remarksRTB.Size = new System.Drawing.Size(324, 40);
-            this.remarksRTB.TabIndex = 10;
+            this.remarksRTB.Size = new System.Drawing.Size(654, 59);
+            this.remarksRTB.TabIndex = 20;
             this.remarksRTB.Text = "";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(66, 243);
+            this.label17.Location = new System.Drawing.Point(8, 298);
+            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(73, 18);
             this.label17.TabIndex = 9;
@@ -1328,29 +1428,30 @@ namespace VehicleMonitoringSystem
             // 
             this.registrationRenewalDTP.Enabled = false;
             this.registrationRenewalDTP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.registrationRenewalDTP.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.registrationRenewalDTP.Location = new System.Drawing.Point(156, 159);
+            this.registrationRenewalDTP.Location = new System.Drawing.Point(143, 204);
+            this.registrationRenewalDTP.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.registrationRenewalDTP.Name = "registrationRenewalDTP";
-            this.registrationRenewalDTP.Size = new System.Drawing.Size(323, 26);
-            this.registrationRenewalDTP.TabIndex = 4;
+            this.registrationRenewalDTP.Size = new System.Drawing.Size(652, 26);
+            this.registrationRenewalDTP.TabIndex = 18;
             // 
             // registrationORDateDTP
             // 
             this.registrationORDateDTP.Enabled = false;
             this.registrationORDateDTP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.registrationORDateDTP.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.registrationORDateDTP.Location = new System.Drawing.Point(156, 124);
+            this.registrationORDateDTP.Location = new System.Drawing.Point(143, 159);
+            this.registrationORDateDTP.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.registrationORDateDTP.Name = "registrationORDateDTP";
-            this.registrationORDateDTP.Size = new System.Drawing.Size(323, 26);
-            this.registrationORDateDTP.TabIndex = 4;
+            this.registrationORDateDTP.Size = new System.Drawing.Size(652, 26);
+            this.registrationORDateDTP.TabIndex = 17;
             // 
             // registrationClearB
             // 
             this.registrationClearB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.registrationClearB.Location = new System.Drawing.Point(490, 90);
+            this.registrationClearB.Location = new System.Drawing.Point(803, 114);
+            this.registrationClearB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.registrationClearB.Name = "registrationClearB";
-            this.registrationClearB.Size = new System.Drawing.Size(75, 30);
-            this.registrationClearB.TabIndex = 8;
+            this.registrationClearB.Size = new System.Drawing.Size(112, 46);
+            this.registrationClearB.TabIndex = 23;
             this.registrationClearB.Text = "Clear";
             this.registrationClearB.UseVisualStyleBackColor = true;
             this.registrationClearB.Visible = false;
@@ -1359,10 +1460,11 @@ namespace VehicleMonitoringSystem
             // registrationCancelB
             // 
             this.registrationCancelB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.registrationCancelB.Location = new System.Drawing.Point(490, 56);
+            this.registrationCancelB.Location = new System.Drawing.Point(803, 62);
+            this.registrationCancelB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.registrationCancelB.Name = "registrationCancelB";
-            this.registrationCancelB.Size = new System.Drawing.Size(75, 30);
-            this.registrationCancelB.TabIndex = 8;
+            this.registrationCancelB.Size = new System.Drawing.Size(112, 46);
+            this.registrationCancelB.TabIndex = 22;
             this.registrationCancelB.Text = "Cancel";
             this.registrationCancelB.UseVisualStyleBackColor = true;
             this.registrationCancelB.Visible = false;
@@ -1371,10 +1473,11 @@ namespace VehicleMonitoringSystem
             // registrationEditB
             // 
             this.registrationEditB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.registrationEditB.Location = new System.Drawing.Point(490, 23);
+            this.registrationEditB.Location = new System.Drawing.Point(803, 11);
+            this.registrationEditB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.registrationEditB.Name = "registrationEditB";
-            this.registrationEditB.Size = new System.Drawing.Size(75, 30);
-            this.registrationEditB.TabIndex = 8;
+            this.registrationEditB.Size = new System.Drawing.Size(112, 46);
+            this.registrationEditB.TabIndex = 21;
             this.registrationEditB.Text = "Edit";
             this.registrationEditB.UseVisualStyleBackColor = true;
             this.registrationEditB.Click += new System.EventHandler(this.registrationEditB_Click);
@@ -1393,9 +1496,10 @@ namespace VehicleMonitoringSystem
             this.registrationLV.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.registrationLV.GridLines = true;
             this.registrationLV.HideSelection = false;
-            this.registrationLV.Location = new System.Drawing.Point(10, 285);
+            this.registrationLV.Location = new System.Drawing.Point(4, 363);
+            this.registrationLV.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.registrationLV.Name = "registrationLV";
-            this.registrationLV.Size = new System.Drawing.Size(1058, 381);
+            this.registrationLV.Size = new System.Drawing.Size(915, 281);
             this.registrationLV.TabIndex = 1;
             this.registrationLV.UseCompatibleStateImageBehavior = false;
             this.registrationLV.View = System.Windows.Forms.View.Details;
@@ -1413,12 +1517,12 @@ namespace VehicleMonitoringSystem
             // registrationNameHeader
             // 
             this.registrationNameHeader.Text = "Registered Name";
-            this.registrationNameHeader.Width = 255;
+            this.registrationNameHeader.Width = 229;
             // 
             // registrationORNumberHeader
             // 
             this.registrationORNumberHeader.Text = "OR Number";
-            this.registrationORNumberHeader.Width = 120;
+            this.registrationORNumberHeader.Width = 123;
             // 
             // registrationORDateHeader
             // 
@@ -1438,52 +1542,57 @@ namespace VehicleMonitoringSystem
             // registrationRemarksHeader
             // 
             this.registrationRemarksHeader.Text = "Remarks";
-            this.registrationRemarksHeader.Width = 182;
+            this.registrationRemarksHeader.Width = 135;
             // 
             // registrationAmountTB
             // 
             this.registrationAmountTB.Enabled = false;
             this.registrationAmountTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.registrationAmountTB.Location = new System.Drawing.Point(156, 194);
+            this.registrationAmountTB.Location = new System.Drawing.Point(143, 249);
+            this.registrationAmountTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.registrationAmountTB.Name = "registrationAmountTB";
-            this.registrationAmountTB.Size = new System.Drawing.Size(323, 26);
-            this.registrationAmountTB.TabIndex = 0;
-            this.registrationAmountTB.Text = "0.00";
+            this.registrationAmountTB.Size = new System.Drawing.Size(652, 26);
+            this.registrationAmountTB.TabIndex = 19;
+            this.registrationAmountTB.Text = " PHP 0.00";
             // 
             // registrationORNumberTB
             // 
             this.registrationORNumberTB.Enabled = false;
             this.registrationORNumberTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.registrationORNumberTB.Location = new System.Drawing.Point(156, 89);
+            this.registrationORNumberTB.Location = new System.Drawing.Point(143, 112);
+            this.registrationORNumberTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.registrationORNumberTB.MaxLength = 10;
             this.registrationORNumberTB.Name = "registrationORNumberTB";
-            this.registrationORNumberTB.Size = new System.Drawing.Size(323, 26);
-            this.registrationORNumberTB.TabIndex = 0;
+            this.registrationORNumberTB.Size = new System.Drawing.Size(652, 26);
+            this.registrationORNumberTB.TabIndex = 16;
             // 
             // registrationRegisteredNameTB
             // 
             this.registrationRegisteredNameTB.Enabled = false;
             this.registrationRegisteredNameTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.registrationRegisteredNameTB.Location = new System.Drawing.Point(156, 54);
+            this.registrationRegisteredNameTB.Location = new System.Drawing.Point(143, 67);
+            this.registrationRegisteredNameTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.registrationRegisteredNameTB.Name = "registrationRegisteredNameTB";
-            this.registrationRegisteredNameTB.Size = new System.Drawing.Size(323, 26);
-            this.registrationRegisteredNameTB.TabIndex = 0;
+            this.registrationRegisteredNameTB.Size = new System.Drawing.Size(652, 26);
+            this.registrationRegisteredNameTB.TabIndex = 15;
             // 
             // registrationPlateNumberTB
             // 
             this.registrationPlateNumberTB.Enabled = false;
             this.registrationPlateNumberTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.registrationPlateNumberTB.Location = new System.Drawing.Point(156, 19);
+            this.registrationPlateNumberTB.Location = new System.Drawing.Point(143, 21);
+            this.registrationPlateNumberTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.registrationPlateNumberTB.MaxLength = 8;
             this.registrationPlateNumberTB.Name = "registrationPlateNumberTB";
-            this.registrationPlateNumberTB.Size = new System.Drawing.Size(323, 26);
-            this.registrationPlateNumberTB.TabIndex = 0;
+            this.registrationPlateNumberTB.Size = new System.Drawing.Size(652, 26);
+            this.registrationPlateNumberTB.TabIndex = 14;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(77, 198);
+            this.label2.Location = new System.Drawing.Point(8, 253);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 18);
             this.label2.TabIndex = 1;
@@ -1493,7 +1602,8 @@ namespace VehicleMonitoringSystem
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(70, 165);
+            this.label25.Location = new System.Drawing.Point(8, 210);
+            this.label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(69, 18);
             this.label25.TabIndex = 1;
@@ -1503,7 +1613,8 @@ namespace VehicleMonitoringSystem
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(70, 130);
+            this.label24.Location = new System.Drawing.Point(8, 165);
+            this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(70, 18);
             this.label24.TabIndex = 1;
@@ -1513,7 +1624,8 @@ namespace VehicleMonitoringSystem
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(48, 93);
+            this.label22.Location = new System.Drawing.Point(8, 116);
+            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(92, 18);
             this.label22.TabIndex = 1;
@@ -1523,7 +1635,8 @@ namespace VehicleMonitoringSystem
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(13, 57);
+            this.label21.Location = new System.Drawing.Point(8, 71);
+            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(127, 18);
             this.label21.TabIndex = 1;
@@ -1533,7 +1646,8 @@ namespace VehicleMonitoringSystem
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(38, 23);
+            this.label20.Location = new System.Drawing.Point(8, 25);
+            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(102, 18);
             this.label20.TabIndex = 1;
@@ -1564,67 +1678,74 @@ namespace VehicleMonitoringSystem
             this.informationTP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.informationTP.ForeColor = System.Drawing.Color.Black;
             this.informationTP.Location = new System.Drawing.Point(4, 27);
+            this.informationTP.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.informationTP.Name = "informationTP";
-            this.informationTP.Size = new System.Drawing.Size(1071, 668);
+            this.informationTP.Size = new System.Drawing.Size(923, 649);
             this.informationTP.TabIndex = 4;
             this.informationTP.Text = "Vehicle Information";
             // 
             // issuedToTB
             // 
             this.issuedToTB.Enabled = false;
-            this.issuedToTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.issuedToTB.Location = new System.Drawing.Point(266, 259);
+            this.issuedToTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.issuedToTB.Location = new System.Drawing.Point(217, 486);
+            this.issuedToTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.issuedToTB.MaxLength = 9;
             this.issuedToTB.Name = "issuedToTB";
-            this.issuedToTB.Size = new System.Drawing.Size(593, 26);
-            this.issuedToTB.TabIndex = 31;
+            this.issuedToTB.Size = new System.Drawing.Size(668, 26);
+            this.issuedToTB.TabIndex = 9;
             // 
             // plateNumberTB
             // 
             this.plateNumberTB.Enabled = false;
-            this.plateNumberTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.plateNumberTB.Location = new System.Drawing.Point(266, 29);
+            this.plateNumberTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.plateNumberTB.Location = new System.Drawing.Point(217, 37);
+            this.plateNumberTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.plateNumberTB.MaxLength = 8;
             this.plateNumberTB.Name = "plateNumberTB";
-            this.plateNumberTB.Size = new System.Drawing.Size(593, 26);
-            this.plateNumberTB.TabIndex = 9;
+            this.plateNumberTB.Size = new System.Drawing.Size(668, 26);
+            this.plateNumberTB.TabIndex = 2;
             // 
             // registeredNameTB
             // 
             this.registeredNameTB.Enabled = false;
-            this.registeredNameTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.registeredNameTB.Location = new System.Drawing.Point(266, 61);
+            this.registeredNameTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.registeredNameTB.Location = new System.Drawing.Point(217, 98);
+            this.registeredNameTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.registeredNameTB.Name = "registeredNameTB";
-            this.registeredNameTB.Size = new System.Drawing.Size(593, 26);
-            this.registeredNameTB.TabIndex = 10;
+            this.registeredNameTB.Size = new System.Drawing.Size(668, 26);
+            this.registeredNameTB.TabIndex = 3;
             // 
             // crNumberTB
             // 
             this.crNumberTB.Enabled = false;
-            this.crNumberTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.crNumberTB.Location = new System.Drawing.Point(266, 93);
+            this.crNumberTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.crNumberTB.Location = new System.Drawing.Point(217, 162);
+            this.crNumberTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.crNumberTB.MaxLength = 9;
             this.crNumberTB.Name = "crNumberTB";
-            this.crNumberTB.Size = new System.Drawing.Size(593, 26);
-            this.crNumberTB.TabIndex = 12;
+            this.crNumberTB.Size = new System.Drawing.Size(668, 26);
+            this.crNumberTB.TabIndex = 4;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label10.Location = new System.Drawing.Point(154, 263);
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(33, 489);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(77, 18);
+            this.label10.Size = new System.Drawing.Size(83, 20);
             this.label10.TabIndex = 30;
             this.label10.Text = "Issued To:";
             // 
             // clearB
             // 
-            this.clearB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.clearB.Location = new System.Drawing.Point(449, 311);
+            this.clearB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clearB.Location = new System.Drawing.Point(518, 569);
+            this.clearB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.clearB.Name = "clearB";
-            this.clearB.Size = new System.Drawing.Size(80, 35);
-            this.clearB.TabIndex = 29;
+            this.clearB.Size = new System.Drawing.Size(120, 54);
+            this.clearB.TabIndex = 10;
             this.clearB.Text = "Clear";
             this.clearB.UseVisualStyleBackColor = true;
             this.clearB.Visible = false;
@@ -1633,7 +1754,7 @@ namespace VehicleMonitoringSystem
             // categoryCB
             // 
             this.categoryCB.Enabled = false;
-            this.categoryCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.categoryCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.categoryCB.FormattingEnabled = true;
             this.categoryCB.Items.AddRange(new object[] {
             "Company Service",
@@ -1643,19 +1764,21 @@ namespace VehicleMonitoringSystem
             "Double Tire",
             "Single Tire",
             "Closed Van"});
-            this.categoryCB.Location = new System.Drawing.Point(266, 225);
+            this.categoryCB.Location = new System.Drawing.Point(217, 423);
+            this.categoryCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.categoryCB.Name = "categoryCB";
-            this.categoryCB.Size = new System.Drawing.Size(593, 28);
-            this.categoryCB.TabIndex = 23;
+            this.categoryCB.Size = new System.Drawing.Size(668, 28);
+            this.categoryCB.TabIndex = 8;
             this.categoryCB.Text = " ";
             // 
             // cancelB
             // 
-            this.cancelB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.cancelB.Location = new System.Drawing.Point(535, 311);
+            this.cancelB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelB.Location = new System.Drawing.Point(646, 569);
+            this.cancelB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cancelB.Name = "cancelB";
-            this.cancelB.Size = new System.Drawing.Size(80, 35);
-            this.cancelB.TabIndex = 28;
+            this.cancelB.Size = new System.Drawing.Size(120, 54);
+            this.cancelB.TabIndex = 11;
             this.cancelB.Text = "Cancel";
             this.cancelB.UseVisualStyleBackColor = true;
             this.cancelB.Visible = false;
@@ -1663,11 +1786,12 @@ namespace VehicleMonitoringSystem
             // 
             // editB
             // 
-            this.editB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.editB.Location = new System.Drawing.Point(621, 311);
+            this.editB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editB.Location = new System.Drawing.Point(776, 569);
+            this.editB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.editB.Name = "editB";
-            this.editB.Size = new System.Drawing.Size(80, 35);
-            this.editB.TabIndex = 27;
+            this.editB.Size = new System.Drawing.Size(120, 54);
+            this.editB.TabIndex = 12;
             this.editB.Text = "Edit";
             this.editB.UseVisualStyleBackColor = true;
             this.editB.Click += new System.EventHandler(this.editB_Click);
@@ -1675,18 +1799,19 @@ namespace VehicleMonitoringSystem
             // crDateDTP
             // 
             this.crDateDTP.Enabled = false;
-            this.crDateDTP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.crDateDTP.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.crDateDTP.Location = new System.Drawing.Point(266, 125);
+            this.crDateDTP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.crDateDTP.Location = new System.Drawing.Point(217, 226);
+            this.crDateDTP.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.crDateDTP.Name = "crDateDTP";
-            this.crDateDTP.Size = new System.Drawing.Size(593, 26);
-            this.crDateDTP.TabIndex = 26;
+            this.crDateDTP.Size = new System.Drawing.Size(668, 26);
+            this.crDateDTP.TabIndex = 5;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(122, 32);
+            this.label5.Location = new System.Drawing.Point(33, 40);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(109, 20);
             this.label5.TabIndex = 20;
@@ -1695,7 +1820,7 @@ namespace VehicleMonitoringSystem
             // listingCB
             // 
             this.listingCB.Enabled = false;
-            this.listingCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.listingCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listingCB.FormattingEnabled = true;
             this.listingCB.Items.AddRange(new object[] {
             "BMW",
@@ -1707,10 +1832,11 @@ namespace VehicleMonitoringSystem
             "Toyota",
             "Subaru",
             "Kia"});
-            this.listingCB.Location = new System.Drawing.Point(266, 157);
+            this.listingCB.Location = new System.Drawing.Point(217, 290);
+            this.listingCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.listingCB.Name = "listingCB";
-            this.listingCB.Size = new System.Drawing.Size(593, 28);
-            this.listingCB.TabIndex = 24;
+            this.listingCB.Size = new System.Drawing.Size(668, 28);
+            this.listingCB.TabIndex = 6;
             // 
             // brandCB
             // 
@@ -1727,16 +1853,18 @@ namespace VehicleMonitoringSystem
             "Toyota",
             "Subaru",
             "Kia"});
-            this.brandCB.Location = new System.Drawing.Point(266, 191);
+            this.brandCB.Location = new System.Drawing.Point(217, 358);
+            this.brandCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.brandCB.Name = "brandCB";
-            this.brandCB.Size = new System.Drawing.Size(593, 28);
-            this.brandCB.TabIndex = 24;
+            this.brandCB.Size = new System.Drawing.Size(668, 28);
+            this.brandCB.TabIndex = 7;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(94, 64);
+            this.label9.Location = new System.Drawing.Point(33, 101);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(137, 20);
             this.label9.TabIndex = 21;
@@ -1745,50 +1873,55 @@ namespace VehicleMonitoringSystem
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label18.Location = new System.Drawing.Point(159, 229);
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(33, 426);
+            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(72, 18);
+            this.label18.Size = new System.Drawing.Size(77, 20);
             this.label18.TabIndex = 17;
             this.label18.Text = "Category:";
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label16.Location = new System.Drawing.Point(180, 195);
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(33, 361);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(51, 18);
+            this.label16.Size = new System.Drawing.Size(56, 20);
             this.label16.TabIndex = 15;
             this.label16.Text = "Brand:";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label13.Location = new System.Drawing.Point(140, 97);
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(33, 165);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(91, 18);
+            this.label13.Size = new System.Drawing.Size(96, 20);
             this.label13.TabIndex = 14;
             this.label13.Text = "CR Number:";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label15.Location = new System.Drawing.Point(177, 161);
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(33, 293);
+            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(54, 18);
+            this.label15.Size = new System.Drawing.Size(59, 20);
             this.label15.TabIndex = 19;
             this.label15.Text = "Listing:";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label14.Location = new System.Drawing.Point(162, 131);
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(33, 231);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(69, 18);
+            this.label14.Size = new System.Drawing.Size(75, 20);
             this.label14.TabIndex = 13;
             this.label14.Text = "CR Date:";
             // 
@@ -1802,11 +1935,12 @@ namespace VehicleMonitoringSystem
             this.informationTC.Controls.Add(this.maintenanceTB);
             this.informationTC.Controls.Add(this.statementTP);
             this.informationTC.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.informationTC.Location = new System.Drawing.Point(271, 27);
+            this.informationTC.Location = new System.Drawing.Point(406, 42);
+            this.informationTC.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.informationTC.Name = "informationTC";
             this.informationTC.SelectedIndex = 0;
-            this.informationTC.Size = new System.Drawing.Size(1079, 699);
-            this.informationTC.TabIndex = 5;
+            this.informationTC.Size = new System.Drawing.Size(938, 681);
+            this.informationTC.TabIndex = 1;
             // 
             // maintenanceTB
             // 
@@ -1820,9 +1954,10 @@ namespace VehicleMonitoringSystem
             this.maintenanceTB.Controls.Add(this.label27);
             this.maintenanceTB.Controls.Add(this.maintenanceLV);
             this.maintenanceTB.Location = new System.Drawing.Point(4, 27);
+            this.maintenanceTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.maintenanceTB.Name = "maintenanceTB";
-            this.maintenanceTB.Padding = new System.Windows.Forms.Padding(3);
-            this.maintenanceTB.Size = new System.Drawing.Size(1071, 668);
+            this.maintenanceTB.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.maintenanceTB.Size = new System.Drawing.Size(923, 649);
             this.maintenanceTB.TabIndex = 6;
             this.maintenanceTB.Text = "Maintenance";
             this.maintenanceTB.UseVisualStyleBackColor = true;
@@ -1837,18 +1972,20 @@ namespace VehicleMonitoringSystem
             "For Repair",
             "For Replacement",
             "On Going Repair"});
-            this.statusCB.Location = new System.Drawing.Point(156, 93);
+            this.statusCB.Location = new System.Drawing.Point(125, 115);
+            this.statusCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.statusCB.Name = "statusCB";
-            this.statusCB.Size = new System.Drawing.Size(294, 28);
-            this.statusCB.TabIndex = 57;
+            this.statusCB.Size = new System.Drawing.Size(670, 28);
+            this.statusCB.TabIndex = 60;
             // 
             // label45
             // 
             this.label45.AutoSize = true;
-            this.label45.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label45.Location = new System.Drawing.Point(75, 96);
+            this.label45.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label45.Location = new System.Drawing.Point(8, 118);
+            this.label45.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(54, 18);
+            this.label45.Size = new System.Drawing.Size(60, 20);
             this.label45.TabIndex = 56;
             this.label45.Text = "Status:";
             // 
@@ -1858,28 +1995,31 @@ namespace VehicleMonitoringSystem
             this.plateNumberCB.Enabled = false;
             this.plateNumberCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.plateNumberCB.FormattingEnabled = true;
-            this.plateNumberCB.Location = new System.Drawing.Point(156, 25);
+            this.plateNumberCB.Location = new System.Drawing.Point(125, 20);
+            this.plateNumberCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.plateNumberCB.Name = "plateNumberCB";
-            this.plateNumberCB.Size = new System.Drawing.Size(294, 28);
-            this.plateNumberCB.TabIndex = 55;
+            this.plateNumberCB.Size = new System.Drawing.Size(670, 28);
+            this.plateNumberCB.TabIndex = 58;
             // 
             // label44
             // 
             this.label44.AutoSize = true;
-            this.label44.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label44.Location = new System.Drawing.Point(26, 28);
+            this.label44.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label44.Location = new System.Drawing.Point(8, 23);
+            this.label44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(102, 18);
+            this.label44.Size = new System.Drawing.Size(109, 20);
             this.label44.TabIndex = 54;
             this.label44.Text = "Plate Number:";
             // 
             // maintenanceCancelB
             // 
-            this.maintenanceCancelB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.maintenanceCancelB.Location = new System.Drawing.Point(492, 59);
+            this.maintenanceCancelB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.maintenanceCancelB.Location = new System.Drawing.Point(803, 61);
+            this.maintenanceCancelB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.maintenanceCancelB.Name = "maintenanceCancelB";
-            this.maintenanceCancelB.Size = new System.Drawing.Size(75, 27);
-            this.maintenanceCancelB.TabIndex = 52;
+            this.maintenanceCancelB.Size = new System.Drawing.Size(112, 42);
+            this.maintenanceCancelB.TabIndex = 62;
             this.maintenanceCancelB.Text = "Cancel";
             this.maintenanceCancelB.UseVisualStyleBackColor = true;
             this.maintenanceCancelB.Visible = false;
@@ -1887,11 +2027,12 @@ namespace VehicleMonitoringSystem
             // 
             // editMaintenanceB
             // 
-            this.editMaintenanceB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.editMaintenanceB.Location = new System.Drawing.Point(492, 26);
+            this.editMaintenanceB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editMaintenanceB.Location = new System.Drawing.Point(803, 10);
+            this.editMaintenanceB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.editMaintenanceB.Name = "editMaintenanceB";
-            this.editMaintenanceB.Size = new System.Drawing.Size(75, 27);
-            this.editMaintenanceB.TabIndex = 53;
+            this.editMaintenanceB.Size = new System.Drawing.Size(112, 42);
+            this.editMaintenanceB.TabIndex = 61;
             this.editMaintenanceB.Text = "Edit";
             this.editMaintenanceB.UseVisualStyleBackColor = true;
             this.editMaintenanceB.Click += new System.EventHandler(this.editMaintenanceB_Click);
@@ -1902,18 +2043,20 @@ namespace VehicleMonitoringSystem
             this.partCB.Enabled = false;
             this.partCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.partCB.FormattingEnabled = true;
-            this.partCB.Location = new System.Drawing.Point(156, 59);
+            this.partCB.Location = new System.Drawing.Point(125, 68);
+            this.partCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.partCB.Name = "partCB";
-            this.partCB.Size = new System.Drawing.Size(294, 28);
-            this.partCB.TabIndex = 50;
+            this.partCB.Size = new System.Drawing.Size(670, 28);
+            this.partCB.TabIndex = 59;
             // 
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label27.Location = new System.Drawing.Point(93, 62);
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(8, 71);
+            this.label27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(39, 18);
+            this.label27.Size = new System.Drawing.Size(42, 20);
             this.label27.TabIndex = 48;
             this.label27.Text = "Part:";
             // 
@@ -1923,11 +2066,13 @@ namespace VehicleMonitoringSystem
             this.maintenanceIDHeader,
             this.maintenancePartHeader,
             this.ramarksHeader});
+            this.maintenanceLV.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.maintenanceLV.FullRowSelect = true;
             this.maintenanceLV.HideSelection = false;
-            this.maintenanceLV.Location = new System.Drawing.Point(31, 144);
+            this.maintenanceLV.Location = new System.Drawing.Point(4, 153);
+            this.maintenanceLV.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.maintenanceLV.Name = "maintenanceLV";
-            this.maintenanceLV.Size = new System.Drawing.Size(441, 356);
+            this.maintenanceLV.Size = new System.Drawing.Size(915, 491);
             this.maintenanceLV.TabIndex = 47;
             this.maintenanceLV.UseCompatibleStateImageBehavior = false;
             this.maintenanceLV.View = System.Windows.Forms.View.Details;
@@ -1958,10 +2103,9 @@ namespace VehicleMonitoringSystem
             this.statementTP.Controls.Add(this.supplierSortCB);
             this.statementTP.Controls.Add(this.label12);
             this.statementTP.Location = new System.Drawing.Point(4, 27);
-            this.statementTP.Margin = new System.Windows.Forms.Padding(2);
             this.statementTP.Name = "statementTP";
-            this.statementTP.Padding = new System.Windows.Forms.Padding(2);
-            this.statementTP.Size = new System.Drawing.Size(1071, 668);
+            this.statementTP.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.statementTP.Size = new System.Drawing.Size(930, 650);
             this.statementTP.TabIndex = 5;
             this.statementTP.Text = "Statement";
             this.statementTP.UseVisualStyleBackColor = true;
@@ -1980,9 +2124,10 @@ namespace VehicleMonitoringSystem
             this.listView1.FullRowSelect = true;
             this.listView1.GridLines = true;
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(498, 71);
+            this.listView1.Location = new System.Drawing.Point(473, 74);
+            this.listView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(453, 537);
+            this.listView1.Size = new System.Drawing.Size(450, 510);
             this.listView1.TabIndex = 52;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -2017,14 +2162,14 @@ namespace VehicleMonitoringSystem
             // columnHeader6
             // 
             this.columnHeader6.Text = "Status";
+            this.columnHeader6.Width = 77;
             // 
             // sortClearB
             // 
-            this.sortClearB.Location = new System.Drawing.Point(395, 25);
-            this.sortClearB.Margin = new System.Windows.Forms.Padding(2);
+            this.sortClearB.Location = new System.Drawing.Point(814, 17);
             this.sortClearB.Name = "sortClearB";
-            this.sortClearB.Size = new System.Drawing.Size(68, 27);
-            this.sortClearB.TabIndex = 51;
+            this.sortClearB.Size = new System.Drawing.Size(102, 42);
+            this.sortClearB.TabIndex = 64;
             this.sortClearB.Text = "Clear";
             this.sortClearB.UseVisualStyleBackColor = true;
             this.sortClearB.Click += new System.EventHandler(this.sortClearB_Click);
@@ -2043,9 +2188,10 @@ namespace VehicleMonitoringSystem
             this.statementLV.FullRowSelect = true;
             this.statementLV.GridLines = true;
             this.statementLV.HideSelection = false;
-            this.statementLV.Location = new System.Drawing.Point(10, 71);
+            this.statementLV.Location = new System.Drawing.Point(7, 74);
+            this.statementLV.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.statementLV.Name = "statementLV";
-            this.statementLV.Size = new System.Drawing.Size(453, 537);
+            this.statementLV.Size = new System.Drawing.Size(450, 510);
             this.statementLV.TabIndex = 50;
             this.statementLV.UseCompatibleStateImageBehavior = false;
             this.statementLV.View = System.Windows.Forms.View.Details;
@@ -2064,7 +2210,7 @@ namespace VehicleMonitoringSystem
             // invoice
             // 
             this.invoice.Text = "Invoice No.";
-            this.invoice.Width = 118;
+            this.invoice.Width = 113;
             // 
             // type
             // 
@@ -2081,15 +2227,15 @@ namespace VehicleMonitoringSystem
             // statusHeader
             // 
             this.statusHeader.Text = "Status";
+            this.statusHeader.Width = 82;
             // 
             // totalDueTB
             // 
             this.totalDueTB.Enabled = false;
             this.totalDueTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalDueTB.Location = new System.Drawing.Point(890, 626);
-            this.totalDueTB.Margin = new System.Windows.Forms.Padding(2);
+            this.totalDueTB.Location = new System.Drawing.Point(649, 605);
             this.totalDueTB.Name = "totalDueTB";
-            this.totalDueTB.Size = new System.Drawing.Size(179, 30);
+            this.totalDueTB.Size = new System.Drawing.Size(266, 30);
             this.totalDueTB.TabIndex = 49;
             this.totalDueTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -2097,8 +2243,7 @@ namespace VehicleMonitoringSystem
             // 
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.Location = new System.Drawing.Point(817, 631);
-            this.label26.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label26.Location = new System.Drawing.Point(540, 613);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(69, 20);
             this.label26.TabIndex = 48;
@@ -2108,68 +2253,40 @@ namespace VehicleMonitoringSystem
             // 
             this.supplierSortCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.supplierSortCB.FormattingEnabled = true;
-            this.supplierSortCB.Location = new System.Drawing.Point(79, 26);
-            this.supplierSortCB.Margin = new System.Windows.Forms.Padding(2);
+            this.supplierSortCB.Location = new System.Drawing.Point(119, 26);
             this.supplierSortCB.Name = "supplierSortCB";
-            this.supplierSortCB.Size = new System.Drawing.Size(296, 26);
-            this.supplierSortCB.TabIndex = 47;
+            this.supplierSortCB.Size = new System.Drawing.Size(666, 26);
+            this.supplierSortCB.TabIndex = 63;
             this.supplierSortCB.SelectedIndexChanged += new System.EventHandler(this.SupplierSortCB_SelectedIndexChanged);
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(6, 28);
+            this.label12.Location = new System.Drawing.Point(22, 28);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(71, 20);
             this.label12.TabIndex = 45;
             this.label12.Text = "Supplier:";
             // 
-            // repairInvoiceNumberCB
-            // 
-            this.repairInvoiceNumberCB.Enabled = false;
-            this.repairInvoiceNumberCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.repairInvoiceNumberCB.FormattingEnabled = true;
-            this.repairInvoiceNumberCB.Items.AddRange(new object[] {
-            "BMW",
-            "GMC",
-            "Ford",
-            "Mitsubishi",
-            "Fuso",
-            "Isuzu",
-            "Toyota",
-            "Subaru",
-            "Kia"});
-            this.repairInvoiceNumberCB.Location = new System.Drawing.Point(162, 149);
-            this.repairInvoiceNumberCB.Name = "repairInvoiceNumberCB";
-            this.repairInvoiceNumberCB.Size = new System.Drawing.Size(304, 28);
-            this.repairInvoiceNumberCB.TabIndex = 61;
-            // 
-            // fuelInvoiceNumberCB
-            // 
-            this.fuelInvoiceNumberCB.Enabled = false;
-            this.fuelInvoiceNumberCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fuelInvoiceNumberCB.FormattingEnabled = true;
-            this.fuelInvoiceNumberCB.Location = new System.Drawing.Point(163, 155);
-            this.fuelInvoiceNumberCB.Name = "fuelInvoiceNumberCB";
-            this.fuelInvoiceNumberCB.Size = new System.Drawing.Size(294, 28);
-            this.fuelInvoiceNumberCB.TabIndex = 3;
-            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(899, 494);
+            this.ClientSize = new System.Drawing.Size(914, 494);
             this.Controls.Add(this.vehicleListLV);
             this.Controls.Add(this.informationTC);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TG Home Builders Vehicle Monitoring System";
@@ -2328,9 +2445,9 @@ namespace VehicleMonitoringSystem
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.ComboBox supplierSortCB;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ToolStripMenuItem maintenanceTSM;
-        private System.Windows.Forms.ToolStripMenuItem paymentTSM;
-        private System.Windows.Forms.ToolStripMenuItem supplierTSM;
+        private System.Windows.Forms.ToolStripMenuItem newMaintenanceTSM;
+        private System.Windows.Forms.ToolStripMenuItem newPaymentTSM;
+        private System.Windows.Forms.ToolStripMenuItem newSupplierTSM;
         private System.Windows.Forms.TabPage maintenanceTB;
         private System.Windows.Forms.Button maintenanceCancelB;
         private System.Windows.Forms.Button editMaintenanceB;
@@ -2363,7 +2480,7 @@ namespace VehicleMonitoringSystem
         private System.Windows.Forms.ColumnHeader repairSupplierHeader;
         private System.Windows.Forms.ColumnHeader repairInvoiceNumberSupplier;
         private System.Windows.Forms.ColumnHeader repairAmountHeader;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutTSM;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.ColumnHeader ramarksHeader;
         private System.Windows.Forms.ComboBox plateNumberCB;
