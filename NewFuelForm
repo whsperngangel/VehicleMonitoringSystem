@@ -26,60 +26,59 @@ namespace VehicleMonitoringSystem
         private DateTime date;
         private double amount;
         private Fuel _fuel = new Fuel();
+        private Statement _statement = new Statement();
+        private Vehicle _vehicle = new Vehicle();
         private Supplier _supplier = new Supplier();
         private List<Fuel> _fuels = new List<Fuel>();
+        private List<Vehicle> _vehicles = new List<Vehicle>();
+        private List<Supplier> _Supplier = new List<Supplier>();
         #endregion
 
         #region  Constructors
         public NewFuelForm()
         {
             InitializeComponent();
-            fuelIDTB.Text = _fuel.CreateFuel().ToString();
             ComboBoxLoad();
         }
         #endregion
 
-        #region Fuel Methods
+        #region Gas Methods
+        
         private void ShowData(string plateNumber)
         {
             _fuel = _fuel.RetrieveFuelInfo(plateNumber);
-
-            fuelIDTB.Text = _fuel.FuelID.ToString();
             plateNumberCB.Text = _fuel.PlateNumber;
             dateDTP.Value = _fuel.FuelDate;
             typeOfFuelCB.Text = _fuel.TypeOfFuel;
            // supplierCB.Text = _fuel.SupplierID;
             amountTB.Text = _fuel.Amount.ToString("N2");
         }
-        private void NewFuelForm_Load(object sender, EventArgs e)
-        {
 
-        }
+        //here din =)
         private void ComboBoxLoad()
         {
             _fuels = _fuel.RetrieveFuelList();
             foreach (Fuel f in _fuels)
             {
-                plateNumberCB.Items.Add(f.PlateNumber);
                 typeOfFuelCB.Items.Add(f.TypeOfFuel);
-               // supplierCB.Items.Add(f.Supplier);
+            }
+            _vehicles = _vehicle.RetrieveVehicleList();
+            foreach (Vehicle v in _vehicles)
+            {
+                plateNumberCB.Items.Add(v.PlateNumber);
+            }
+            _Supplier = _supplier.RetrieveSupplierList();
+            foreach (Supplier s in _Supplier)
+            {
+                supplierCB.Items.Add(s.SupplierName);
             }
         }
         //Entry Buttons
-        private void newB_Click(object sender, EventArgs e)
-        {
-            NewSupplierForm newSupplierForm = new NewSupplierForm();
-            newSupplierForm.ShowDialog();
-        }
-        private void doneB_Click(object sender, EventArgs e)
+        private void saveB_Click(object sender, EventArgs e)
         {
             if (plateNumberCB.Text == "")
             {
                 MessageBox.Show("Please choose a PLATE NUMBER", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else if (vehicleCB.Text == "")
-            {
-                MessageBox.Show("Please choose a VEHICLE", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else if (typeOfFuelCB.Text == "")
             {
@@ -101,25 +100,27 @@ namespace VehicleMonitoringSystem
             {
                 try
                 {
-                    fuelID = int.Parse(fuelIDTB.Text.Trim());
+                    fuelID = _fuel.CreateFuelID();
                     plateNumber = plateNumberCB.Text.Trim();
-                    vehicle = vehicleCB.Text.Trim();
                     date = dateDTP.Value;
                     typeOfFuel = typeOfFuelCB.Text.Trim();
                     invoiceNumber = invoiceNumberTB.Text.Trim();
                     supplierID = _supplier.RetrieveSupplierID(supplierCB.Text.Trim());
                     amount = double.Parse(amountTB.Text.Trim());
+                    string type = "Fuel";
+                    string status = "Unpaid";
 
                     _fuel = new Fuel(fuelID,
-                                     plateNumber,
+                                     plateNumber, //some part here
                                      date,
                                      typeOfFuel,
                                      invoiceNumber,
                                      supplierID,
-                                     amount,
-                                     paid);
+                                     amount);
+                    _statement = new Statement();
 
                     _fuel.InsertFuel(_fuel);
+                 //   _statement.InsertStatement(_statement.CreateStatementID(), supplierID, type, invoiceNumber, status);
                     Close();
                 }
                 catch (Exception ex)
@@ -132,65 +133,17 @@ namespace VehicleMonitoringSystem
         {
             Close();
         }
-        private void payB_Click(object sender, EventArgs e)
+        //here
+        private void clearB_Click(object sender, EventArgs e)
         {
-            if (plateNumberCB.Text == "")
-            {
-                MessageBox.Show("Please choose a PLATE NUMBER", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else if (vehicleCB.Text == "")
-            {
-                MessageBox.Show("Please choose a VEHICLE", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else if (typeOfFuelCB.Text == "")
-            {
-                MessageBox.Show("Please choose the TYPE OF FUEL", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else if (invoiceNumberTB.Text == "")
-            {
-                MessageBox.Show("Please insert an INVOICE NUMBER", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else if (supplierCB.Text == "")
-            {
-                MessageBox.Show("Please choose a SUPPLIER/n If the SUPPLIER does not exist, create NEW SUPPLIER", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else if (amountTB.Text == "")
-            {
-                MessageBox.Show("Please insert the AMOUNT", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
-            {
-                try
-                {
-                    fuelID = int.Parse(fuelIDTB.Text.Trim());
-                    plateNumber = plateNumberCB.Text.Trim();
-                    vehicle = vehicleCB.Text.Trim();
-                    date = dateDTP.Value;
-                    typeOfFuel = typeOfFuelCB.Text.Trim();
-                    invoiceNumber = invoiceNumberTB.Text.Trim();
-                    supplierID = _supplier.RetrieveSupplierID(supplierCB.Text.Trim());
-                    amount = double.Parse(amountTB.Text.Trim());
-
-                    _fuel = new Fuel(fuelID,
-                                     plateNumber,
-                                     date,
-                                     typeOfFuel,
-                                     invoiceNumber,
-                                     supplierID,
-                                     amount,
-                                     paid);
-
-                    _fuel.InsertFuel(_fuel);
-                    NewPaymentForm newPaymentForm = new NewPaymentForm();
-                    newPaymentForm.ShowDialog();
-                    Close();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-            }
+            plateNumberCB.Text = "";
+            dateDTP.Value = DateTime.Now;
+            typeOfFuelCB.Text = "";
+            supplierCB.Text = "";
+            amountTB.Text = "";
+            invoiceNumberTB.Text = "";
         }
         #endregion
     }
+    //end
 }
