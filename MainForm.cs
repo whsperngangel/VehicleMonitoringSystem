@@ -41,9 +41,8 @@ namespace VehicleMonitoringSystem
                        _repairInvoiceNumber = "",
                        _invoiceNumber = "",
                        _conditionString1 = "",
-                       _type,
-                       _viewStatus;
-        private bool _fuelPaid = false, _status = false; //added
+                       _type, _status;
+        private bool _fuelPaid = false; //added
         private double _amount,
                        _insuranceAmount,
                         _fuelAmount,
@@ -79,7 +78,7 @@ namespace VehicleMonitoringSystem
         List<Repair>       _repairs = new List<Repair>();
         List<RepairDetail> _repairDetails = new List<RepairDetail>();
         List<Fuel>         _fuels = new List<Fuel>();
-        List<Supplier> _suppliers = new List<Supplier>();
+        List<Supplier> _Supplier = new List<Supplier>();
         List<Statement> _statements = new List<Statement>();
         List<Part> _parts = new List<Part>();
         #endregion
@@ -95,6 +94,7 @@ namespace VehicleMonitoringSystem
         }
         #endregion
 
+        #region UI Methods
         #region Populate ListViews
         public void ListViewLoad()
         {
@@ -107,8 +107,8 @@ namespace VehicleMonitoringSystem
         }
         private void ComboBoxLoad()
         {
-            _suppliers = _supplier.RetrieveSupplierList();
-            foreach (Supplier s in _suppliers)
+            _Supplier = _supplier.RetrieveSupplierList();
+            foreach (Supplier s in _Supplier)
             {
                 repairSupplierCB.Items.Add(s.SupplierName);
                 supplierSortCB.Items.Add(s.SupplierName);
@@ -124,6 +124,7 @@ namespace VehicleMonitoringSystem
                 plateNumberCB.Items.Add(v.PlateNumber);
             }
         }
+        //dito
         private void MaintenanceListLoad(string plateNumber)
         {
             maintenanceLV.Items.Clear();
@@ -135,23 +136,14 @@ namespace VehicleMonitoringSystem
                 _partID = m.PartID;
                 _status = m.Status;
 
-                _partDescription = _part.RetrievePartInfo(_partID).Description;
-                if (_status == false)
-                {
-                    _viewStatus = "Unrepaired";
-                }
-                else
-                {
-                    _viewStatus = "Repaired";
-                }
-
                 ListViewItem maintenanceList = new ListViewItem(_maintenanceID.ToString());
-                maintenanceList.SubItems.Add(_partDescription);
-                maintenanceList.SubItems.Add(_viewStatus);
+                maintenanceList.SubItems.Add(_part.RetrievePartInfo(_partID).Description);
+                maintenanceList.SubItems.Add(_status);
 
                 maintenanceLV.Items.Add(maintenanceList);
             }
         }
+        //doon
         public void LoadRegistration(string plateNumber)
         {
             _registrations = _registration.RetrieveRegistrationList(plateNumber);
@@ -263,25 +255,16 @@ namespace VehicleMonitoringSystem
         //dito
         public void LoadALLStatement()
         {
-            totalDueTB.Text = "";
-            _totalAmt = 0;
-            statementLV.Items.Clear();
-            LoadFuelStatement();
-            LoadRepairStatement();
-            LoadRepairDetailStatement();
-        }
-        public void LoadFuelStatement()
-        {
-            _statements = _statement.RetrieveFuelStatement(_conditionString1);
+            _statements = _statement.RetrieveStatementList(_conditionString1);
             _totalFuel = 0;
             foreach (Statement statement in _statements)
             {
 
+                _statementID = statement.StatementID;
                 _supplierID = statement.SupplierID;
-                _fuelID = statement.ID;
-                _invoiceNumber = statement.InvoiceNumber;
-                _amount = statement.AmountDue;
                 _type = statement.Type;
+                _invoiceNumber = statement.InvoiceNumber;
+                _status = statement.Status;
                 _totalFuel += statement.AmountDue;
 
 
@@ -295,60 +278,59 @@ namespace VehicleMonitoringSystem
 
             }
         }
-        public void LoadRepairStatement()
-        {
-            _statements = _statement.RetrieveRepairStatement(_conditionString1);
-            _totalRepair = 0;
-            foreach (Statement statement in _statements)
-            {
-                _supplierID = statement.SupplierID;
-                _repairID = statement.ID;
-                _invoiceNumber = statement.InvoiceNumber;
-                _type = statement.Type;
-                _repairAmount = statement.AmountDue;
-                _totalRepair += statement.AmountDue;
+        //public void LoadRepairStatement()
+        //{
+        //    _statements = _statement.RetrieveRepairStatement(_conditionString1);
+        //    _totalRepair = 0;
+        //    foreach (Statement statement in _statements)
+        //    {
+        //        _supplierID = statement.SupplierID;
+        //        _repairID = statement.ID;
+        //        _invoiceNumber = statement.InvoiceNumber;
+        //        _type = statement.Type;
+        //        _repairAmount = statement.AmountDue;
+        //        _totalRepair += statement.AmountDue;
 
-                ListViewItem searchStatement = new ListViewItem(_supplierID.ToString());
-                searchStatement.SubItems.Add(_repairID.ToString());
-                searchStatement.SubItems.Add(_invoiceNumber);
-                searchStatement.SubItems.Add(_type);
-                searchStatement.SubItems.Add(_repairAmount.ToString("N2"));
+        //        ListViewItem searchStatement = new ListViewItem(_supplierID.ToString());
+        //        searchStatement.SubItems.Add(_repairID.ToString());
+        //        searchStatement.SubItems.Add(_invoiceNumber);
+        //        searchStatement.SubItems.Add(_type);
+        //        searchStatement.SubItems.Add(_repairAmount.ToString("N2"));
 
-                statementLV.Items.Add(searchStatement);
-            }
-        }
-        public void LoadRepairDetailStatement()
-        {
-            _statements = _statement.RetrieveRepairDetailStatement(_conditionString1);
-            _totalPart = 0;
-            foreach (Statement statement in _statements)
-            {
-                _supplierID = statement.SupplierID;
-                _partID = statement.ID;
-                _invoiceNumber = statement.InvoiceNumber;
-                _type = statement.Type;
-                _repairAmount = statement.AmountDue;
-                _totalPart += statement.AmountDue;
+        //        statementLV.Items.Add(searchStatement);
+        //    }
+        //}
+        //public void LoadRepairDetailStatement()
+        //{
+        //    _statements = _statement.RetrieveRepairDetailStatement(_conditionString1);
+        //    _totalPart = 0;
+        //    foreach (Statement statement in _statements)
+        //    {
+        //        _supplierID = statement.SupplierID;
+        //        _partID = statement.ID;
+        //        _invoiceNumber = statement.InvoiceNumber;
+        //        _type = statement.Type;
+        //        _repairAmount = statement.AmountDue;
+        //        _totalPart += statement.AmountDue;
 
-                ListViewItem searchStatement = new ListViewItem(_supplierID.ToString());
-                searchStatement.SubItems.Add(_partID.ToString());
-                searchStatement.SubItems.Add(_invoiceNumber);
-                searchStatement.SubItems.Add(_type);
-                searchStatement.SubItems.Add(_repairAmount.ToString("N2"));
+        //        ListViewItem searchStatement = new ListViewItem(_supplierID.ToString());
+        //        searchStatement.SubItems.Add(_partID.ToString());
+        //        searchStatement.SubItems.Add(_invoiceNumber);
+        //        searchStatement.SubItems.Add(_type);
+        //        searchStatement.SubItems.Add(_repairAmount.ToString("N2"));
 
-                statementLV.Items.Add(searchStatement);
-            }
-        }
+        //        statementLV.Items.Add(searchStatement);
+        //    }
+        //}
         //doon
         #endregion
-
-        #region ShowData Add Compute
+        //dito
         private void ShowData(string plateNumber)
         {
-            LoadRegistration(_plateNumber);
-            LoadInsurance(_plateNumber);
-            LoadRepair(_plateNumber);
-            Loadfuel(_plateNumber);
+            LoadRegistration(plateNumber);
+            LoadInsurance(plateNumber);
+            LoadRepair(plateNumber);
+            Loadfuel(plateNumber);
 
             _vehicle = _vehicle.RetrieveVehicleInfo(plateNumber);
             plateNumberTB.Text = _vehicle.PlateNumber;
@@ -363,12 +345,20 @@ namespace VehicleMonitoringSystem
             registrationPlateNumberTB.Text = _registration.PlateNumber;
             registeredNameTB.Text = registrationRegisteredNameTB.Text = _registration.RegisteredName;
             registrationORNumberTB.Text = _registration.ORNumber;
-            //registrationRenewalDTP.Value = _registration.Renewal;
+            
+            if (_registration.Renewal.ToString() != "01/01/0001 12:00:00 AM")
+            {
+                registrationRenewalDTP.Value = _registration.Renewal;
+            }
+            else
+            {
+                registrationRenewalDTP.Value = DateTime.Now;
+            }
             registrationAmountTB.Text = _registration.Amount.ToString("N2");
             remarksRTB.Text = _registration.Remarks;
 
             _insurance = _insurance.RetrieveInsuranceInfo(plateNumber);
-            insurancePlateNumberTB.Text = _insurance.PlateNumber;
+            insurancePlateNumberTB.Text = plateNumber;
             insuranceRegisteredNameTB.Text = _registration.RegisteredName;
             insuranceCompanyTB.Text = _insurance.Company;
            // insuranceDurationFromDTP.Value = _insurance.DurationFrom;
@@ -377,15 +367,15 @@ namespace VehicleMonitoringSystem
             insuranceAmountTB.Text = _insurance.Amount.ToString("N2");
 
             _repairs = _repair.RetrieveRepairList(plateNumber);
-            repairPlateNumberTB.Text = _maintenance.PlateNumber;
-           // repairDateDTP.Value = _repair.RepairDate;
+            repairPlateNumberTB.Text = plateNumber; //this
+            //repairDateDTP.Value = _repair.RepairDate;
             repairTypeOfRepairTB.Text = _repair.TypeOfRepair;
             repairSupplierCB.Text = _supplier.RetrieveSupplierInfo(_repair.SupplierID).SupplierName;
             repairSupplierInvoiceNumberTB.Text = _repair.InvoiceNumber;
             repairAmountTB.Text = _repair.Amount.ToString("N2");
 
-            _fuel = _fuel.RetrieveFuelInfo(plateNumber);
-            fuelPlateNumberTB.Text = _fuel.PlateNumber;
+            _fuel = _fuel.RetrieveFuelInfo(plateNumber); 
+            fuelPlateNumberTB.Text = plateNumber; //this
             fuelVehicleTB.Text = _vehicle.RetrieveVehicleInfo(_fuel.PlateNumber).Category;
            // fuelDateDTP.Value = _fuel.FuelDate;
             fuelTypeOfFuelCB.Text = _fuel.TypeOfFuel;
@@ -404,12 +394,11 @@ namespace VehicleMonitoringSystem
         }
         #endregion
 
-        #region Selected Index Changed
         private void SupplierSortCB_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (supplierSortCB.SelectedIndex > -1)
             {
-                _conditionString1 = "WHERE supplier.SupplierName = '" + supplierSortCB.Text + "' ";
+                _conditionString1 = "AND supplier.SupplierName = '" + supplierSortCB.Text + "' ";
                 LoadALLStatement();
                 Compute();
             }
@@ -423,6 +412,10 @@ namespace VehicleMonitoringSystem
         {
             ClearFuel();
             ClearRepair();
+            ClearMaintenance();
+            ClearInformation();
+            ClearInsurance();
+            ClearRegistration();
             if (vehicleListLV.SelectedItems.Count > 0)
             {
                 _plateNumber = vehicleListLV.SelectedItems[0].Text;
@@ -450,10 +443,13 @@ namespace VehicleMonitoringSystem
             ClearRepair();
             if (statementLV.SelectedItems.Count > 0)
             {
+                fuelLV.Items.Clear();
+                repairLV.Items.Clear();
                 if (statementLV.SelectedItems[0].SubItems[3].Text == "Fuel")
                 {
                     informationTC.SelectedTab = fuelTP;
                     fuelPlateNumberTB.Text = _fuel.RetrieveFuelInfo(_fuelID).PlateNumber;
+                    _plateNumber = _fuel.RetrieveFuelInfo(_fuelID).PlateNumber;
                     fuelVehicleTB.Text = _vehicle.RetrieveVehicleInfo(_plateNumber).Brand;
                     _fuelID = int.Parse(statementLV.SelectedItems[0].SubItems[1].Text);
                     fuelTypeOfFuelCB.Text = _fuel.RetrieveFuelInfo(_fuelID).TypeOfFuel;
@@ -466,16 +462,30 @@ namespace VehicleMonitoringSystem
                 else if (statementLV.SelectedItems[0].SubItems[3].Text == "Repair")
                 {
                     informationTC.SelectedTab = repairTP;
+                    _repairID = int.Parse(statementLV.SelectedItems[0].SubItems[1].Text);
+                    _maintenanceID = _repair.RetrieveRepairInfo(_repairID).MaintenanceID;
+                    repairPlateNumberTB.Text = _maintenance.RetrieveMaintenanceInfo(_maintenanceID).PlateNumber;
                     repairTypeOfRepairTB.Text = _repair.RetrieveRepairInfo(_repairID).TypeOfRepair;
                     _supplierID = int.Parse(statementLV.SelectedItems[0].SubItems[0].Text);
                     repairSupplierCB.Text = _supplier.RetrieveSupplierInfo(_supplierID).SupplierName;
                     repairSupplierInvoiceNumberTB.Text = statementLV.SelectedItems[0].SubItems[2].Text;
                     repairAmountTB.Text = statementLV.SelectedItems[0].SubItems[4].Text;
                 }
+                else if (statementLV.SelectedItems[0].SubItems[3].Text == "Part")
+                {
+                    RepairDetailsForm repairDetailsForm = new RepairDetailsForm(this);
+                    int _getID = int.Parse(statementLV.SelectedItems[0].SubItems[1].Text);
+                    _invoiceNumber = statementLV.SelectedItems[0].SubItems[2].Text;
+
+
+                    repairDetailsForm._partID = _getID;
+                    repairDetailsForm._invoiceNumber = _invoiceNumber;
+
+                    repairDetailsForm.LoadStatementRepair(_getID, _invoiceNumber);
+                    repairDetailsForm.ShowDialog();
+                }
             }
         }
-        #endregion
-
         #region Tool Strip Menu
         private void reportsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -561,12 +571,14 @@ namespace VehicleMonitoringSystem
                 MaintenanceListLoad(_plateNumber);
             }
         }
+
         private void sortClearB_Click(object sender, EventArgs e)
         {
             supplierSortCB.SelectedIndex = -1;
             LoadALLStatement();
             Compute();
         }
+
         private void editInsuranceTSM_Click(object sender, EventArgs e)
         {
             if (insuranceEditB.Text == "Edit")
@@ -603,34 +615,12 @@ namespace VehicleMonitoringSystem
                 MaintenanceListLoad(_plateNumber);
             }
         }
-        private void editRepairTSM_Click(object sender, EventArgs e)
-        {
-            if (repairEditB.Text == "Edit")
-            {
-                repairEditB.Text = "Save";
-                EnableRepair();
-            }
-            else if (repairEditB.Text == "Save")
-            {
-                if (
-                    _repairDate != repairDateDTP.Value ||
-                    _typeOfRepair != repairTypeOfRepairTB.Text ||
-                    _repairSupplier != repairSupplierCB.Text ||
-                    _repairAmount != double.Parse(repairAmountTB.Text))
-                {
-                    _repair = new Repair(_repair.RepairID, _repair.MaintenanceID, repairDateDTP.Value, repairTypeOfRepairTB.Text, int.Parse(repairSupplierCB.Text), repairSupplierInvoiceNumberTB.Text, double.Parse(repairAmountTB.Text), _repair.Paid);
-                }
-                _repair.UpdateRepairInfo(_repair);
-                DisableRepair();
-                repairEditB.Text = "Edit";
 
-                LoadRegistration(_plateNumber);
-                LoadInsurance(_plateNumber);
-                LoadRepair(_plateNumber);
-                Loadfuel(_plateNumber);
-                MaintenanceListLoad(_plateNumber);
-            }
+        private void aboutTSM_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("DEVELOPERS:\nAlma Anne Angel Salipot\nIvan Roi Lomahan\nLheamour Pasing\n\nTG Home Builders\n© 2020 All Rights Reserved.", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
         private void editFuelTSM_Click(object sender, EventArgs e)
         {
             switch (fuelEditB.Text)
@@ -653,8 +643,7 @@ namespace VehicleMonitoringSystem
                                        fuelTypeOfFuelCB.Text,
                                        fuelInvoiceNumberTB.Text,
                                        int.Parse(fuelSupplierTB.Text),
-                                       double.Parse(fuelAmountTB.Text),
-                                       _fuel.Paid);
+                                       double.Parse(fuelAmountTB.Text));
                     }
 
                     _fuel.UpdateFuelInfo(_fuel);
@@ -715,20 +704,26 @@ namespace VehicleMonitoringSystem
 
                 plateNumberCB.Text = _plateNumber;
                 partCB.Text = _part.RetrievePartInfo(_maintenance.PartID).Description;
+                statusCB.Text = _maintenance.Status;
             }
         }
+
         private void MaintenanceTSM_Click(object sender, EventArgs e)
         {
             NewMaintenanceForm newMaintenanceForm = new NewMaintenanceForm();
             newMaintenanceForm.ShowDialog();
         }
+        //dito
         private void viewRepairDetailB_Click(object sender, EventArgs e)
         {
             RepairDetailsForm repairDetailsForm = new RepairDetailsForm(this);
             int _getID = _repairID;
-            repairDetailsForm._getID = _getID;
+            string _getPlateNumber = _plateNumber;
+            repairDetailsForm._repairID = _getID;
+            repairDetailsForm._plateNumber = _getPlateNumber;
             repairDetailsForm.ShowDialog();
         }
+        //doon
         private void PaymentTSM_Click(object sender, EventArgs e)
         {
             NewPaymentForm newPaymentForm = new NewPaymentForm();
@@ -747,14 +742,13 @@ namespace VehicleMonitoringSystem
         private void maintenanceCancelB_Click(object sender, EventArgs e)
         {
             DisableMaintenance();
-        }
-        private void aboutTSM_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("DEVELOPERS:\nAlma Anne Angel Salipot\nIvan Roi Lomahan\nLheamour Pasing\n\nTG Home Builders\n© 2020 All Rights Reserved.", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            editMaintenanceB.Text = "Edit";
         }
         #endregion
 
+        #region Other Methods
         #region Edit Cancel Clear
+        //HERE all contents of load()
         private void editB_Click(object sender, EventArgs e)
         {
             if (editB.Text == "Edit")
@@ -773,18 +767,18 @@ namespace VehicleMonitoringSystem
                    _crDate != crDateDTP.Value ||
                    _issuedTo != issuedToTB.Text)
                 {
+                    _registration = new Registration();
                     _vehicle = new Vehicle(plateNumberTB.Text, listingCB.Text, brandCB.Text, categoryCB.Text, crNumberTB.Text, crDateDTP.Value, issuedToTB.Text);
                 }
-
+                _registration.UpdateRegistrationName(registeredNameTB.Text, plateNumberTB.Text);
                 _vehicle.UpdateVehicleInfo(_vehicle);
                 DisableInformation();
                 editB.Text = "Edit";
-
-                LoadRegistration(_plateNumber);
-                LoadInsurance(_plateNumber);
-                LoadRepair(_plateNumber);
-                Loadfuel(_plateNumber);
             }
+            LoadRegistration(plateNumberTB.Text);
+            LoadInsurance(plateNumberTB.Text);
+            LoadRepair(plateNumberTB.Text);
+            Loadfuel(plateNumberTB.Text);
         }
         private void cancelB_Click(object sender, EventArgs e)
         {
@@ -830,10 +824,10 @@ namespace VehicleMonitoringSystem
                 DisableRegistration();
                 registrationEditB.Text = "Edit";
 
-                LoadRegistration(_plateNumber);
-                LoadInsurance(_plateNumber);
-                LoadRepair(_plateNumber);
-                Loadfuel(_plateNumber);
+                LoadRegistration(_registration.PlateNumber);
+                LoadInsurance(_registration.PlateNumber);
+                LoadRepair(_registration.PlateNumber);
+                Loadfuel(_registration.PlateNumber);
             }
         }
         private void registrationCancelB_Click(object sender, EventArgs e)
@@ -882,10 +876,10 @@ namespace VehicleMonitoringSystem
                 insuranceEditB.Text = "Edit";
 
 
-                LoadRegistration(_plateNumber);
-                LoadInsurance(_plateNumber);
-                LoadRepair(_plateNumber);
-                Loadfuel(_plateNumber);
+                LoadRegistration(_insurance.PlateNumber);
+                LoadInsurance(_insurance.PlateNumber);
+                LoadRepair(_insurance.PlateNumber);
+                Loadfuel(_insurance.PlateNumber);
             }
         }
         private void insuranceCancelB_Click(object sender, EventArgs e)
@@ -920,10 +914,10 @@ namespace VehicleMonitoringSystem
                         _repair = new Repair(int.Parse(_repair.RepairID.ToString()),
                                              _repair.MaintenanceID,
                                              repairDateDTP.Value,
-                                             repairTypeOfRepairTB.Text,
-                                             _supplier.RetrieveSupplierID(repairSupplierCB.Text),
+                                             repairTypeOfRepairTB.Text, 
                                              repairSupplierInvoiceNumberTB.Text,
-                                             double.Parse(repairAmountTB.Text), _repair.Paid);
+                                             _supplier.RetrieveSupplierID(repairSupplierCB.Text),
+                                             double.Parse(repairAmountTB.Text));
                     }
 
                     _repair.UpdateRepairInfo(_repair);
@@ -970,18 +964,17 @@ namespace VehicleMonitoringSystem
                                        fuelTypeOfFuelCB.Text,
                                        fuelInvoiceNumberTB.Text,
                                        int.Parse(fuelSupplierTB.Text),
-                                       double.Parse(fuelAmountTB.Text),
-                                       _fuel.Paid);
+                                       double.Parse(fuelAmountTB.Text));
                     }
 
                     _fuel.UpdateFuelInfo(_fuel);
                     DisableFuel();
                     fuelEditB.Text = "Edit";
 
-                    LoadRegistration(_plateNumber);
-                    LoadInsurance(_plateNumber);
-                    LoadRepair(_plateNumber);
-                    Loadfuel(_plateNumber);
+                    LoadRegistration(_fuel.PlateNumber);
+                    LoadInsurance(_fuel.PlateNumber);
+                    LoadRepair(_fuel.PlateNumber);
+                    Loadfuel(_fuel.PlateNumber);
                     break;
             }
         }
@@ -1139,6 +1132,7 @@ namespace VehicleMonitoringSystem
             fuelCancelB.Visible = false;
             fuelClearB.Visible = false;
         }
+
         private void EnableRepair()
         {
             repairPlateNumberTB.Enabled = true;
@@ -1160,7 +1154,6 @@ namespace VehicleMonitoringSystem
             repairAmountTB.Text = "";
             repairDueDateDTP.Value = DateTime.Now;
 
-
         }
         private void DisableRepair()
         {
@@ -1174,17 +1167,29 @@ namespace VehicleMonitoringSystem
             repairCancelB.Visible = false;
             repairClearB.Visible = false;
         }
+        //here
+        private void ClearMaintenance()
+        {
+            plateNumberCB.Text = "";
+            partCB.Text = "";
+            statusCB.Text = "";
+        }
         private void EnableMaintenance()
         {
             partCB.Enabled = true;
+            statusCB.Enabled = true;
             maintenanceCancelB.Visible = true;
 
         }
+        
         private void DisableMaintenance()
         {
             partCB.Enabled = false;
+            statusCB.Enabled = false;
             maintenanceCancelB.Visible = false;
         }
+        //end
+        #endregion
         #endregion
     }
 }
