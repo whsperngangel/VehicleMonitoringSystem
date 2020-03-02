@@ -66,6 +66,7 @@ namespace VehicleMonitoringSystem
                 }
                 addPartB.Text = "Save";
             }
+            Close();
             ClearFields();
             ListViewLoad();
         }
