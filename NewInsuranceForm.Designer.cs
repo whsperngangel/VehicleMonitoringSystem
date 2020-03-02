@@ -283,7 +283,6 @@ namespace VehicleMonitoringSystem
             this.Name = "NewInsuranceForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "New Insurance Form";
-            this.Load += new System.EventHandler(this.NewInsuranceForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
