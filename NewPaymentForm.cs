@@ -9,25 +9,22 @@ namespace VehicleMonitoringSystem
         #region Variables
         private int supplierID,
                     paymentID,
-                    statementID;
+                    statementID, ID;
         private string supplierName,
                        invoiceNumber,
                        datePaid,
                        paidBy,
-                       amountPaid;
-        private double balance;
+                       amountPaid, type;
+        private double balance; 
 
-        private Fuel _fuel = new Fuel();
-        private Repair _repair = new Repair();
-        private RepairDetail _repairDetail = new RepairDetail();
         private Supplier _supplier = new Supplier();
+        private Part _part = new Part();
         private Payment _payment = new Payment();
-
-        List<Fuel> _fuels = new List<Fuel>();
-        List<Repair> _repairs = new List<Repair>();
-        List<RepairDetail> _repairDetails = new List<RepairDetail>();
+        private Maintenance _maintenance = new Maintenance();
         List<Supplier> _suppliers = new List<Supplier>();
         List<Payment> _payments = new List<Payment>();
+        List<Maintenance> _maintenances = new List<Maintenance>();
+        List<Part> _parts = new List<Part>();
         #endregion
 
         #region Constructors
@@ -36,45 +33,68 @@ namespace VehicleMonitoringSystem
             InitializeComponent();
             ComboBoxLoad();
         }
-
-
         #endregion
 
         #region Payment Methods
+        #region Selected Index
+
+        //private void supplierCB_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    supplierName = supplierCB.Text.Trim();
+        //    supplierID = _supplier.RetrieveSupplierID(supplierName);
+        //    invoiceNumberCB.Items.Clear();
+
+        //    _payments = _payment.RetrievePaymentInvoiceNumber(supplierID);
+        //    foreach (Payment p in _payments)
+        //    {
+        //        invoiceNumberCB.Items.Add(p.InvoiceNumber);
+        //    }
+        //}
+
+        //private void typeCB_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    type = typeCB.Text.Trim();
+        //    supplierCB.Items.Clear();
+        //    invoiceNumberCB.Items.Clear();
+        //    EnablePayment();
+        //    if(type == "Part")
+        //    {
+        //        type = "repairdetail";
+        //    }
+        //    _payments = _payment.RetrieveAllTypeList(type);
+            
+        //    foreach (Payment p in _payments)
+        //    {
+        //        _payments = _payment.RetireveSupplierIDList(type);
+        //        foreach (Payment sid in _payments)
+        //        {
+        //            supplierCB.Items.Add(sid.SupplierID);
+        //            _payments = _payment.RetrievePaymentInvoiceNumber(sid.SupplierID);
+        //            foreach (Payment inid in _payments)
+        //            {
+        //                invoiceNumberCB.Items.Add(inid.SupplierID);
+        //            }
+        //        }
+                
+        //    }
+        //}
+
+        #endregion
+
         private void ComboBoxLoad()
         {
-            _suppliers = _supplier.RetrieveSupplierList();
-            foreach (Supplier s in _suppliers)
-            {
-                supplierCB.Items.Add(s.SupplierName);
-            }
+            //_payments = _payment.RetrievePaymentSupplierList();
+            //foreach (Payment p in _payments)
+            //{
+            //    supplierCB.Items.Add(_supplier.RetrieveSupplierInfo(p.SupplierID).SupplierName);
+            //}
 
             _payments = _payment.RetrievePaymentList();
             foreach (Payment p in _payments)
             {
                 paidByCB.Items.Add(p.PaidBy);
             }
-
-            _fuels = _fuel.RetrieveFuelList();
-            foreach (Fuel f in _fuels)
-            {
-                invoiceNumberCB.Items.Add(f.InvoiceNumber);
-            }
-
-            _repairs = _repair.RetrieveRepairList();
-            foreach (Repair r in _repairs)
-            {
-                invoiceNumberCB.Items.Add(r.InvoiceNumber);
-            }
-
-            _repairDetails = _repairDetail.RetrieveRepairDetailList();
-            foreach (RepairDetail rd in _repairDetails)
-            {
-                invoiceNumberCB.Items.Add(rd.InvoiceNumber);
-            }
         }
-
-
         private void saveB_Click(object sender, EventArgs e)
         {
             try
@@ -85,13 +105,19 @@ namespace VehicleMonitoringSystem
                 amountPaid = amountPaidTB.Text.Trim();
                 paidBy = paidByCB.Text.Trim();
 
-                _supplier = new Supplier(supplierID, supplierName);
-                _payment = new Payment(paymentID, statementID, invoiceNumber, datePaid, amountPaid, paidBy);
+                //_payment = new Payment(paymentID, _supplier.RetrieveSupplierID(supplierName), invoiceNumber, datePaid, amountPaid, paidBy);
+                //_payment.InsertPayment(_payment);
+
+                //ID = _payment.RetrievePaymentUpdateStatus(_supplier.RetrieveSupplierID(supplierName), invoiceNumber).ID;
+                //type = _payment.RetrievePaymentUpdateStatus(_supplier.RetrieveSupplierID(supplierName), invoiceNumber).Type;
+
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
+            this.Close();
         }
         private void clearB_Click(object sender, EventArgs e)
         {
@@ -105,8 +131,6 @@ namespace VehicleMonitoringSystem
         {
             Close();
         }
-
-
         private void supplierCB_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
@@ -135,6 +159,27 @@ namespace VehicleMonitoringSystem
                 e.Handled = true;
             }
         }
+        private void EnablePayment()
+        {
+            supplierCB.Enabled = true;
+            invoiceNumberCB.Enabled = true;
+            datePaidDTP.Enabled = true;
+            amountPaidTB.Enabled = true;
+            saveB.Enabled = true;
+            cancelB.Enabled = true;
+            clearB.Enabled = true;
+        }
+        private void DisablePayment()
+        {
+            supplierCB.Enabled = true;
+            invoiceNumberCB.Enabled = true;
+            datePaidDTP.Enabled = true;
+            amountPaidTB.Enabled = true;
+            saveB.Enabled = true;
+            cancelB.Enabled = true;
+            clearB.Enabled = true;
+        }
+
         #endregion
     }
 }
