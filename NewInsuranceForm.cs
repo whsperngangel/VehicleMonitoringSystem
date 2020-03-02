@@ -32,6 +32,7 @@ namespace VehicleMonitoringSystem
         List<Insurance> _insurances = new List<Insurance>();
         List<Vehicle> _vehicles = new List<Vehicle>();
         #endregion
+
         #region Constructors
         public NewInsuranceForm()
         {
@@ -153,6 +154,5 @@ namespace VehicleMonitoringSystem
             renewal = renewalDTP.Value = DateTime.Now;
         }
         #endregion
-        }
     }
 }
