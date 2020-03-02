@@ -13,9 +13,8 @@ namespace VehicleMonitoringSystem
     public partial class NewMaintenanceForm : Form
     {
         #region Variables
-        private string _plateNumber;
+        private string _plateNumber, _status, _description;
         private int _maintenanceID, _partID, _repairID;
-        private bool _status = false;
 
         private Maintenance _maintenance = new Maintenance();
         private Vehicle _vehicle = new Vehicle();
@@ -23,36 +22,7 @@ namespace VehicleMonitoringSystem
         private List<Maintenance> _maintenances = new List<Maintenance>();
         private Part _part = new Part();
         private Repair _repair = new Repair();
-        private List<Part> _parts = new List<Part>();
-        #endregion
 
-        #region Constructors
-        public NewMaintenanceForm()
-        {
-            InitializeComponent();
-            ComboBox();
-        }
-        #endregion
-
-        #region UI Methods
-        private void ComboBox()
-        {
-            _vehicles = _vehicle.RetrieveVehicleList();
-            foreach (Vehicle v in _vehicles)
-            {
-                plateNumberCB.Items.Add(v.PlateNumber);
-            }
-            _parts = _part.RetrievePartList();
-            foreach (Part p in _parts)
-            {
-                partCB.Items.Add(p.Description);
-            }
-        }
-        private void newB_Click(object sender, EventArgs e)
-        {
-            NewPartForm newPartForm = new NewPartForm();
-            newPartForm.ShowDialog();
-        }
         private void repairB_Click(object sender, EventArgs e)
         {
             if (plateNumberCB.Text == "")
@@ -78,6 +48,13 @@ namespace VehicleMonitoringSystem
             newRepairForm.ShowDialog();
             Close();
         }
+
+        private void newB_Click(object sender, EventArgs e)
+        {
+            NewPartForm newPartForm = new NewPartForm();
+            newPartForm.ShowDialog();
+        }
+
         private void doneB_Click(object sender, EventArgs e)
         {
             if (plateNumberCB.Text == "")
@@ -100,6 +77,45 @@ namespace VehicleMonitoringSystem
                 partCB.Text = "";
             }
             Close();
+        }
+
+        private List<Part> _parts = new List<Part>();
+        #endregion
+
+        #region Constructors
+        public NewMaintenanceForm()
+        {
+            InitializeComponent();
+            ComboBox();
+        }
+
+        #endregion
+
+        #region Maintenance Methods
+        private void ComboBox()
+        {
+            _vehicles = _vehicle.RetrieveVehicleList();
+            foreach (Vehicle v in _vehicles)
+            {
+                plateNumberCB.Items.Add(v.PlateNumber);
+            }
+            
+            _parts = _part.RetrievePartList();
+            foreach (Part p in _parts)
+            {
+                _description = p.Description;
+            }
+        }
+        private void addB_Click(object sender, EventArgs e)
+        {
+            _maintenanceID = _maintenance.CreateMaintenanceID();
+            _repairID = _repair.CreateRepairID();
+            _plateNumber = plateNumberCB.Text.Trim();
+            _status = statusCB.Text;
+            plateNumberCB.Text = "";
+            statusCB.Text = "";
+            _maintenance = new Maintenance(_maintenanceID, _plateNumber, _partID, _status);
+            _maintenance.InsertMaintenance(_maintenance);
         }
         #endregion
     }
