@@ -42,26 +42,6 @@ namespace VehicleMonitoringSystem
         #endregion
         private void addPartB_Click(object sender, EventArgs e)
         {
-            //switch (addPartB.Text)
-            //{
-            //    case "Add":
-            //        _partID = _part.CreatePartID();
-            //        _description = partDescriptionTB.Text.Trim();
-
-            //        _part = new Part(_partID, _description);
-
-            //        _part.InsertPart(_part);
-            //        break;
-
-            //    case "Update":
-            //        if (partDescriptionTB.Text != _description)
-            //        {
-            //            _part = new Part(int.Parse(partIDTB.Text), partDescriptionTB.Text);
-            //            _part.UpdatePartInfo(_part);
-            //        }
-            //        addPartB.Text = "Add";
-            //        break;
-            //}
 
             if (addPartB.Text == "Add")
             {
