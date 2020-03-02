@@ -52,7 +52,7 @@ namespace VehicleMonitoringSystem
             this.statusCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.statusCB.Name = "statusCB";
             this.statusCB.Size = new System.Drawing.Size(454, 28);
-            this.statusCB.TabIndex = 32;
+            this.statusCB.TabIndex = 2;
             // 
             // label14
             // 
@@ -73,7 +73,7 @@ namespace VehicleMonitoringSystem
             this.newB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.newB.Name = "newB";
             this.newB.Size = new System.Drawing.Size(117, 43);
-            this.newB.TabIndex = 37;
+            this.newB.TabIndex = 3;
             this.newB.Text = "New Part";
             this.newB.UseVisualStyleBackColor = true;
             this.newB.Click += new System.EventHandler(this.newB_Click);
@@ -85,7 +85,7 @@ namespace VehicleMonitoringSystem
             this.repairB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.repairB.Name = "repairB";
             this.repairB.Size = new System.Drawing.Size(117, 43);
-            this.repairB.TabIndex = 38;
+            this.repairB.TabIndex = 4;
             this.repairB.Text = "Repair";
             this.repairB.UseVisualStyleBackColor = true;
             this.repairB.Click += new System.EventHandler(this.repairB_Click);
@@ -97,7 +97,7 @@ namespace VehicleMonitoringSystem
             this.DoneB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.DoneB.Name = "DoneB";
             this.DoneB.Size = new System.Drawing.Size(117, 43);
-            this.DoneB.TabIndex = 39;
+            this.DoneB.TabIndex = 5;
             this.DoneB.Text = "Done";
             this.DoneB.UseVisualStyleBackColor = true;
             // 
@@ -110,7 +110,7 @@ namespace VehicleMonitoringSystem
             this.partCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.partCB.Name = "partCB";
             this.partCB.Size = new System.Drawing.Size(454, 28);
-            this.partCB.TabIndex = 35;
+            this.partCB.TabIndex = 1;
             // 
             // plateNumberCB
             // 
@@ -121,7 +121,7 @@ namespace VehicleMonitoringSystem
             this.plateNumberCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.plateNumberCB.Name = "plateNumberCB";
             this.plateNumberCB.Size = new System.Drawing.Size(454, 28);
-            this.plateNumberCB.TabIndex = 33;
+            this.plateNumberCB.TabIndex = 0;
             // 
             // label2
             // 
