@@ -117,7 +117,7 @@ namespace VehicleMonitoringSystem
                 partCB.Items.Add(p.Description);
             }
             _vehicles = _vehicle.RetrieveVehicleList();
-           foreach (Vehicle v in _vehicles)
+            foreach (Vehicle v in _vehicles)
             {
                 plateNumberCB.Items.Add(v.PlateNumber);
             }
@@ -263,7 +263,7 @@ namespace VehicleMonitoringSystem
             foreach (Statement statement in _statements)
             {
 
-             //   _statementID = statement.StatementID;
+                //   _statementID = statement.StatementID;
                 _supplierID = statement.SupplierID;
                 _type = statement.Type;
                 _invoiceNumber = statement.InvoiceNumber;
@@ -349,7 +349,7 @@ namespace VehicleMonitoringSystem
             registrationPlateNumberTB.Text = _registration.PlateNumber;
             registeredNameTB.Text = registrationRegisteredNameTB.Text = _registration.RegisteredName;
             registrationORNumberTB.Text = _registration.ORNumber;
-            
+
             if (_registration.Renewal.ToString() != "01/01/0001 12:00:00 AM")
             {
                 registrationRenewalDTP.Value = _registration.Renewal;
@@ -365,8 +365,8 @@ namespace VehicleMonitoringSystem
             insurancePlateNumberTB.Text = plateNumber;
             insuranceRegisteredNameTB.Text = _registration.RegisteredName;
             insuranceCompanyTB.Text = _insurance.Company;
-           // insuranceDurationFromDTP.Value = _insurance.DurationFrom;
-           // insuranceDurationToDTP.Value = _insurance.DurationTo;
+            // insuranceDurationFromDTP.Value = _insurance.DurationFrom;
+            // insuranceDurationToDTP.Value = _insurance.DurationTo;
             //insuranceRenewalDTP.Value = _insurance.Renewal;
             insuranceAmountTB.Text = _insurance.Amount.ToString("N2");
 
@@ -375,13 +375,13 @@ namespace VehicleMonitoringSystem
             //repairDateDTP.Value = _repair.RepairDate;
             repairTypeOfRepairTB.Text = _repair.TypeOfRepair;
             repairSupplierCB.Text = _supplier.RetrieveSupplierInfo(_repair.SupplierID).SupplierName;
-            repairSupplierInvoiceNumberTB.Text = _repair.InvoiceNumber;
+            repairInvoiceNumberCB.Text = _repair.InvoiceNumber;
             repairAmountTB.Text = _repair.Amount.ToString("N2");
 
-            _fuel = _fuel.RetrieveFuelInfo(plateNumber); 
+            _fuel = _fuel.RetrieveFuelInfo(plateNumber);
             fuelPlateNumberTB.Text = plateNumber; //this
             fuelVehicleTB.Text = _vehicle.RetrieveVehicleInfo(_fuel.PlateNumber).Category;
-           // fuelDateDTP.Value = _fuel.FuelDate;
+            // fuelDateDTP.Value = _fuel.FuelDate;
             fuelTypeOfFuelCB.Text = _fuel.TypeOfFuel;
             fuelSupplierTB.Text = _supplier.RetrieveSupplierInfo(_fuel.SupplierID).SupplierName;
             fuelAmountTB.Text = _fuel.Amount.ToString("N2");
@@ -459,7 +459,7 @@ namespace VehicleMonitoringSystem
                     _fuelID = int.Parse(statementLV.SelectedItems[0].SubItems[1].Text);
                     fuelTypeOfFuelCB.Text = _fuel.RetrieveFuelInfo(_fuelID).TypeOfFuel;
                     fuelAmountTB.Text = statementLV.SelectedItems[0].SubItems[4].Text;
-                    fuelInvoiceNumberTB.Text = statementLV.SelectedItems[0].SubItems[2].Text;
+                    fuelInvoiceNumberCB.Text = statementLV.SelectedItems[0].SubItems[2].Text;
                     _supplierID = int.Parse(statementLV.SelectedItems[0].SubItems[0].Text);
                     fuelSupplierTB.Text = _supplier.RetrieveSupplierInfo(_supplierID).SupplierName;
 
@@ -473,7 +473,7 @@ namespace VehicleMonitoringSystem
                     repairTypeOfRepairTB.Text = _repair.RetrieveRepairInfo(_repairID).TypeOfRepair;
                     _supplierID = int.Parse(statementLV.SelectedItems[0].SubItems[0].Text);
                     repairSupplierCB.Text = _supplier.RetrieveSupplierInfo(_supplierID).SupplierName;
-                    repairSupplierInvoiceNumberTB.Text = statementLV.SelectedItems[0].SubItems[2].Text;
+                    repairInvoiceNumberCB.Text = statementLV.SelectedItems[0].SubItems[2].Text;
                     repairAmountTB.Text = statementLV.SelectedItems[0].SubItems[4].Text;
                 }
                 else if (statementLV.SelectedItems[0].SubItems[3].Text == "Part")
@@ -664,7 +664,7 @@ namespace VehicleMonitoringSystem
                                         _fuel.PlateNumber,
                                        fuelDateDTP.Value,
                                        fuelTypeOfFuelCB.Text,
-                                       fuelInvoiceNumberTB.Text,
+                                       fuelInvoiceNumberCB.Text,
                                        int.Parse(fuelSupplierTB.Text),
                                        double.Parse(fuelAmountTB.Text));
                     }
@@ -694,9 +694,9 @@ namespace VehicleMonitoringSystem
 
                     _maintenanceID = int.Parse(maintenanceLV.SelectedItems[0].Text);
                     _partID = _part.RetrievePartID(partCB.Text);
-                   _maintenance = new Maintenance(_maintenance.MaintenanceID,
-                                    _maintenance.PlateNumber,
-                                   _partID, _status); //added
+                    _maintenance = new Maintenance(_maintenance.MaintenanceID,
+                                     _maintenance.PlateNumber,
+                                    _partID, _status); //added
 
                     _maintenance.UpdateMaintenanceInfo(_maintenance);
                     editMaintenanceB.Text = "Edit";
@@ -747,7 +747,6 @@ namespace VehicleMonitoringSystem
         #endregion
 
         #region Edit Cancel Clear
-        //HERE all contents of load()
         private void editB_Click(object sender, EventArgs e)
         {
             if (editB.Text == "Edit")
@@ -762,7 +761,7 @@ namespace VehicleMonitoringSystem
                    _listing != listingCB.Text ||
                    _brand != brandCB.Text ||
                    _category != categoryCB.Text ||
-                   _crNumber != crNumberTB.Text || 
+                   _crNumber != crNumberTB.Text ||
                    _crDate != crDateDTP.Value ||
                    _issuedTo != issuedToTB.Text)
                 {
@@ -793,7 +792,7 @@ namespace VehicleMonitoringSystem
         {
             ClearInformation();
         }
-        
+
         private void registrationEditB_Click(object sender, EventArgs e)
         {
             if (registrationEditB.Text == "Edit")
@@ -810,7 +809,7 @@ namespace VehicleMonitoringSystem
                     _amount != double.Parse(registrationAmountTB.Text.Trim()) ||
                     _remarks != remarksRTB.Text)
                 {
-                    _registration = new Registration(_registration.RegistrationID,_registration.PlateNumber,
+                    _registration = new Registration(_registration.RegistrationID, _registration.PlateNumber,
                                                      registrationRegisteredNameTB.Text,
                                                      registrationORNumberTB.Text,
                                                      registrationORDateDTP.Value,
@@ -892,7 +891,7 @@ namespace VehicleMonitoringSystem
         {
             ClearInsurance();
         }
-       
+
         private void repairEditB_Click(object sender, EventArgs e)
         {
             Button bt = (Button)sender;
@@ -913,8 +912,8 @@ namespace VehicleMonitoringSystem
                         _repair = new Repair(int.Parse(_repair.RepairID.ToString()),
                                              _repair.MaintenanceID,
                                              repairDateDTP.Value,
-                                             repairTypeOfRepairTB.Text, 
-                                             repairSupplierInvoiceNumberTB.Text,
+                                             repairTypeOfRepairTB.Text,
+                                             repairInvoiceNumberCB.Text,
                                              _supplier.RetrieveSupplierID(repairSupplierCB.Text),
                                              double.Parse(repairAmountTB.Text));
                     }
@@ -961,7 +960,7 @@ namespace VehicleMonitoringSystem
                                        _fuel.PlateNumber,
                                        fuelDateDTP.Value,
                                        fuelTypeOfFuelCB.Text,
-                                       fuelInvoiceNumberTB.Text,
+                                       fuelInvoiceNumberCB.Text,
                                        int.Parse(fuelSupplierTB.Text),
                                        double.Parse(fuelAmountTB.Text));
                     }
@@ -1149,7 +1148,7 @@ namespace VehicleMonitoringSystem
             repairDateDTP.Value = DateTime.Now;
             repairTypeOfRepairTB.Text = "";
             repairSupplierCB.Text = "";
-            repairSupplierInvoiceNumberTB.Text = "";
+            repairInvoiceNumberCB.Text = "";
             repairAmountTB.Text = "";
             repairDueDateDTP.Value = DateTime.Now;
 
