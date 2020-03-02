@@ -73,17 +73,19 @@ namespace VehicleMonitoringSystem
 
         private void amountTB_KeyPress(object sender, KeyPressEventArgs e)
         {
-            amountTB.Text = "";
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
             (e.KeyChar != '.'))
             {
                 e.Handled = true;
             }
-
             if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
             {
                 e.Handled = true;
             }
+        }
+        private void amountTB_Click(object sender, EventArgs e)
+        {
+            amountTB.Text = "";
         }
 
         private void saveB_Click(object sender, EventArgs e)
