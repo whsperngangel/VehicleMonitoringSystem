@@ -38,11 +38,14 @@ namespace VehicleMonitoringSystem
             this.typeOfRepairCB = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.repairGB = new System.Windows.Forms.GroupBox();
+            this.payB = new System.Windows.Forms.Button();
             this.statusCB = new System.Windows.Forms.ComboBox();
+            this.doneB = new System.Windows.Forms.Button();
             this.partAmountTB = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.partCB = new System.Windows.Forms.ComboBox();
             this.addB = new System.Windows.Forms.Button();
+            this.cancelB = new System.Windows.Forms.Button();
             this.partDateDTP = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -68,9 +71,6 @@ namespace VehicleMonitoringSystem
             this.statusHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.supplierGB = new System.Windows.Forms.GroupBox();
             this.vehicleDetailGB = new System.Windows.Forms.GroupBox();
-            this.cancelB = new System.Windows.Forms.Button();
-            this.payB = new System.Windows.Forms.Button();
-            this.doneB = new System.Windows.Forms.Button();
             this.repairGB.SuspendLayout();
             this.supplierGB.SuspendLayout();
             this.vehicleDetailGB.SuspendLayout();
@@ -84,7 +84,7 @@ namespace VehicleMonitoringSystem
             this.repairDateDTP.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.repairDateDTP.Name = "repairDateDTP";
             this.repairDateDTP.Size = new System.Drawing.Size(277, 26);
-            this.repairDateDTP.TabIndex = 23;
+            this.repairDateDTP.TabIndex = 2;
             // 
             // label9
             // 
@@ -115,7 +115,7 @@ namespace VehicleMonitoringSystem
             this.repairAmountTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.repairAmountTB.Name = "repairAmountTB";
             this.repairAmountTB.Size = new System.Drawing.Size(277, 26);
-            this.repairAmountTB.TabIndex = 22;
+            this.repairAmountTB.TabIndex = 4;
             this.repairAmountTB.Text = "PHP 0.00";
             this.repairAmountTB.Click += new System.EventHandler(this.repairAmountTB_Click);
             this.repairAmountTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.repairAmountTB_KeyPress);
@@ -129,7 +129,7 @@ namespace VehicleMonitoringSystem
             this.repairSupplierCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.repairSupplierCB.Name = "repairSupplierCB";
             this.repairSupplierCB.Size = new System.Drawing.Size(277, 28);
-            this.repairSupplierCB.TabIndex = 12;
+            this.repairSupplierCB.TabIndex = 1;
             // 
             // label4
             // 
@@ -154,7 +154,7 @@ namespace VehicleMonitoringSystem
             this.typeOfRepairCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.typeOfRepairCB.Name = "typeOfRepairCB";
             this.typeOfRepairCB.Size = new System.Drawing.Size(277, 28);
-            this.typeOfRepairCB.TabIndex = 12;
+            this.typeOfRepairCB.TabIndex = 5;
             // 
             // label3
             // 
@@ -194,6 +194,18 @@ namespace VehicleMonitoringSystem
             this.repairGB.TabStop = false;
             this.repairGB.Text = "Parts";
             // 
+            // payB
+            // 
+            this.payB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.payB.Location = new System.Drawing.Point(19, 346);
+            this.payB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.payB.Name = "payB";
+            this.payB.Size = new System.Drawing.Size(129, 43);
+            this.payB.TabIndex = 13;
+            this.payB.Text = "Pay";
+            this.payB.UseVisualStyleBackColor = true;
+            this.payB.Click += new System.EventHandler(this.payB_Click);
+            // 
             // statusCB
             // 
             this.statusCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -206,7 +218,18 @@ namespace VehicleMonitoringSystem
             this.statusCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.statusCB.Name = "statusCB";
             this.statusCB.Size = new System.Drawing.Size(283, 28);
-            this.statusCB.TabIndex = 30;
+            this.statusCB.TabIndex = 11;
+            // 
+            // doneB
+            // 
+            this.doneB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.doneB.Location = new System.Drawing.Point(293, 346);
+            this.doneB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.doneB.Name = "doneB";
+            this.doneB.Size = new System.Drawing.Size(129, 43);
+            this.doneB.TabIndex = 15;
+            this.doneB.Text = "Done";
+            this.doneB.UseVisualStyleBackColor = true;
             // 
             // partAmountTB
             // 
@@ -215,7 +238,7 @@ namespace VehicleMonitoringSystem
             this.partAmountTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.partAmountTB.Name = "partAmountTB";
             this.partAmountTB.Size = new System.Drawing.Size(283, 26);
-            this.partAmountTB.TabIndex = 29;
+            this.partAmountTB.TabIndex = 10;
             this.partAmountTB.Text = "PHP 0.00";
             this.partAmountTB.Click += new System.EventHandler(this.partAmountTB_Click);
             this.partAmountTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.partAmountTB_KeyPress);
@@ -240,7 +263,7 @@ namespace VehicleMonitoringSystem
             this.partCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.partCB.Name = "partCB";
             this.partCB.Size = new System.Drawing.Size(283, 28);
-            this.partCB.TabIndex = 27;
+            this.partCB.TabIndex = 9;
             // 
             // addB
             // 
@@ -249,10 +272,20 @@ namespace VehicleMonitoringSystem
             this.addB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.addB.Name = "addB";
             this.addB.Size = new System.Drawing.Size(129, 43);
-            this.addB.TabIndex = 26;
+            this.addB.TabIndex = 12;
             this.addB.Text = "Add";
             this.addB.UseVisualStyleBackColor = true;
             this.addB.Click += new System.EventHandler(this.AddB_Click);
+            // 
+            // cancelB
+            // 
+            this.cancelB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelB.Location = new System.Drawing.Point(156, 346);
+            this.cancelB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cancelB.Name = "cancelB";
+            this.cancelB.Size = new System.Drawing.Size(129, 43);
+            this.cancelB.TabIndex = 14;
+            this.cancelB.Text = "Cancel";
             // 
             // partDateDTP
             // 
@@ -262,7 +295,7 @@ namespace VehicleMonitoringSystem
             this.partDateDTP.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.partDateDTP.Name = "partDateDTP";
             this.partDateDTP.Size = new System.Drawing.Size(283, 26);
-            this.partDateDTP.TabIndex = 24;
+            this.partDateDTP.TabIndex = 7;
             // 
             // label2
             // 
@@ -293,7 +326,7 @@ namespace VehicleMonitoringSystem
             this.partInvoiceNumberTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.partInvoiceNumberTB.Name = "partInvoiceNumberTB";
             this.partInvoiceNumberTB.Size = new System.Drawing.Size(283, 26);
-            this.partInvoiceNumberTB.TabIndex = 22;
+            this.partInvoiceNumberTB.TabIndex = 8;
             // 
             // label14
             // 
@@ -326,7 +359,7 @@ namespace VehicleMonitoringSystem
             this.partSupplierCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.partSupplierCB.Name = "partSupplierCB";
             this.partSupplierCB.Size = new System.Drawing.Size(283, 28);
-            this.partSupplierCB.TabIndex = 12;
+            this.partSupplierCB.TabIndex = 6;
             // 
             // label13
             // 
@@ -346,7 +379,7 @@ namespace VehicleMonitoringSystem
             this.repairInvoiceNumberTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.repairInvoiceNumberTB.Name = "repairInvoiceNumberTB";
             this.repairInvoiceNumberTB.Size = new System.Drawing.Size(277, 26);
-            this.repairInvoiceNumberTB.TabIndex = 14;
+            this.repairInvoiceNumberTB.TabIndex = 3;
             // 
             // vehicleNameL
             // 
@@ -386,7 +419,7 @@ namespace VehicleMonitoringSystem
             this.plateNumberCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.plateNumberCB.Name = "plateNumberCB";
             this.plateNumberCB.Size = new System.Drawing.Size(277, 28);
-            this.plateNumberCB.TabIndex = 12;
+            this.plateNumberCB.TabIndex = 0;
             this.plateNumberCB.SelectedIndexChanged += new System.EventHandler(this.plateNumberCB_SelectedIndexChanged);
             // 
             // label1
@@ -504,39 +537,6 @@ namespace VehicleMonitoringSystem
             this.vehicleDetailGB.TabIndex = 36;
             this.vehicleDetailGB.TabStop = false;
             this.vehicleDetailGB.Text = "Vehicle Detail";
-            // 
-            // cancelB
-            // 
-            this.cancelB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelB.Location = new System.Drawing.Point(156, 346);
-            this.cancelB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cancelB.Name = "cancelB";
-            this.cancelB.Size = new System.Drawing.Size(129, 43);
-            this.cancelB.TabIndex = 35;
-            this.cancelB.Text = "Cancel";
-            // 
-            // payB
-            // 
-            this.payB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.payB.Location = new System.Drawing.Point(19, 346);
-            this.payB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.payB.Name = "payB";
-            this.payB.Size = new System.Drawing.Size(129, 43);
-            this.payB.TabIndex = 40;
-            this.payB.Text = "Pay";
-            this.payB.UseVisualStyleBackColor = true;
-            this.payB.Click += new System.EventHandler(this.payB_Click);
-            // 
-            // doneB
-            // 
-            this.doneB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.doneB.Location = new System.Drawing.Point(293, 346);
-            this.doneB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.doneB.Name = "doneB";
-            this.doneB.Size = new System.Drawing.Size(129, 43);
-            this.doneB.TabIndex = 42;
-            this.doneB.Text = "Done";
-            this.doneB.UseVisualStyleBackColor = true;
             // 
             // NewRepairForm
             // 
