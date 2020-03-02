@@ -59,7 +59,6 @@ namespace VehicleMonitoringSystem
             this.mainPlateNumberHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fuelTP = new System.Windows.Forms.TabPage();
             this.label39 = new System.Windows.Forms.Label();
-            this.fuelInvoiceNumberTB = new System.Windows.Forms.TextBox();
             this.fuelClearB = new System.Windows.Forms.Button();
             this.fuelCancelB = new System.Windows.Forms.Button();
             this.fuelEditB = new System.Windows.Forms.Button();
@@ -91,7 +90,6 @@ namespace VehicleMonitoringSystem
             this.repairDueDateL = new System.Windows.Forms.Label();
             this.viewRepairDetailB = new System.Windows.Forms.Button();
             this.repairSupplierCB = new System.Windows.Forms.ComboBox();
-            this.repairSupplierInvoiceNumberTB = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.repairClearB = new System.Windows.Forms.Button();
             this.repairCancelB = new System.Windows.Forms.Button();
@@ -202,18 +200,6 @@ namespace VehicleMonitoringSystem
             this.maintenancePartHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ramarksHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statementTP = new System.Windows.Forms.TabPage();
-            this.sortClearB = new System.Windows.Forms.Button();
-            this.statementLV = new System.Windows.Forms.ListView();
-            this.SID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.invoice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.fuelAmountDue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.totalDueTB = new System.Windows.Forms.TextBox();
-            this.label26 = new System.Windows.Forms.Label();
-            this.supplierSortCB = new System.Windows.Forms.ComboBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.statusHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -221,6 +207,20 @@ namespace VehicleMonitoringSystem
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.sortClearB = new System.Windows.Forms.Button();
+            this.statementLV = new System.Windows.Forms.ListView();
+            this.SID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.invoice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.fuelAmountDue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.statusHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.totalDueTB = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.supplierSortCB = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.repairInvoiceNumberCB = new System.Windows.Forms.ComboBox();
+            this.fuelInvoiceNumberCB = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.fuelTP.SuspendLayout();
             this.repairTP.SuspendLayout();
@@ -434,7 +434,6 @@ namespace VehicleMonitoringSystem
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             this.reportsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.reportsToolStripMenuItem.Text = "Reports";
-            //this.reportsToolStripMenuItem.Click += new System.EventHandler(this.reportsToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -468,7 +467,6 @@ namespace VehicleMonitoringSystem
             // fuelTP
             // 
             this.fuelTP.Controls.Add(this.label39);
-            this.fuelTP.Controls.Add(this.fuelInvoiceNumberTB);
             this.fuelTP.Controls.Add(this.fuelClearB);
             this.fuelTP.Controls.Add(this.fuelCancelB);
             this.fuelTP.Controls.Add(this.fuelEditB);
@@ -476,6 +474,7 @@ namespace VehicleMonitoringSystem
             this.fuelTP.Controls.Add(this.label6);
             this.fuelTP.Controls.Add(this.fuelDateDTP);
             this.fuelTP.Controls.Add(this.label40);
+            this.fuelTP.Controls.Add(this.fuelInvoiceNumberCB);
             this.fuelTP.Controls.Add(this.fuelTypeOfFuelCB);
             this.fuelTP.Controls.Add(this.label4);
             this.fuelTP.Controls.Add(this.label3);
@@ -503,15 +502,6 @@ namespace VehicleMonitoringSystem
             this.label39.Size = new System.Drawing.Size(115, 18);
             this.label39.TabIndex = 38;
             this.label39.Text = "Invoice Number:";
-            // 
-            // fuelInvoiceNumberTB
-            // 
-            this.fuelInvoiceNumberTB.Enabled = false;
-            this.fuelInvoiceNumberTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fuelInvoiceNumberTB.Location = new System.Drawing.Point(163, 155);
-            this.fuelInvoiceNumberTB.Name = "fuelInvoiceNumberTB";
-            this.fuelInvoiceNumberTB.Size = new System.Drawing.Size(294, 26);
-            this.fuelInvoiceNumberTB.TabIndex = 37;
             // 
             // fuelClearB
             // 
@@ -752,8 +742,8 @@ namespace VehicleMonitoringSystem
             this.repairTP.Controls.Add(this.repairDueDateDTP);
             this.repairTP.Controls.Add(this.repairDueDateL);
             this.repairTP.Controls.Add(this.viewRepairDetailB);
+            this.repairTP.Controls.Add(this.repairInvoiceNumberCB);
             this.repairTP.Controls.Add(this.repairSupplierCB);
-            this.repairTP.Controls.Add(this.repairSupplierInvoiceNumberTB);
             this.repairTP.Controls.Add(this.label19);
             this.repairTP.Controls.Add(this.repairClearB);
             this.repairTP.Controls.Add(this.repairCancelB);
@@ -828,15 +818,6 @@ namespace VehicleMonitoringSystem
             this.repairSupplierCB.Name = "repairSupplierCB";
             this.repairSupplierCB.Size = new System.Drawing.Size(304, 28);
             this.repairSupplierCB.TabIndex = 61;
-            // 
-            // repairSupplierInvoiceNumberTB
-            // 
-            this.repairSupplierInvoiceNumberTB.Enabled = false;
-            this.repairSupplierInvoiceNumberTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.repairSupplierInvoiceNumberTB.Location = new System.Drawing.Point(162, 149);
-            this.repairSupplierInvoiceNumberTB.Name = "repairSupplierInvoiceNumberTB";
-            this.repairSupplierInvoiceNumberTB.Size = new System.Drawing.Size(304, 26);
-            this.repairSupplierInvoiceNumberTB.TabIndex = 60;
             // 
             // label19
             // 
@@ -1985,6 +1966,58 @@ namespace VehicleMonitoringSystem
             this.statementTP.Text = "Statement";
             this.statementTP.UseVisualStyleBackColor = true;
             // 
+            // listView1
+            // 
+            this.listView1.Alignment = System.Windows.Forms.ListViewAlignment.Default;
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6});
+            this.listView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.listView1.FullRowSelect = true;
+            this.listView1.GridLines = true;
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(498, 71);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(453, 537);
+            this.listView1.TabIndex = 52;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "SID";
+            this.columnHeader1.Width = 0;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "ID";
+            this.columnHeader2.Width = 0;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Invoice No.";
+            this.columnHeader3.Width = 118;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Type";
+            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.columnHeader4.Width = 121;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Amount Due";
+            this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.columnHeader5.Width = 129;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Status";
+            // 
             // sortClearB
             // 
             this.sortClearB.Location = new System.Drawing.Point(395, 25);
@@ -2045,6 +2078,10 @@ namespace VehicleMonitoringSystem
             this.fuelAmountDue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.fuelAmountDue.Width = 129;
             // 
+            // statusHeader
+            // 
+            this.statusHeader.Text = "Status";
+            // 
             // totalDueTB
             // 
             this.totalDueTB.Enabled = false;
@@ -2088,61 +2125,35 @@ namespace VehicleMonitoringSystem
             this.label12.TabIndex = 45;
             this.label12.Text = "Supplier:";
             // 
-            // statusHeader
+            // repairInvoiceNumberCB
             // 
-            this.statusHeader.Text = "Status";
+            this.repairInvoiceNumberCB.Enabled = false;
+            this.repairInvoiceNumberCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.repairInvoiceNumberCB.FormattingEnabled = true;
+            this.repairInvoiceNumberCB.Items.AddRange(new object[] {
+            "BMW",
+            "GMC",
+            "Ford",
+            "Mitsubishi",
+            "Fuso",
+            "Isuzu",
+            "Toyota",
+            "Subaru",
+            "Kia"});
+            this.repairInvoiceNumberCB.Location = new System.Drawing.Point(162, 149);
+            this.repairInvoiceNumberCB.Name = "repairInvoiceNumberCB";
+            this.repairInvoiceNumberCB.Size = new System.Drawing.Size(304, 28);
+            this.repairInvoiceNumberCB.TabIndex = 61;
             // 
-            // listView1
+            // fuelInvoiceNumberCB
             // 
-            this.listView1.Alignment = System.Windows.Forms.ListViewAlignment.Default;
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5,
-            this.columnHeader6});
-            this.listView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.listView1.FullRowSelect = true;
-            this.listView1.GridLines = true;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(498, 71);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(453, 537);
-            this.listView1.TabIndex = 52;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "SID";
-            this.columnHeader1.Width = 0;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "ID";
-            this.columnHeader2.Width = 0;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Invoice No.";
-            this.columnHeader3.Width = 118;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Type";
-            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.columnHeader4.Width = 121;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "Amount Due";
-            this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.columnHeader5.Width = 129;
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "Status";
+            this.fuelInvoiceNumberCB.Enabled = false;
+            this.fuelInvoiceNumberCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fuelInvoiceNumberCB.FormattingEnabled = true;
+            this.fuelInvoiceNumberCB.Location = new System.Drawing.Point(163, 155);
+            this.fuelInvoiceNumberCB.Name = "fuelInvoiceNumberCB";
+            this.fuelInvoiceNumberCB.Size = new System.Drawing.Size(294, 28);
+            this.fuelInvoiceNumberCB.TabIndex = 3;
             // 
             // MainForm
             // 
@@ -2152,7 +2163,7 @@ namespace VehicleMonitoringSystem
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1168, 534);
+            this.ClientSize = new System.Drawing.Size(899, 494);
             this.Controls.Add(this.vehicleListLV);
             this.Controls.Add(this.informationTC);
             this.Controls.Add(this.menuStrip1);
@@ -2185,7 +2196,6 @@ namespace VehicleMonitoringSystem
         }
 
         #endregion
-        private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newVehicleTSM;
         private System.Windows.Forms.ToolStripMenuItem newRepairTSM;
@@ -2333,7 +2343,6 @@ namespace VehicleMonitoringSystem
         private System.Windows.Forms.Label repairDueDateL;
         private System.Windows.Forms.Button viewRepairDetailB;
         private System.Windows.Forms.ComboBox repairSupplierCB;
-        private System.Windows.Forms.TextBox repairSupplierInvoiceNumberTB;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Button repairClearB;
         private System.Windows.Forms.Button repairCancelB;
@@ -2356,7 +2365,6 @@ namespace VehicleMonitoringSystem
         private System.Windows.Forms.ColumnHeader repairAmountHeader;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.TextBox fuelInvoiceNumberTB;
         private System.Windows.Forms.ColumnHeader ramarksHeader;
         private System.Windows.Forms.ComboBox plateNumberCB;
         private System.Windows.Forms.Label label44;
@@ -2377,6 +2385,9 @@ namespace VehicleMonitoringSystem
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ColumnHeader statusHeader;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ComboBox fuelInvoiceNumberCB;
+        private System.Windows.Forms.ComboBox repairInvoiceNumberCB;
     }
 }
 
