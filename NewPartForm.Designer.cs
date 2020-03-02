@@ -39,10 +39,10 @@ namespace VehicleMonitoringSystem
             // 
             // addPartB
             // 
-            this.addPartB.Location = new System.Drawing.Point(320, 63);
-            this.addPartB.Margin = new System.Windows.Forms.Padding(4);
+            this.addPartB.Location = new System.Drawing.Point(360, 68);
+            this.addPartB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.addPartB.Name = "addPartB";
-            this.addPartB.Size = new System.Drawing.Size(100, 28);
+            this.addPartB.Size = new System.Drawing.Size(112, 35);
             this.addPartB.TabIndex = 80;
             this.addPartB.Text = "Add";
             this.addPartB.UseVisualStyleBackColor = true;
@@ -55,10 +55,10 @@ namespace VehicleMonitoringSystem
             this.descriptionHeader});
             this.partListLV.FullRowSelect = true;
             this.partListLV.HideSelection = false;
-            this.partListLV.Location = new System.Drawing.Point(36, 99);
-            this.partListLV.Margin = new System.Windows.Forms.Padding(4);
+            this.partListLV.Location = new System.Drawing.Point(17, 122);
+            this.partListLV.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.partListLV.Name = "partListLV";
-            this.partListLV.Size = new System.Drawing.Size(384, 248);
+            this.partListLV.Size = new System.Drawing.Size(455, 290);
             this.partListLV.TabIndex = 78;
             this.partListLV.UseCompatibleStateImageBehavior = false;
             this.partListLV.View = System.Windows.Forms.View.Details;
@@ -78,42 +78,43 @@ namespace VehicleMonitoringSystem
             // 
             this.label33.AutoSize = true;
             this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.Location = new System.Drawing.Point(31, 28);
+            this.label33.Location = new System.Drawing.Point(13, 26);
             this.label33.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(115, 25);
+            this.label33.Size = new System.Drawing.Size(93, 20);
             this.label33.TabIndex = 73;
             this.label33.Text = "Description:";
             // 
             // partDescriptionTB
             // 
             this.partDescriptionTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.partDescriptionTB.Location = new System.Drawing.Point(154, 25);
-            this.partDescriptionTB.Margin = new System.Windows.Forms.Padding(4);
+            this.partDescriptionTB.Location = new System.Drawing.Point(114, 23);
+            this.partDescriptionTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.partDescriptionTB.Name = "partDescriptionTB";
-            this.partDescriptionTB.Size = new System.Drawing.Size(266, 30);
+            this.partDescriptionTB.Size = new System.Drawing.Size(358, 26);
             this.partDescriptionTB.TabIndex = 66;
             // 
             // partIDTB
             // 
-            this.partIDTB.Location = new System.Drawing.Point(154, 63);
-            this.partIDTB.Margin = new System.Windows.Forms.Padding(4);
+            this.partIDTB.Location = new System.Drawing.Point(114, 68);
+            this.partIDTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.partIDTB.Name = "partIDTB";
-            this.partIDTB.Size = new System.Drawing.Size(88, 22);
+            this.partIDTB.Size = new System.Drawing.Size(98, 26);
             this.partIDTB.TabIndex = 81;
             this.partIDTB.Visible = false;
             // 
             // NewPartForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(454, 375);
+            this.ClientSize = new System.Drawing.Size(489, 429);
             this.Controls.Add(this.partIDTB);
             this.Controls.Add(this.addPartB);
             this.Controls.Add(this.partListLV);
             this.Controls.Add(this.label33);
             this.Controls.Add(this.partDescriptionTB);
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.Name = "NewPartForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
