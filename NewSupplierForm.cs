@@ -16,31 +16,24 @@ namespace VehicleMonitoringSystem
         private string _supplierName = "";
 
         DBOperation _dbOp = new DBOperation();
-        private Supplier _suppliers = new Supplier();
+        private Supplier _Supplier = new Supplier();
         private MainForm _mainForm = new MainForm();
         public NewSupplierForm()
         {
             InitializeComponent();
-            supplierIDTB.Text = _suppliers.CreateSupplierID().ToString();
         }
-
-        //internal NewSupplierForm(MainForm mainForm)
-        //{
-        //    InitializeComponent();
-        //    supplierIDTB.Text = _suppliers.CreateSupplierID().ToString();
-        //    _mainForm = mainForm;
-        //}
-
-        private void saveB_Click(object sender, EventArgs e)
+        //here
+        private void SaveB_Click(object sender, EventArgs e)
         {
             if (supplierTB.Text != "") 
             { 
-                _supplierID = int.Parse(supplierIDTB.Text.Trim());
+                _supplierID = int.Parse(_Supplier.CreateSupplierID().ToString());
                 _supplierName = supplierTB.Text.Trim();
 
-                _suppliers = new Supplier(_supplierID, _supplierName);
+                _Supplier = new Supplier(_supplierID, _supplierName);
 
-                _suppliers.InsertSupplier(_suppliers);
+                _Supplier.InsertSupplier(_Supplier);
+                supplierTB.Text = "";
             }
             else
             {
