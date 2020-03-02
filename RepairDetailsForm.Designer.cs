@@ -143,7 +143,7 @@ namespace VehicleMonitoringSystem
             this.invoiceNumberTB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.invoiceNumberTB.Name = "invoiceNumberTB";
             this.invoiceNumberTB.Size = new System.Drawing.Size(282, 26);
-            this.invoiceNumberTB.TabIndex = 67;
+            this.invoiceNumberTB.TabIndex = 4;
             // 
             // partCB
             // 
@@ -155,7 +155,7 @@ namespace VehicleMonitoringSystem
             this.partCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.partCB.Name = "partCB";
             this.partCB.Size = new System.Drawing.Size(290, 28);
-            this.partCB.TabIndex = 68;
+            this.partCB.TabIndex = 0;
             // 
             // label1
             // 
@@ -189,7 +189,7 @@ namespace VehicleMonitoringSystem
             this.supplierCB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.supplierCB.Name = "supplierCB";
             this.supplierCB.Size = new System.Drawing.Size(290, 28);
-            this.supplierCB.TabIndex = 72;
+            this.supplierCB.TabIndex = 2;
             // 
             // label4
             // 
@@ -233,7 +233,7 @@ namespace VehicleMonitoringSystem
             this.repairCancelB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.repairCancelB.Name = "repairCancelB";
             this.repairCancelB.Size = new System.Drawing.Size(112, 35);
-            this.repairCancelB.TabIndex = 77;
+            this.repairCancelB.TabIndex = 6;
             this.repairCancelB.Text = "Cancel";
             this.repairCancelB.UseVisualStyleBackColor = true;
             this.repairCancelB.Visible = false;
@@ -246,7 +246,7 @@ namespace VehicleMonitoringSystem
             this.repairEditB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.repairEditB.Name = "repairEditB";
             this.repairEditB.Size = new System.Drawing.Size(112, 35);
-            this.repairEditB.TabIndex = 78;
+            this.repairEditB.TabIndex = 5;
             this.repairEditB.Text = "Edit";
             this.repairEditB.UseVisualStyleBackColor = true;
             this.repairEditB.Click += new System.EventHandler(this.RepairEditB_Click);
@@ -259,7 +259,7 @@ namespace VehicleMonitoringSystem
             this.purchaseDateDTP.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.purchaseDateDTP.Name = "purchaseDateDTP";
             this.purchaseDateDTP.Size = new System.Drawing.Size(290, 26);
-            this.purchaseDateDTP.TabIndex = 79;
+            this.purchaseDateDTP.TabIndex = 1;
             // 
             // RepairDetailsForm
             // 
